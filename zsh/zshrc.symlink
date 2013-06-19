@@ -1,0 +1,12 @@
+# Customize to your needs...
+export DOTS=$HOME/.dotfiles
+export PROJECTS=~/Projects
+
+# Source every .zsh file
+for config_file ($DOTS/**/*.zsh) source $config_file
+
+# Add Brew to path
+export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+
+# Add Rbenv to path
+export PATH="$HOME/.rbenv/bin:$PATH"

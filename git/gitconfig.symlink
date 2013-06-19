@@ -1,0 +1,13 @@
+[user]
+	name = Lucas Mendelowski
+	email = lucas@mendelowski.com
+[core]
+	editor = vim
+	excludesfile = /Users/lucas/.gitignore
+[push]
+	default = matching
+[pivotal]
+	api-token = e00233e62bcebb9fd6fefc9f9c3dec74
+	full-name = Lucas Mendelowski
+	only-mine = true
+	integration-branch = develop
