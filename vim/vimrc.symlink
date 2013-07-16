@@ -23,7 +23,7 @@ set textwidth=80
 set list listchars=tab:»·,trail:·
 
 " Color settings
-color tomorrow-night
+color codeschool
 
 " Hide scrollbars
 set guioptions=aAce

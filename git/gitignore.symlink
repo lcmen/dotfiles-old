@@ -3,6 +3,9 @@
 bin
 vendor/bundle
 
+# Ignore rbenv ruby version
+.ruby-version
+
 # Ignore all logfiles and tempfiles.
 .sass-cache
 capybara-*.html

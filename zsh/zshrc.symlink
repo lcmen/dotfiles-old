@@ -5,6 +5,10 @@ export PROJECTS=~/Projects
 # Source every .zsh file
 for config_file ($DOTS/**/*.zsh) source $config_file
 
+# initialize autocomplete
+autoload -U compinit
+compinit
+
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
