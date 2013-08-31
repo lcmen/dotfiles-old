@@ -9,3 +9,5 @@
 [pivotal]
 	full-name = Lucas Mendelowski
 	only-mine = true
+[color]
+	ui = true
