@@ -6,7 +6,7 @@
 	url = git://github.com/scrooloose/nerdtree.git
 [submodule "vim/vim.symlink/bundle/vim-nerdtree-tabs"]
 	path = vim/vim.symlink/bundle/vim-nerdtree-tabs
-	url = git://github.com/jistr/vim-nerdtree-tabs.git
+	url = git://github.com/jistr/vim-nerdtree-tabs
 [submodule "vim/vim.symlink/bundle/vim-slim"]
 	path = vim/vim.symlink/bundle/vim-slim
 	url = git://github.com/slim-template/vim-slim.git
@@ -28,3 +28,9 @@
 [submodule "vim/vim.symlink/bundle/vim-javascript"]
 	path = vim/vim.symlink/bundle/vim-javascript
 	url = git://github.com/pangloss/vim-javascript.git
+[submodule "vim/vim.symlink/bundle/tagbar"]
+	path = vim/vim.symlink/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar
+[submodule "vim/vim.symlink/bundle/--force"]
+	path = vim/vim.symlink/bundle/--force
+	url = git://github.com/jistr/vim-nerdtree-tabs
