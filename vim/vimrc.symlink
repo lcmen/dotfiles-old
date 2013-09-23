@@ -32,11 +32,6 @@ set list listchars=tab:»·,trail:·
 colorscheme tomorrow-night
 set t_Co=256
 
-" NERDTree colors
-autocmd VimEnter * hi NERDTreeDir guifg=#eeeeee gui=bold
-autocmd VimEnter * hi NERDTreeDirSlash guifg=#eeeeee
-autocmd VimEnter * hi NERDTreeExecFile gui=none
-
 " Hide scrollbars
 set guioptions=aAce
 

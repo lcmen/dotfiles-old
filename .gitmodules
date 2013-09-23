@@ -34,3 +34,6 @@
 [submodule "vim/vim.symlink/bundle/--force"]
 	path = vim/vim.symlink/bundle/--force
 	url = git://github.com/jistr/vim-nerdtree-tabs
+[submodule "vim/vim.symlink/bundle/vim-airline"]
+	path = vim/vim.symlink/bundle/vim-airline
+	url = git://github.com/bling/vim-airline

@@ -14,3 +14,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
 # Add Rbenv to path
 export PATH="$HOME/.rbenv/bin:$PATH"
+
+# Change Python path in order to support latest version of gdal
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
