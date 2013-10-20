@@ -23,6 +23,7 @@ capybara-*.html
 Icon
 
 # Ignore files created by text editors
+.idea
 *.sublime-project
 *.sublime-workspace
 *.tmproj
