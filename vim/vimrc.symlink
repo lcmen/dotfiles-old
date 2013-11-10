@@ -4,7 +4,9 @@ silent execute pathogen#helptags()
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
+" No compatibility with legacy vim
 set nocompatible
+
 set noswapfile
 
 " Set encoding
@@ -28,6 +30,11 @@ set nosmarttab
 set textwidth=80
 set list listchars=tab:»·,trail:·
 
+" Searching settings
+set hlsearch
+set ignorecase
+set smartcase
+
 " Color settings
 colorscheme tomorrow-night
 set t_Co=256
@@ -40,10 +47,6 @@ set laststatus=2
 
 " Show Mode
 set showmode
-
-" Case-insensitive searching unles expresion contains a capital letter
-set ignorecase
-set smartcase
 
 " Allow backspacing over everything in inset mode
 set backspace=indent,eol,start
