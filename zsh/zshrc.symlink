@@ -9,6 +9,8 @@ for config_file ($DOTS/**/*.zsh) source $config_file
 autoload -U compinit
 compinit
 
+export EDITOR="/usr/bin/vim"
+
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 

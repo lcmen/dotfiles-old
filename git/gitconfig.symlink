@@ -3,7 +3,7 @@
 	email = lucas@mendelowski.com
 [core]
 	editor = vim
-	excludesfile = /Users/lucas/.gitignore
+	excludesfile = ~/.gitignore
 [push]
 	default = matching
 [pivotal]

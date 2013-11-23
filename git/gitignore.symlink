@@ -1,18 +1,5 @@
-# Ignore bundler
-.bundle
-bin
-vendor/bundle
-
 # Ignore rbenv ruby version
 .ruby-version
-
-# Ignore all logfiles and tempfiles.
-.sass-cache
-capybara-*.html
-/assets
-/log/*.log
-/public/system/assets
-/tmp
 
 # Ignore OS related files
 .AppleDouble
