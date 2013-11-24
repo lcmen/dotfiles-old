@@ -88,7 +88,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_javascript_checkers=['jshint']
 let g:syntastic_ruby_checkers=['mri']
 let g:syntastic_ruby_exec = 'ruby19'
-let g:syntastic_ruby_exec = '~/.rbenv/versions/1.9.3-p448/bin/ruby'
+let g:syntastic_ruby_exec = '~/.rbenv/versions/1.9.3-p484/bin/ruby'
 
 " Automatically resize splits when resizing MacVim window
 if has("gui_running")
