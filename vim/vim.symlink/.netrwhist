@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/lucas/Projects/lurnbox'
-let g:netrw_dirhist_2='/Users/lucas/Projects/menco/mencoio'
-let g:netrw_dirhist_3='/Users/lucas/Projects/lurnbox'
-let g:netrw_dirhist_4='/Users/lucas/Projects/menco/mencoio'
-let g:netrw_dirhist_5='/Users/lucas/.dotfiles/.git/modules/vim'
