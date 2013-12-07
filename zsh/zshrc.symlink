@@ -14,9 +14,6 @@ export EDITOR="/usr/bin/vim"
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
-# Add Rbenv to path
-export PATH="$HOME/.rbenv/bin:$PATH"
-
 # Add NPM modules to path
 export PATH="/usr/local/share/npm/bin:$PATH"
 
