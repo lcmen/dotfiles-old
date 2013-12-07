@@ -5,7 +5,7 @@
   "vars": true,
   "camelcase": true,
   "eqeqeq": true,
-  "indent": 2,
+  "smarttabs": true,
   "latedef": true,
   "newcap": true
 }
