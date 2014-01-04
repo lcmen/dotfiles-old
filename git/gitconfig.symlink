@@ -2,7 +2,7 @@
 	name = Lucas Mendelowski
 	email = lucas@mendelowski.com
 [core]
-	editor = vim
+	editor = /usr/local/bin/mate -w
 	excludesfile = ~/.gitignore
 [push]
 	default = matching

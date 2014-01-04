@@ -9,7 +9,7 @@ for config_file ($DOTS/**/*.zsh) source $config_file
 autoload -U compinit
 compinit
 
-export EDITOR="/usr/bin/vim"
+export EDITOR="/usr/local/bin/mate -w"
 
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
@@ -19,3 +19,6 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 
 # Change Python path in order to support latest version of gdal
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+# Add Firefox to path for Selenium
+export PATH="$HOME/Applications/Firefox.app/Contents/MacOS:$PATH"

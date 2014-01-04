@@ -1,5 +1,8 @@
-# Ignore rbenv ruby version
+# Ignore chruby ruby version
 .ruby-version
+
+# Ignore bundler vendors
+/vendor
 
 # Ignore OS related files
 .AppleDouble
