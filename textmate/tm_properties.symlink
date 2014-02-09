@@ -3,12 +3,12 @@ encoding         = UTF-8
 lineEndings      = '\n'
 showInvisibles   = false
 softWrap         = true
-softTabs		 = true
+softTabs         = true
 tabSize          = 2
 
 # Variables
 TM_GIT = "/usr/local/bin/git"
-TM_RUBY = "/Users/lucas/.rbenv/shims/ruby"
+TM_RUBY = "$HOME/.rubies/ruby-1.9.3-p484/bin/ruby"
 
 [ text ]
 spellChecking    = true

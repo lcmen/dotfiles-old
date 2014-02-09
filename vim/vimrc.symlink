@@ -1,0 +1,55 @@
+execute pathogen#infect()
+silent execute pathogen#helptags()
+
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" General settings
+set encoding=utf-8
+set nocompatible
+set noswapfile
+
+" Display settings
+colorscheme tomorrow-night
+set t_Co=256
+set guioptions=aAce
+set laststatus=2
+set showmode
+
+" Editor settings
+set number
+set colorcolumn=80
+set ruler
+syntax on
+set backspace=indent,eol,start " Allow backspacing over everything in inset mode
+filetype plugin indent on " Load plugin and indent settings for detected filetype
+
+" Whitespace settings
+set autoindent
+set smartindent
+set nowrap
+set softtabstop=2
+set shiftwidth=2
+set tabstop=4
+set expandtab
+set nosmarttab
+set list listchars=tab:»·,trail:·
+
+" Mappings for tabs
+nnoremap ti :tabnew<CR>
+nnoremap th :tabfirst<CR>
+nnoremap tj :tabnext<CR>
+nnoremap tk :tabprev<CR>
+nnoremap tl :tablast<CR>
+nnoremap td :tabclose<CR>
+
+" Mappings for windows
+nnoremap wh <c-w>h
+nnoremap wj <c-w>j
+nnoremap wk <c-w>k
+nnoremap wl <c-w>l
+nnoremap wd :close<CR>
+
+" Moving block of codes
+vnoremap < <gv
+vnoremap > >gv
