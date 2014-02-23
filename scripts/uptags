@@ -1,0 +1,20 @@
+#!/bin/sh
+
+start=$(pwd)
+ 
+# Generate tags files in directories where "tags" is not the newest file
+for f in $(find . -type f -newer ./tags); do
+  cd $f
+  ctags -n .
+  cd $start
+done
+
+# Generate tags files in directories where "tags" doesn't exist
+# but exists in the parent directory
+for f in $(find . -type d ! -path "./\.*" ! -path "./vendor*" ! -exec test -e '{}/tags' \; -print); do
+  if [ -e ${f}/../tags ]; then
+    cd $f
+    ctags -n .
+    cd $start
+  fi
+done

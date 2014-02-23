@@ -1,0 +1,11 @@
+#!/bin/sh
+
+start=$(pwd)
+
+# Ignore hidden directories and vendor directory
+for f in $(find . -type d ! -path "./\.*" ! -path "./vendor*"); do
+  cd $f
+  ctags -n .
+  cd $start
+done
+
