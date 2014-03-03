@@ -1,4 +1,4 @@
 --type-set=coffee=.coffee
 --type-set=erb=.erb
---type-set=sass=.sass
+--type-set=sass=.sass,.scss
 --type-set=slim=.slim
