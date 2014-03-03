@@ -9,6 +9,7 @@ tabSize          = 2
 # Variables
 TM_GIT = "/usr/local/bin/git"
 TM_RUBY = "$HOME/.rubies/ruby-1.9.3-p484/bin/ruby"
+TM_CTAGS = "/usr/local/bin/ctags"
 
 [ text ]
 spellChecking    = true

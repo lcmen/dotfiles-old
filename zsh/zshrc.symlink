@@ -1,5 +1,6 @@
 # Customize to your needs...
 export DOTS=$HOME/.dotfiles
+export SCRIPTS=$DOTS/scripts
 export PROJECTS=~/Projects
 
 # Source every .zsh file
@@ -10,6 +11,9 @@ autoload -U compinit
 compinit
 
 export EDITOR="/usr/local/bin/mate -w"
+
+# Add Scripts to path
+export PATH="$PATH:$SCRIPTS"
 
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
