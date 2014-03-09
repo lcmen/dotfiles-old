@@ -1,4 +1,6 @@
 execute pathogen#infect()
+
+" Automatic generation of help
 silent execute pathogen#helptags()
 
 " Automatic reloading of .vimrc
@@ -35,21 +37,41 @@ set expandtab
 set nosmarttab
 set list listchars=tab:»·,trail:·
 
+" Block arrow keys
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+nnoremap <Up>   :echoe "Use k"<CR>
+nnoremap <Right>:echoe "Use l"<CR>
+
 " Mappings for tabs
-nnoremap ti :tabnew<CR>
-nnoremap th :tabfirst<CR>
-nnoremap tj :tabnext<CR>
-nnoremap tk :tabprev<CR>
-nnoremap tl :tablast<CR>
-nnoremap td :tabclose<CR>
+nnoremap <S-k> :tabprev<CR>
+nnoremap <S-j> :tabnext<CR>
+nnoremap <S-h> :tabm-1<CR>
+nnoremap <S-l> :tabm+1<CR>
+nnoremap <S-t> :tabnew<CR>
+inoremap <S-k> <ESC>:tabprev<CR>i
+inoremap <S-j> <Esc>:tabnext<CR>i
+inoremap <S-h> <Esc>:tabm+1<CR>i
+inoremap <S-l> <Esc>:tabm-1<CR>i
+inoremap <S-t> <Esc>:tabnew<CR>i
 
 " Mappings for windows
-nnoremap wh <c-w>h
-nnoremap wj <c-w>j
-nnoremap wk <c-w>k
-nnoremap wl <c-w>l
-nnoremap wd :close<CR>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-w> :new<CR>
+nnoremap <C-v> :vert new<CR>
+inoremap <C-j> <Esc><C-w>ji
+inoremap <C-k> <Esc><C-w>ki
+inoremap <C-h> <Esc><C-w>hi
+inoremap <C-l> <Esc><C-w>li
+inoremap <C-w> <Esc>:new<CR>i
+inoremap <C-v> <Esc>:vert new<CR>i
 
 " Moving block of codes
 vnoremap < <gv
 vnoremap > >gv
+
+" Plugins
+noremap <F3> :NERDTreeToggle<CR>
