@@ -49,11 +49,6 @@ nnoremap <S-j> :tabnext<CR>
 nnoremap <S-h> :tabm-1<CR>
 nnoremap <S-l> :tabm+1<CR>
 nnoremap <S-t> :tabnew<CR>
-inoremap <S-k> <ESC>:tabprev<CR>i
-inoremap <S-j> <Esc>:tabnext<CR>i
-inoremap <S-h> <Esc>:tabm+1<CR>i
-inoremap <S-l> <Esc>:tabm-1<CR>i
-inoremap <S-t> <Esc>:tabnew<CR>i
 
 " Mappings for windows
 nnoremap <C-j> <C-w>j
@@ -62,12 +57,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-w> :new<CR>
 nnoremap <C-v> :vert new<CR>
-inoremap <C-j> <Esc><C-w>ji
-inoremap <C-k> <Esc><C-w>ki
-inoremap <C-h> <Esc><C-w>hi
-inoremap <C-l> <Esc><C-w>li
-inoremap <C-w> <Esc>:new<CR>i
-inoremap <C-v> <Esc>:vert new<CR>i
 
 " Moving block of codes
 vnoremap < <gv
