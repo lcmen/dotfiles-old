@@ -74,4 +74,5 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Plugins
+set tags=tags,gem.tags
 noremap <F3> :NERDTreeToggle<CR>
