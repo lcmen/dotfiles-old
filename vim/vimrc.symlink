@@ -1,4 +1,4 @@
-# Pathogen
+" Pathogen
 execute pathogen#infect()
 
 " Automatic generation of help
@@ -8,13 +8,15 @@ silent execute pathogen#helptags()
 set encoding=utf-8
 set nocompatible
 set noswapfile
+syntax enable
+filetype plugin indent on
 
 " Display settings
 colorscheme tomorrow-night
 set t_Co=256
 set guioptions=aAce
 set laststatus=2
-set showmode
+set showcmd
 
 " Editor settings
 set number
@@ -63,8 +65,9 @@ nnoremap <C-v> :vert new<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" Plugins
-syntax on
-filetype plugin indent on " Load plugin and indent settings for detected filetype
+" Plugins settings
 set tags=tags,gem.tags
+
+" Plugins mapping
 noremap <F3> :NERDTreeToggle<CR>
+noremap <F4> :set hlsearch!<CR>
