@@ -41,6 +41,9 @@ set shiftwidth=2
 set tabstop=4
 set list listchars=tab:▸\ ,trail:·,eol:¬
 
+" Language specific whitespace settings
+autocmd FileType php setl softtabstop=4 shiftwidth=4
+
 " Block arrow keys
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
