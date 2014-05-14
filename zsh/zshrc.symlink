@@ -10,8 +10,6 @@ for config_file ($DOTS/**/*.zsh) source $config_file
 autoload -U compinit
 compinit
 
-export EDITOR="/usr/local/bin/mate -w"
-
 # Add Scripts to path
 export PATH="$PATH:$SCRIPTS"
 
