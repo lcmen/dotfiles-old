@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 " General settings
 set encoding=utf-8
 set nocompatible
@@ -8,6 +10,7 @@ filetype plugin indent on
 " Display settings
 set t_Co=256
 set guioptions=aAce
+colorscheme blackboard
 set laststatus=2
 set showcmd
 set guifont=Monaco\ 13
@@ -36,6 +39,7 @@ set list listchars=tab:▸\ ,trail:·,eol:¬
 
 " Language specific whitespace settings
 autocmd FileType php setl softtabstop=4 shiftwidth=4
+autocmd FileType python setl softtabstop=4 shiftwidth=4
 
 " Block arrow keys
 nnoremap <Left> :echoe "Use h"<CR>
@@ -66,7 +70,8 @@ vnoremap > >gv
 set tags=tags,gem.tags
 
 " Plugins mapping
+noremap <F3> :NERDTreeToggle<CR>
 noremap <F4> :set hlsearch!<CR>
 
 " Commands and hooks
-autocmd BufWritePre * :%s/\s\+$//e " Trim whitespaces
+autocmd BufWritePre * :%s/\s+$//e " Trim whitespaces
