@@ -1,11 +1,20 @@
 {
   "undef": true,
   "unused": true,
-  "strict": true,
-  "vars": true,
   "camelcase": true,
   "eqeqeq": true,
   "smarttabs": true,
   "latedef": true,
-  "newcap": true
+  "newcap": true,
+  "globals": {
+    "$": false,
+    "jQuery": false,
+
+    "module": false,
+    "require": false,
+    // Jasmine
+    "describe": false,
+    "expect": true,
+    "it": false
+  }
 }
