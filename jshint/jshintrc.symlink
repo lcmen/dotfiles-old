@@ -7,6 +7,10 @@
   "latedef": true,
   "newcap": true,
   "globals": {
+    "console": false,
+    "process": false,
+    "__dirname": false,
+    
     "$": false,
     "jQuery": false,
 
