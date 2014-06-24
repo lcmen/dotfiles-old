@@ -11,6 +11,7 @@
     "process": false,
     "__dirname": false,
     
+    "window": false,
     "$": false,
     "jQuery": false,
 
