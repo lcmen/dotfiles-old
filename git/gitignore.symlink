@@ -2,7 +2,7 @@
 .ruby-version
 
 # Ignore bundler vendors
-/vendor
+vendor/bundle
 
 # Ignore OS related files
 .AppleDouble
