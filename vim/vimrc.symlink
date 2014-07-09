@@ -59,8 +59,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-nnoremap <C-w> :new<CR>
-nnoremap <C-v> :vert new<CR>
+nnoremap <C-h> :new<CR>
+nnoremap <C-w> :vert new<CR>
 
 " Moving block of codes
 vnoremap < <gv
