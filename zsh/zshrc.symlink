@@ -1,7 +1,6 @@
 # Customize to your needs...
 export DOTS=$HOME/.dotfiles
 export SCRIPTS=$DOTS/scripts
-export PROJECTS=~/Projects
 
 # Source every .zsh file
 for config_file ($DOTS/**/*.zsh) source $config_file

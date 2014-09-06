@@ -4,3 +4,9 @@
 [submodule "vim/vim.symlink/bundle/YouCompleteMe"]
 	path = vim/vim.symlink/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "vim/vim.symlink/bundle/vim-elixir"]
+	path = vim/vim.symlink/bundle/vim-elixir
+	url = https://github.com/elixir-lang/vim-elixir.git
+[submodule "vim/vim.symlink/bundle/ctrlp.vim"]
+	path = vim/vim.symlink/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
