@@ -10,7 +10,7 @@ filetype plugin indent on
 " Display settings
 set t_Co=256
 set guioptions=aAce
-colorscheme codeschool
+colorscheme monokai
 set laststatus=2
 set showcmd
 set guifont=Monaco:h12

@@ -5,8 +5,7 @@
 	excludesfile = ~/.gitignore
 [push]
 	default = matching
-[pivotal]
-	full-name = Lucas Mendelowski
-	only-mine = true
 [color]
 	ui = true
+[alias]
+  compare = log --left-right --graph --cherry-pick --oneline
