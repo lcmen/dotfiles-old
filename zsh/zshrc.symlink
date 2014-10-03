@@ -9,9 +9,6 @@ for config_file ($DOTS/**/*.zsh) source $config_file
 autoload -U compinit
 compinit
 
-# Add Scripts to path
-export PATH="$PATH:$SCRIPTS"
-
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
@@ -23,4 +20,4 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 # Add web-browsers to path for Selenium
 export PATH="$HOME/Applications/Firefox.app/Contents/MacOS:$PATH"
-export CHROME_BIN="$HOME/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+export PATH="$HOME/Applications/Google Chrome.app/Contents/MacOS:$PATH"
