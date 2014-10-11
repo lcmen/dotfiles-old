@@ -9,4 +9,11 @@
 [color]
 	ui = true
 [alias]
+  am = commit -a --amend
+  br = branch
+  cm = !git add -A && git commit
+  co = checkout
+  cob = checkout -b
   compare = log --left-right --graph --cherry-pick --oneline
+  wipe = !git add -A && git stash && git reset HEAD --hard
+  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
