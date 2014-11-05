@@ -10,7 +10,8 @@ filetype plugin indent on
 " Display settings
 set t_Co=256
 set guioptions=aAce
-colorscheme monokai
+set background=dark
+colorscheme solarized
 set laststatus=2
 set showcmd
 set guifont=Monaco:h12
@@ -68,10 +69,17 @@ vnoremap > >gv
 " Plugins settings
 let NERDTreeShowHidden=1
 set tags=tags,gem.tags
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_theme='solarized'
 
 " Plugins mapping
 noremap <F3> :NERDTreeToggle<CR>
-noremap <F4> :set hlsearch!<CR>
+noremap <F4> :TagbarToggle<CR>
+noremap <F5> :set hlsearch!<CR>
 noremap <leader>o <ESC>:CommandT<CR>
 noremap <leader>m <ESC>:CommandTBuffer<CR>
 

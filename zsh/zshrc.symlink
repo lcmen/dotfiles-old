@@ -5,9 +5,13 @@ export SCRIPTS=$DOTS/scripts
 # Source every .zsh file
 for config_file ($DOTS/**/*.zsh) source $config_file
 
-# initialize autocomplete
+# Initialize autocomplete
 autoload -U compinit
 compinit
+
+# Shortcuts
+bindkey "^b" beginning-of-line
+bindkey "^e" end-of-line
 
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
