@@ -13,6 +13,10 @@ alias flushdns="dscacheutil -flushcache"
 alias httpserver="Python -m SimpleHTTPServer"
 
 # Spotify Control
-alias s="osascript ~/.dotfiles/spotify-control/SpotifyControl.scpt"
-alias sn="osascript ~/.dotfiles/spotify-control/SpotifyControl.scpt next"
-alias sp="osascript ~/.dotfiles/spotify-control/SpotifyControl.scpt prev"
+alias spotify="osascript ~/.dotfiles/spotify-control/SpotifyControl.scpt"
+alias s="spotify start"
+alias si="spotify info"
+alias sn="spotify next"
+alias sp="spotify prev"
+alias ss="spotify play/pouse && spotify info"
+alias sv="spotify volume"
