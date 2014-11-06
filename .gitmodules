@@ -46,3 +46,12 @@
 [submodule "powerline-fonts"]
 	path = powerline-fonts
 	url = https://github.com/Lokaltog/powerline-fonts.git
+[submodule "vim/vim.symlink/bundle/vim-tmux-navigator"]
+	path = vim/vim.symlink/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "SpotifyControl"]
+	path = SpotifyControl
+	url = https://github.com/dronir/SpotifyControl.git
+[submodule "spotify-control"]
+	path = spotify-control
+	url = https://github.com/dronir/SpotifyControl.git
