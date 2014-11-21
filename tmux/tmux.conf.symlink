@@ -33,21 +33,21 @@ bind-key -t vi-edit Down history-down
 set -g default-terminal "screen-256color"
 
 # set the status line's colors
-set -g status-bg colour235
+set -g status-bg colour240
 
 # set the color of the window list
-setw -g window-status-fg colour238
+setw -g window-status-fg colour033
 
 # set colors for the active window
 setw -g window-status-current-fg colour250
-setw -g window-status-current-bg colour021
+setw -g window-status-current-bg colour64
 setw -g window-status-current-format "[ #I:#W#F ]"
 
 # pane colors
-set -g pane-border-fg colour235
-set -g pane-border-bg colour235
-set -g pane-active-border-fg colour255
-set -g pane-active-border-bg colour021
+set -g pane-border-fg colour240
+set -g pane-border-bg colour240
+set -g pane-active-border-fg colour064
+set -g pane-active-border-bg colour064
 
 # Status bar
 set -g status-justify centre
@@ -55,7 +55,7 @@ set -g status-justify centre
 # Status line left side
 # user | session | window.pane
 set -g status-left-length 40
-set -g status-left "#[fg=colour000, bg=colour253] #(whoami) @ #h #[fg=colour000, bg=colour244] #S #[fg=colour000, bg=colour238] #I.#P "
+set -g status-left "#[fg=colour166, bg=colour235] #(whoami) @ #h #[fg=colour234, bg=colour245] #S #[fg=colour234, bg=colour245] #I.#P "
 set-option -g status-utf8 on
 
 # Split settings

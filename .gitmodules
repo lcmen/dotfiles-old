@@ -55,3 +55,12 @@
 [submodule "spotify-control"]
 	path = spotify-control
 	url = https://github.com/dronir/SpotifyControl.git
+[submodule "vim/vim.symlink/bundle/JSON.vim"]
+	path = vim/vim.symlink/bundle/JSON.vim
+	url = https://github.com/vim-scripts/JSON.vim.git
+[submodule "vim/vim.symlink/bundle/vim-ruby"]
+	path = vim/vim.symlink/bundle/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/vim.symlink/bundle/vim-blockle"]
+	path = vim/vim.symlink/bundle/vim-blockle
+	url = https://github.com/jgdavey/vim-blockle.git
