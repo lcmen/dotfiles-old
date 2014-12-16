@@ -1,20 +1,28 @@
 [user]
-	name = Lucas Mendelowski
-	email = lucas@mendelowski.com
+	name = 
+	email = 
 [core]
-	excludesfile = ~/.gitignore
-	editor = /usr/local/bin/vim
+	excludesfile = /Users/lucas/.gitignore
+  editor = /usr/local/bin/vim
 [push]
-	default = matching
+  default = matching
 [color]
-	ui = true
+  ui = true
 [alias]
-  am = commit -a --amend
+  am = commit --amend
   br = branch
   cm = !git add -A && git commit
   co = checkout
   cob = checkout -b
-  compare = log --left-right --graph --cherry-pick --oneline
+  cmp = log --left-right --graph --cherry-pick --oneline
   st = status
-  wipe = !git add -A && git stash && git reset HEAD --hard
-  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+[diff]
+  tool = sourcetree
+[difftool]
+  prompt = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
