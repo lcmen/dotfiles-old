@@ -64,3 +64,9 @@
 [submodule "vim/vim.symlink/bundle/vim-blockle"]
 	path = vim/vim.symlink/bundle/vim-blockle
 	url = https://github.com/jgdavey/vim-blockle.git
+[submodule "vim/vim.symlink/bundle/vim-surround"]
+	path = vim/vim.symlink/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/vim.symlink/bundle/golden-ratio"]
+	path = vim/vim.symlink/bundle/golden-ratio
+	url = https://github.com/roman/golden-ratio.git
