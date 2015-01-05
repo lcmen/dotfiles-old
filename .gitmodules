@@ -70,3 +70,6 @@
 [submodule "vim/vim.symlink/bundle/golden-ratio"]
 	path = vim/vim.symlink/bundle/golden-ratio
 	url = https://github.com/roman/golden-ratio.git
+[submodule "vim/vim.symlink/bundle/vim-nerdtree-tabs"]
+	path = vim/vim.symlink/bundle/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git

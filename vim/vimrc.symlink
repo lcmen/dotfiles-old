@@ -1,5 +1,8 @@
 execute pathogen#infect()
 
+" Automatically reload vim if vim config file has been modified
+autocmd! bufwritepost _vimrc source %
+
 " General settings
 set encoding=utf-8
 set nocompatible
@@ -48,12 +51,10 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <Up>   :echoe "Use k"<CR>
 nnoremap <Right>:echoe "Use l"<CR>
 
-" Mappings for tabs
-nnoremap <S-k> :tabprev<CR>
-nnoremap <S-j> :tabnext<CR>
-nnoremap <S-h> :tabm-1<CR>
-nnoremap <S-l> :tabm+1<CR>
-nnoremap <S-t> :tabnew<CR>
+" Resizing windows
+nnoremap <silent> <leader>+ :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
+nnoremap <silent> <leader>= :exe "vertical resize " . (winwidth(0) * 5/4)<CR> " Shift is hard
+nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 
 " Moving block of codes
 vnoremap < <gv
@@ -61,6 +62,7 @@ vnoremap > >gv
 
 " Plugins settings
 let NERDTreeShowHidden=1
+let g:nerdtree_tabs_autoclose=0 " Do not close nerdtree when there aren't any windows left
 set tags=tags,gem.tags
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
@@ -70,7 +72,7 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_theme='solarized'
 
 " Plugins mapping
-noremap <F3> :NERDTreeToggle<CR>
+noremap <F3> :NERDTreeTabsToggle<CR>
 noremap <F4> :TagbarToggle<CR>
 noremap <F5> :set hlsearch!<CR>
 noremap <leader>o :CtrlP<CR>
