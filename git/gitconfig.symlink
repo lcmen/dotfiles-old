@@ -15,6 +15,7 @@
   co = checkout
   cob = checkout -b
   cmp = log --left-right --graph --cherry-pick --oneline
+  ft = fetch --prune
   st = status
 [diff]
   tool = sourcetree
