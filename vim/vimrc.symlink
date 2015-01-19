@@ -63,6 +63,7 @@ vnoremap > >gv
 " Plugins settings
 let NERDTreeShowHidden=1
 let g:nerdtree_tabs_autoclose=0 " Do not close nerdtree when there aren't any windows left
+let g:CommandTMaxHeight=10
 set tags=tags,gem.tags
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
@@ -75,8 +76,9 @@ let g:airline_theme='solarized'
 noremap <F3> :NERDTreeTabsToggle<CR>
 noremap <F4> :TagbarToggle<CR>
 noremap <F5> :set hlsearch!<CR>
-noremap <leader>o :CtrlP<CR>
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
+" Syntax
+au BufReadPost *.jst set syntax=html
 
 " Commands and hooks
 autocmd BufWritePre * :%s/\s+$//e " Trim whitespaces
