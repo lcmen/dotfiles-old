@@ -1,7 +1,26 @@
-execute pathogen#infect()
+" Set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Automatically reload vim if vim config file has been modified
-autocmd! bufwritepost _vimrc source %
+" Vundle plugins
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'wincent/command-t'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'mustache/vim-mustache-handlebars'
+
+Plugin 'jgdavey/vim-blockle'
+Plugin 'tpope/vim-endwise'
+Plugin 'slim-template/vim-slim'
+
 
 " General settings
 set encoding=utf-8
@@ -11,13 +30,11 @@ syntax enable
 filetype plugin indent on
 
 " Display settings
-set t_Co=256
 set guioptions=aAce
-set background=dark
-colorscheme solarized
 set laststatus=2
 set showcmd
-set guifont=Monaco:h12
+set background=dark
+colorscheme solarized
 
 " Editor settings
 set number
@@ -60,26 +77,35 @@ nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" Rename file
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', old_name)
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<CR>
+
 " Plugins settings
 let NERDTreeShowHidden=1
 let g:nerdtree_tabs_autoclose=0 " Do not close nerdtree when there aren't any windows left
 let g:CommandTMaxHeight=10
 set tags=tags,gem.tags
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_theme='solarized'
 
 " Plugins mapping
 noremap <F3> :NERDTreeTabsToggle<CR>
 noremap <F4> :TagbarToggle<CR>
 noremap <F5> :set hlsearch!<CR>
+noremap <F6> :set paste<CR>i
+noremap <leader>r :NERDTreeFind<CR>
 
 " Syntax
 au BufReadPost *.jst set syntax=html
 
 " Commands and hooks
+au InsertLeave * set nopaste " Leave paste mode on exit
 autocmd BufWritePre * :%s/\s+$//e " Trim whitespaces
 autocmd Filetype gitcommit setlocal spell textwidth=72 " Settings for git commit
