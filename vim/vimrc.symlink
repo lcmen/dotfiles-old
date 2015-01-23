@@ -1,3 +1,6 @@
+set nocompatible
+filetype off
+
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -21,13 +24,14 @@ Plugin 'jgdavey/vim-blockle'
 Plugin 'tpope/vim-endwise'
 Plugin 'slim-template/vim-slim'
 
+call vundle#end()
+filetype plugin indent on
 
 " General settings
 set encoding=utf-8
 set nocompatible
 set noswapfile
 syntax enable
-filetype plugin indent on
 
 " Display settings
 set guioptions=aAce
@@ -76,6 +80,9 @@ nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
 " Moving block of codes
 vnoremap < <gv
 vnoremap > >gv
+
+" Remap CTRL-Q to CTRL-A as it's used by tmux
+cnoremap <C-q> <C-a>
 
 " Rename file
 function! RenameFile()

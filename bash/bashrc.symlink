@@ -1,20 +1,23 @@
-# Customize to your needs...
-export DOTS=$HOME/.dotfiles
-export SCRIPTS=$DOTS/scripts
+# Bash completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
 
-# Source every .zsh file
-for config_file ($DOTS/**/*.zsh) source $config_file
+# Source every .bashfile
+for config_file in $(find $HOME/.dotfiles -name "*.bash"); do
+  source $config_file
+done
 
-# Initialize autocomplete
-autoload -U compinit
-compinit
+# Disable C-s / C-q for flow control
+stty -ixon
 
-# Shortcuts
-bindkey "^b" beginning-of-line
-bindkey "^e" end-of-line
+export EDITOR=vim
 
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+
+# Add Rbenv to path
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Add local Node module binaries to path
 export PATH="./node_modules/.bin:$PATH"

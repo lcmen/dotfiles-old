@@ -34,11 +34,11 @@ alias right-1of3    move screenOriginX+screenSizeX*2/3;screenOriginY screenSizeX
 alias right-2of3    move screenOriginX+screenSizeX/3;screenOriginY screenSizeX*2/3;screenSizeY
 
 # App specific
-alias mail-laptop           move screenOriginX;screenOriginY 920;screenSizeY
-alias mail-monitor          move screenOriginX;screenOriginY 1000;screenSizeY
-alias skype-monitor         move screenOriginX+1000;screenOriginY 560;screenSizeY
-alias twitterrific-laptop   move screenOriginX+920;screenOriginY 316;screenSizeY
-alias twitterrific-monitor  move screenOriginX+1560;screenOriginY 316;screenSizeY
+alias mail-laptop      move screenOriginX;screenOriginY 915;screenSizeY
+alias mail-monitor     move screenOriginX;screenOriginY 990;screenSizeY
+alias skype-monitor    move screenOriginX+990;screenOriginY 560;screenSizeY
+alias twitter-laptop   move screenOriginX+915;screenOriginY 366;screenSizeY
+alias twitter-monitor  move screenOriginX+1550;screenOriginY 366;screenSizeY
 
 ################################################
 # Layouts
@@ -47,14 +47,14 @@ alias twitterrific-monitor  move screenOriginX+1560;screenOriginY 316;screenSize
 # Laptop layout
 layout laptoplayout 'Evernote':IGNORE_FAIL ${mail-laptop} ${laptop}
 layout laptoplayout 'Mail':IGNORE_FAIL ${mail-laptop} ${laptop}
-layout laptoplayout 'Twitterrific':IGNORE_FAIL ${twitterrific-laptop} ${laptop}
+layout laptoplayout 'Twitter':IGNORE_FAIL ${twitter-laptop} ${laptop}
 layout laptoplayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
 
 # Monitor layout
 layout monitorlayout 'Evernote':IGNORE_FAIL ${mail-monitor} ${monitor}
 layout monitorlayout 'Mail':IGNORE_FAIL ${mail-monitor} ${monitor}
 layout monitorlayout 'Skype':IGNORE_FAIL ${skype-monitor} ${monitor}
-layout monitorlayout 'Twitterrific':IGNORE_FAIL ${twitterrific-monitor} ${monitor}
+layout monitorlayout 'Twitter':IGNORE_FAIL ${twitter-monitor} ${monitor}
 layout monitorlayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${left-2of3} ${monitor}
 layout monitorlayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${left-2of3} ${monitor}
 layout monitorlayout 'Transmission':IGNORE_FAIL ${right-1of3} ${monitor}
