@@ -79,3 +79,6 @@
 [submodule "vim/vim.symlink/bundle/Vundle.vim"]
 	path = vim/vim.symlink/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
+[submodule "git/git-aware-prompt"]
+	path = git/git-aware-prompt
+	url = https://github.com/jimeh/git-aware-prompt.git
