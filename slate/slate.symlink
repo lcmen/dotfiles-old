@@ -67,8 +67,6 @@ default laptoplayout count:1
 ################################################
 
 # Halfies
-bind up:alt;ctrl          ${top-half}
-bind down:alt;ctrl        ${bottom-half}
 bind left:alt;ctrl        ${left-half}
 bind right:alt;ctrl       ${right-half}
 
