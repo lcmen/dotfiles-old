@@ -21,6 +21,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
 # Add Rbenv to path
 export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # Add local Node module binaries to path
 export PATH="./node_modules/.bin:$PATH"
