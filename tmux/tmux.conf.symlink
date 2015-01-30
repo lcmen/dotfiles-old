@@ -34,7 +34,7 @@ set -g default-terminal "screen-256color"
 set -g terminal-overrides 'xterm:colors=256'
 
 # set the status line's colors
-set -g status-bg colour240
+set -g status-bg colour235
 
 # set the color of the window list
 setw -g window-status-fg colour033
@@ -50,14 +50,22 @@ set -g pane-border-bg colour240
 set -g pane-active-border-fg colour064
 set -g pane-active-border-bg colour064
 
-# Status bar
-set -g status-justify centre
-
 # Status line left side
 # user | session | window.pane
 set -g status-left-length 40
-set -g status-left "#[fg=colour166, bg=colour235] #(whoami) @ #h #[fg=colour234, bg=colour245] #S #[fg=colour234, bg=colour245] #I.#P "
+set -g status-left "#[fg=colour166, bg=colour235] #(whoami) @ #h #[fg=colour234, bg=colour245] #S #[fg=colour234, bg=colour230] #I.#P #[fg=colour166, bg=colour235]"
+
+# Status line right side
+# now playing in iTunes | battery % | DD MMM HH:MM
+set -g status-right-length 90
+set -g status-right "#[fg=colour234, bg=colour033] #(~/.dotfiles/scripts/np_itunes_mac.sh) #[fg=colour234, bg=colour230] #(~/.dotfiles/scripts/battery_mac.sh) #[fg=colour234, bg=colour064] %d %b %R "
+
 set-option -g status-utf8 on
+
+# Update the status bar every 5 seconds
+set -g status-interval 5
+
+set -g status-justify centre
 
 # Split settings
 bind | split-window -h
