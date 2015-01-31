@@ -1,13 +1,15 @@
 [user]
-	name = 
-	email = 
+  name = Lucas Mendelowski
+  email = mendelowski@gmail.com
 [core]
-	excludesfile = /Users/lucas/.gitignore
+  excludesfile = /Users/lucas/.gitignore
   editor = /usr/local/bin/vim
 [push]
   default = matching
 [color]
   ui = true
+[init]
+  templatedir = /Users/lucas/.dotfiles/git/templates
 [alias]
   am = commit --amend
   br = branch
@@ -17,13 +19,3 @@
   cmp = log --left-right --graph --cherry-pick --oneline
   ft = fetch --prune
   st = status
-[diff]
-  tool = sourcetree
-[difftool]
-  prompt = false
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
