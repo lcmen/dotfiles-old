@@ -1,1 +1,0 @@
-{"url": "https://github.com/MattTuttle/sublime-ti-build", "sublime_text": "*", "description": "A build script for Appcelerator Titanium's CLI in Sublime Text 2", "dependencies": [], "platforms": ["*"], "version": "2015.01.13.16.12.38"}
