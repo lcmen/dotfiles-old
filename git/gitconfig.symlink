@@ -9,7 +9,7 @@
 [color]
   ui = true
 [init]
-  templatedir = /Users/lucas/.dotfiles/git/templates
+  templatedir = /Users/lucas/Code/dotfiles/git/templates
 [alias]
   am = commit --amend
   br = branch

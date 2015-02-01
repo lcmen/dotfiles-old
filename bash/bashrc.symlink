@@ -7,7 +7,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 # Source every .bashfile
-for config_file in $(find $HOME/.dotfiles -name "*.bash"); do
+for config_file in $(find $HOME/Code/dotfiles -name "*.bash"); do
   source $config_file
 done
 

@@ -58,7 +58,7 @@ set -g status-left "#[fg=colour166, bg=colour235] #(whoami) @ #h #[fg=colour234,
 # Status line right side
 # now playing in iTunes | battery % | DD MMM HH:MM
 set -g status-right-length 90
-set -g status-right "#[fg=colour234, bg=colour033] #(~/.dotfiles/scripts/np_itunes_mac.sh) #[fg=colour234, bg=colour230] #(~/.dotfiles/scripts/battery_mac.sh) #[fg=colour234, bg=colour064] %d %b %R "
+set -g status-right "#[fg=colour234, bg=colour033] #(~/Code/dotfiles/scripts/np_itunes_mac.sh) #[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) #[fg=colour234, bg=colour064] %d %b %R "
 
 set-option -g status-utf8 on
 
