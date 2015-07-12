@@ -8,23 +8,28 @@ call vundle#begin()
 " Vundle plugins
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'wincent/command-t'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'rking/ag.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'bling/vim-airline'
+Plugin 'majutsushi/tagbar'
 Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 
+Plugin 'tpope/vim-rails'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'elzr/vim-json'
 
 Plugin 'jgdavey/vim-blockle'
 Plugin 'tpope/vim-endwise'
-Plugin 'slim-template/vim-slim'
-
-Plugin 'suan/vim-instant-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -36,40 +41,45 @@ set noswapfile
 syntax enable
 
 " Display settings
+set t_Co=256
 set guioptions=aAce
 set laststatus=2
 set showcmd
-set background=dark
-colorscheme solarized
+colorscheme tomorrow-night
 
 " Editor settings
-set number
-set relativenumber
-set colorcolumn=80
-set ruler
-set backspace=indent,eol,start " Allow backspacing over everything in inset mode
-set scrolloff=5 " Start scrolling 15 lines away from side margin
-set sidescrolloff=15 " Start scrolling 15 lines away from side margin
+set backspace=indent,eol,start    " Allow backspacing over everything in inset mode
+set scrolloff=5                   " Start scrolling 5 lines away from margin
+set sidescrolloff=15              " Start scrolling 15 lines away from side margin
 set sidescroll=1
+set clipboard=unnamed
 
 " Whitespace settings
-set autoindent
-set smartindent
-set wrap " Wrap visually
-set linebreak " Wrap at break character
-set nolist " Disable line break
-set textwidth=0 " Don't insert line breaks automatically
+set nowrap                        " Wrap visually
+set linebreak                     " Disable line break
+set nolist                        " in the middle of words
+set textwidth=0                   " Don't insert line breaks automatically
 set wrapmargin=0
-set expandtab
-set nosmarttab
-set softtabstop=2
-set shiftwidth=2
-set tabstop=4
-set list listchars=tab:▸\ ,trail:·,eol:¬
 
-" Language specific whitespace settings
+" Indentation settings
+set autoindent                    " Indent automatically
+set expandtab                     " Indent with spaces
+set softtabstop=2                 " Number of spaces per <tab> when inserting
+set shiftwidth=2                  " Number of spaces per <tab> when indenting
+set tabstop=4                     " Number of spaces <tab> counts for
+
+" Language specific indentation settings
 autocmd FileType php setl softtabstop=4 shiftwidth=4
 autocmd FileType python setl softtabstop=4 shiftwidth=4
+
+" UI settings
+set number                        " Show line numbers
+set relativenumber                " Use relative line numbers
+set listchars=tab:▸\              " Char representing a tab
+set listchars+=extends:❯          " Char representing an extending line
+set listchars+=nbsp:␣             " Non breaking space
+set listchars+=precedes:❮         " Char representing an extending line in the other direction
+set listchars+=trail:·            " Show trailing spaces as dots
 
 " Block arrow keys
 nnoremap <Left> :echoe "Use h"<CR>
@@ -77,22 +87,34 @@ nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <Up>   :echoe "Use k"<CR>
 nnoremap <Right>:echoe "Use l"<CR>
 
-" Move tabs
-nnoremap <silent> <C-w> :tabclose<CR>
-nnoremap <silent> <C-n> :tabnext<CR>
-nnoremap <silent> <C-p> :tabprevious<CR>
-nnoremap <silent> <C-t> :tabnew<CR>
-
-" Resizing windows
-nnoremap <silent> <leader>= :exe "vertical resize " . (winwidth(0) * 5/4)<CR>
-nnoremap <silent> <leader>- :exe "vertical resize " . (winwidth(0) * 4/5)<CR>
+" Resize windows with the arrow keys
+nnoremap <up>    <C-W>+
+nnoremap <down>  <C-W>-
+nnoremap <left>  3<C-W>>
+nnoremap <right> 3<C-W><
 
 " Moving block of codes
 vnoremap < <gv
 vnoremap > >gv
 
-" Remap CTRL-Q to CTRL-A as it's used by tmux
-cnoremap <C-q> <C-a>
+" Buffers
+nnoremap <Tab> :bn<CR>            " Tab to go next buffer
+nnoremap <S-Tab> :bp<CR>          " Shift-Tab to go previous buffer
+nnoremap <Leader><Leader> <C-^>   " Map 2x leader to toggle buffers
+
+" Search and navigation
+nnoremap <leader>] <C-]>
+nnoremap <leader>[ <C-t>
+nnoremap <silent> <leader>. :cnext<CR>
+nnoremap <silent> <leader>, :cprevious<CR>
+
+" Rails navigation
+nnoremap <leader>rc :Econtroller<Space>
+nnoremap <leader>re :Eenvironment<Space>
+nnoremap <leader>rh :Ehelper<Space>
+nnoremap <leader>rm :Emodel<Space>
+nnoremap <leader>rs :Emailer<Space>
+nnoremap <leader>rv :Eview<Space>
 
 " Rename file
 function! RenameFile()
@@ -108,22 +130,22 @@ map <leader>n :call RenameFile()<CR>
 
 " Plugins settings
 let NERDTreeShowHidden=1
-let g:nerdtree_tabs_autoclose=0 " Do not close nerdtree when there aren't any windows left
-let g:CommandTMaxHeight=10
-let g:instant_markdown_autostart=0
-set tags=tags,gem.tags
+let g:airline_powerline_fonts = 1
+let g:rspec_command = "!bin/rspec {spec}"
+let g:easytags_async=1
+let g:easytags_dynamic_files = 1
+set tags=./tags,./gem.tags
 
 " Plugins mapping
-noremap <F3> :NERDTreeTabsToggle<CR>
-noremap <F4> :TagbarToggle<CR>
-noremap <F5> :set hlsearch!<CR>
-noremap <F6> :set paste<CR>i
-noremap <leader>r :NERDTreeFind<CR>
-noremap <leader>p :InstantMarkdownPreview<CR>
+nnoremap <F3> :NERDTreeToggle<CR>
+nnoremap <F4> :TagbarToggle<CR>
+nnoremap <leader>r :NERDTreeFind<CR>
+nnoremap <leader>p :CtrlPFunky <CR>  " CtrlP funky model (symbols)
 
 " Syntax
 autocmd BufNewFile,BufReadPost *.jst set syntax=html
 autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
+autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
 
 " Leave paste mode on exit
 autocmd InsertLeave * set nopaste

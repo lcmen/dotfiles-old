@@ -1,5 +1,5 @@
 export CLICOLOR=1
-export TERM="xterm-color"
+export TERM="xterm-256color"
 
 # Bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -19,9 +19,16 @@ export EDITOR=vim
 # Add Brew to path
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
+# Activate NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 # Add Rbenv to path
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# Add local bintstubs to path
+export PATH=".bin:$PATH"
 
 # Add local Node module binaries to path
 export PATH="./node_modules/.bin:$PATH"
@@ -29,6 +36,5 @@ export PATH="./node_modules/.bin:$PATH"
 # Change Python path in order to support latest version of gdal
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
-# Add web-browsers to path for Selenium
-export PATH="$HOME/Applications/Firefox.app/Contents/MacOS:$PATH"
-export PATH="$HOME/Applications/Google Chrome.app/Contents/MacOS:$PATH"
+# Heroku
+export PATH="/usr/local/heroku/bin:$PATH"

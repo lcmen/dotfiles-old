@@ -12,9 +12,9 @@ alias monitor       1920x1080
 # Helper variables
 alias center-ratio  0.8
 alias center-x      (screenSizeX-screenSizeX*${center-ratio})/2
-alias center-y      (screenSizeY-screenSizeY*${center-ratio})/2
+alias center-y      screenOriginY
 alias center-width  screenSizeX*${center-ratio}
-alias center-height screenSizeY*${center-ratio}
+alias center-height screenSizeY
 
 ################################################
 # Moves
@@ -34,11 +34,13 @@ alias right-1of3    move screenOriginX+screenSizeX*2/3;screenOriginY screenSizeX
 alias right-2of3    move screenOriginX+screenSizeX/3;screenOriginY screenSizeX*2/3;screenSizeY
 
 # App specific
-alias mail-laptop      move screenOriginX;screenOriginY 915;screenSizeY
-alias mail-monitor     move screenOriginX;screenOriginY 990;screenSizeY
-alias skype-monitor    move screenOriginX+990;screenOriginY 560;screenSizeY
-alias twitter-laptop   move screenOriginX+915;screenOriginY 366;screenSizeY
-alias twitter-monitor  move screenOriginX+1550;screenOriginY 366;screenSizeY
+alias browser-monitor  move screenOriginX;screenOriginY 1085;screenSizeY
+alias chat-monitor     move screenOriginX+1085;screenOriginY 835;screenSizeY
+alias mail-laptop      move screenOriginX;screenOriginY 980;screenSizeY
+alias mail-monitor     move screenOriginX;screenOriginY 1060;screenSizeY
+alias skype-monitor    move screenOriginX+1060;screenOriginY 560;screenSizeY
+alias twitterrific-laptop   move screenOriginX+980;screenOriginY 300;screenSizeY
+alias twitterrific-monitor  move screenOriginX+1620;screenOriginY 300;screenSizeY
 
 ################################################
 # Layouts
@@ -47,16 +49,21 @@ alias twitter-monitor  move screenOriginX+1550;screenOriginY 366;screenSizeY
 # Laptop layout
 layout laptoplayout 'Evernote':IGNORE_FAIL ${mail-laptop} ${laptop}
 layout laptoplayout 'Mail':IGNORE_FAIL ${mail-laptop} ${laptop}
-layout laptoplayout 'Twitter':IGNORE_FAIL ${twitter-laptop} ${laptop}
+layout laptoplayout 'Twitterrific':IGNORE_FAIL ${twitterrific-laptop} ${laptop}
+layout laptoplayout 'Firefox':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
 layout laptoplayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
+layout laptoplayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
+layout laptoplayout 'HipChat':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
 
 # Monitor layout
 layout monitorlayout 'Evernote':IGNORE_FAIL ${mail-monitor} ${monitor}
 layout monitorlayout 'Mail':IGNORE_FAIL ${mail-monitor} ${monitor}
 layout monitorlayout 'Skype':IGNORE_FAIL ${skype-monitor} ${monitor}
-layout monitorlayout 'Twitter':IGNORE_FAIL ${twitter-monitor} ${monitor}
-layout monitorlayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${left-2of3} ${monitor}
-layout monitorlayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${left-2of3} ${monitor}
+layout monitorlayout 'Twitterrific':IGNORE_FAIL ${twitterrific-monitor} ${monitor}
+layout monitorlayout 'Firefox':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
+layout monitorlayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
+layout monitorlayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
+layout monitorlayout 'HipChat':IGNORE_FAIL,REPEAT_LAST ${chat-monitor} ${monitor}
 layout monitorlayout 'Transmission':IGNORE_FAIL ${right-1of3} ${monitor}
 
 # Default

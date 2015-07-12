@@ -1,9 +1,15 @@
 # Ignore chruby ruby version
 .ruby-version
 
+# Ignore nvm node version
+.nvmrc
+
 # Ignore bundler vendors
 .bundle
 vendor/bundle
+
+# Temp files
+.sass-cache
 
 # Ignore OS related files
 .AppleDouble
@@ -12,6 +18,7 @@ vendor/bundle
 .Spotlight-V100
 .Trashes
 Icon
+*.savedSearch
 
 # Ignore files created by text editors
 .idea

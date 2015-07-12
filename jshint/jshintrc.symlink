@@ -1,7 +1,7 @@
 {
   "undef": true,
   "unused": true,
-  "camelcase": true,
+  "camelcase": false,
   "eqeqeq": true,
   "smarttabs": true,
   "latedef": true,
@@ -10,13 +10,20 @@
     "console": false,
     "process": false,
     "__dirname": false,
-    
+    "module": false,
+    "require": false,
+    "exports": false,
+
     "window": false,
     "$": false,
     "jQuery": false,
+    "_": false,
 
-    "module": false,
-    "require": false,
+	// Titanium
+    "Alloy": false,
+	"Ti": false,
+    "L": false,
+
     // Jasmine
     "describe": false,
     "expect": true,
