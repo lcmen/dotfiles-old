@@ -2,6 +2,9 @@
 # Basic settings
 ################################################
 
+# Change default shell to fish
+set-option -g default-shell $SHELL
+
 # Change history settings
 set -g history-limit 30000
 
@@ -18,9 +21,6 @@ set-option -g mouse-select-window on
 set-option -g mouse-resize-pane on
 set-window-option -g mode-mouse on
 
-# Start copy mode when scrolling up
-bind -n WheelUpPane copy-mode
-
 # Remap ctrl+b to ctrl+a
 unbind C-b
 set -g prefix C-a
@@ -34,7 +34,7 @@ bind-key -t vi-edit Down history-down
 
 # Color
 set -g default-terminal "screen-256color"
-set -g terminal-overrides 'xterm:colors=256'
+set -g terminal-overrides "xterm:colors=256"
 
 # set the status line's colors
 set -g status-bg black
@@ -82,7 +82,7 @@ set -g default-terminal "screen-256color"
 # Enable reattach-to-user-namespace on init
 # Requires reattach-to-user-namespace, install with brew:
 # brew install reattach-to-user-namespace
-set-option -g default-command "reattach-to-user-namespace -l bash"
+set-option -g default-command "reattach-to-user-namespace -l fish"
 
 ################################################
 # Shortcuts

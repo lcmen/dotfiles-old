@@ -6,12 +6,14 @@ brew update
 # Install Tools
 brew install ansible
 brew install autoconf
-brew install bash-completion
+brew install autojump
 brew install caskroom/cask/brew-cask
 brew install cmake
 brew install ctags
 brew install elixir
+brew install fish
 brew install git
+brew install hg
 brew install imagemagick
 brew install mariadb
 brew install memcached
@@ -19,7 +21,7 @@ brew install mongodb
 brew install nvm
 brew install openssl
 brew install postgresql
-brew install rbenv
+brew install rbenv --HEAD # Latest version works with fish
 brew install rbenv-binstubs
 brew install rbenv-bundler
 brew install rbenv-bundle-exec
@@ -39,6 +41,7 @@ brew install youtube-dl
 
 # Install Cask versions
 brew tap caskroom/versions
+brew tap homebrew/services
 
 # Install Apps
 brew cask install alfred
@@ -54,6 +57,7 @@ brew cask install google-chrome
 brew cask install gpgtools
 brew cask install heroku-toolbelt
 brew cask install hipchat
+brew cask install karabiner
 brew cask install keepassx0
 brew cask install macvim
 brew cask install remote-desktop-connection

@@ -5,14 +5,16 @@ task :install do
   ARGV.clear
 
   symlinks = Dir.glob('*/*.symlink')
+  directories = { fish: '.config/fish' }
 
   symlinks.each do |s|
     symlink = ".#{s.split('/').last.split('.symlink').first}"
-    target = File.join(ENV['HOME'], symlink)
+    symlink_dest = directories.fetch(symlink[1..-1].to_sym) { symlink }
+    target = File.join(ENV["HOME"], symlink_dest)
     source = File.join(File.dirname(__FILE__), s)
 
     if File.exists?(target)
-      puts "File #{symlink} already exists in #{ENV['HOME']}."
+      puts "File #{symlink} already exists (#{target})."
       puts "Do you want to overwrite? y/n"
       next unless gets.chomp =~ /^y/i
 

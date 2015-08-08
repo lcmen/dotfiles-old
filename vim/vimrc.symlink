@@ -1,6 +1,9 @@
 set nocompatible
 filetype off
 
+" Don't use default fish shell
+set shell=/bin/sh
+
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -30,6 +33,7 @@ Plugin 'elzr/vim-json'
 
 Plugin 'jgdavey/vim-blockle'
 Plugin 'tpope/vim-endwise'
+Plugin 'rizzatti/dash.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -45,14 +49,25 @@ set t_Co=256
 set guioptions=aAce
 set laststatus=2
 set showcmd
-colorscheme tomorrow-night
+colorscheme solarized
+set background=dark
+if !has('gui_running')
+  let g:solarized_termtrans=1
+
+  if (&t_Co >= 256 || $TERM == 'xterm-256color')
+    " Do nothing, it handles itself.
+  else
+    " Make Solarized use 16 colors for Terminal support
+    let g:solarized_termcolors=16
+  endif
+endif
 
 " Editor settings
 set backspace=indent,eol,start    " Allow backspacing over everything in inset mode
 set scrolloff=5                   " Start scrolling 5 lines away from margin
 set sidescrolloff=15              " Start scrolling 15 lines away from side margin
 set sidescroll=1
-set clipboard=unnamed
+set clipboard=unnamed             " Yield to system clipboard
 
 " Whitespace settings
 set nowrap                        " Wrap visually
@@ -71,6 +86,7 @@ set tabstop=4                     " Number of spaces <tab> counts for
 " Language specific indentation settings
 autocmd FileType php setl softtabstop=4 shiftwidth=4
 autocmd FileType python setl softtabstop=4 shiftwidth=4
+autocmd FileType xml setl softtabstop=4 shiftwidth=4
 
 " UI settings
 set number                        " Show line numbers
@@ -101,10 +117,17 @@ vnoremap > >gv
 nnoremap <Tab> :bn<CR>            " Tab to go next buffer
 nnoremap <S-Tab> :bp<CR>          " Shift-Tab to go previous buffer
 nnoremap <Leader><Leader> <C-^>   " Map 2x leader to toggle buffers
+" Match buffers matching file pattern
+cnoremap <C-q> <C-a>
 
 " Search and navigation
-nnoremap <leader>] <C-]>
-nnoremap <leader>[ <C-t>
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+nnoremap <CR> :nohlsearch<cr>     " Clear the search buffer when hitting return
+nnoremap <leader>] <C-]>          " Follow symbol
+nnoremap <leader>[ <C-t>          " Return to the previous position
 nnoremap <silent> <leader>. :cnext<CR>
 nnoremap <silent> <leader>, :cprevious<CR>
 
@@ -115,6 +138,12 @@ nnoremap <leader>rh :Ehelper<Space>
 nnoremap <leader>rm :Emodel<Space>
 nnoremap <leader>rs :Emailer<Space>
 nnoremap <leader>rv :Eview<Space>
+nnoremap <leader>rvc :EVcontroller<Space>
+nnoremap <leader>rve :EVenvironment<Space>
+nnoremap <leader>rvh :EVhelper<Space>
+nnoremap <leader>rvm :EVmodel<Space>
+nnoremap <leader>rvs :EVmailer<Space>
+nnoremap <leader>rvv :EVview<Space>
 
 " Rename file
 function! RenameFile()
@@ -131,7 +160,6 @@ map <leader>n :call RenameFile()<CR>
 " Plugins settings
 let NERDTreeShowHidden=1
 let g:airline_powerline_fonts = 1
-let g:rspec_command = "!bin/rspec {spec}"
 let g:easytags_async=1
 let g:easytags_dynamic_files = 1
 set tags=./tags,./gem.tags
@@ -141,6 +169,8 @@ nnoremap <F3> :NERDTreeToggle<CR>
 nnoremap <F4> :TagbarToggle<CR>
 nnoremap <leader>r :NERDTreeFind<CR>
 nnoremap <leader>p :CtrlPFunky <CR>  " CtrlP funky model (symbols)
+nnoremap <leader>s :Dash<CR>
+inoremap <leader>s <ESC>:Dash<CR>a
 
 " Syntax
 autocmd BufNewFile,BufReadPost *.jst set syntax=html
