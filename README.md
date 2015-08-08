@@ -1,5 +1,7 @@
 # Collection of my dotfiles
 
+It relies on cloning the repo to `~/Code/dotfiles`. I need to add some fix for that.
+
 ## Installation
 1. Install Homebrew
 2. Run brew.sh
