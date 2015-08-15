@@ -3,13 +3,15 @@
 brew doctor
 brew update
 
+brew tap homebrew/services
+brew tap universal-ctags/universal-ctags
+
 # Install Tools
 brew install ansible
 brew install autoconf
 brew install autojump
 brew install caskroom/cask/brew-cask
 brew install cmake
-brew install ctags
 brew install elixir
 brew install fish
 brew install git
@@ -21,6 +23,7 @@ brew install mongodb
 brew install nvm
 brew install openssl
 brew install postgresql
+brew install pow
 brew install rbenv --HEAD # Latest version works with fish
 brew install rbenv-binstubs
 brew install rbenv-bundler
@@ -34,6 +37,7 @@ brew install the_silver_searcher
 brew install tig
 brew install tmux
 brew install tree
+brew install --HEAD universal-ctags
 brew install v8
 brew install vim
 brew install wget
@@ -41,7 +45,6 @@ brew install youtube-dl
 
 # Install Cask versions
 brew tap caskroom/versions
-brew tap homebrew/services
 
 # Install Apps
 brew cask install alfred
