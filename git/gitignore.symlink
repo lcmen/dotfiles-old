@@ -1,9 +1,6 @@
 # Ignore chruby ruby version
 .ruby-version
 
-# Ignore nvm node version
-.nvmrc
-
 # Ignore bundler vendors
 .bundle
 vendor/bundle
@@ -21,11 +18,7 @@ Icon
 *.savedSearch
 
 # Ignore files created by text editors
-.idea
 *.sublime-project
 *.sublime-workspace
-*.tmproj
-*.tmproject
-.tm_properties
 gem.tags
 tags

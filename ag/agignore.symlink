@@ -3,4 +3,7 @@ vendor
 tmp
 doc
 coverage
-.git
+node_modules
+bower_components
+Resources
+/.git/

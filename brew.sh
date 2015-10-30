@@ -24,6 +24,8 @@ brew install nvm
 brew install openssl
 brew install postgresql
 brew install pow
+brew install pyenv
+brew install pyenv-virtualenv
 brew install rbenv --HEAD # Latest version works with fish
 brew install rbenv-binstubs
 brew install rbenv-bundler

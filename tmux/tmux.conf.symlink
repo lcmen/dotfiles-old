@@ -2,7 +2,7 @@
 # Basic settings
 ################################################
 
-# Change default shell to fish
+# Change default shell
 set-option -g default-shell $SHELL
 
 # Change history settings
@@ -16,15 +16,18 @@ set -g pane-base-index 1
 set -g renumber-windows on
 
 # Make mouse useful
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-option -g mouse-resize-pane on
-set-window-option -g mode-mouse on
+set-option -g mouse
+
+# Fix scroll on tmux 2.1
+bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
+bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
+bind-key -t vi-copy WheelUpPane halfpage-up
+bind-key -t vi-copy WheelDownPane halfpage-down
 
 # Remap ctrl+b to ctrl+a
 unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
+set -g prefix C-s
+bind -r C-s send-prefix
 
 # Enable vim key binding
 setw -g mode-keys vi
@@ -32,7 +35,7 @@ set -g status-keys vi
 bind-key -t vi-edit Up   history-up
 bind-key -t vi-edit Down history-down
 
-# Color
+# Use 256color screen. This makes vim look pretty
 set -g default-terminal "screen-256color"
 set -g terminal-overrides "xterm:colors=256"
 
@@ -46,7 +49,6 @@ setw -g window-status-fg brightblue
 setw -g window-status-bg default
 
 # set colors for the active window
-# setw -g window-status-current-fg brred
 setw -g window-status-current-bg default
 setw -g window-status-current-format "[ #I:#W#F ]"
 
@@ -60,7 +62,7 @@ set -g status-left-length 40
 set -g status-left "#(whoami) @ #h #[fg=colour235, bg=blue] #S #[fg=colour234, bg=colour230] #I.#P #[fg=colour166, bg=colour235]"
 
 # Status line right side
-# now playing in iTunes | battery % | DD MMM HH:MM
+# battery % | DD MMM HH:MM
 set -g status-right-length 90
 set -g status-right "#[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) #[fg=colour234, bg=colour064] %d %b %R "
 
@@ -70,14 +72,6 @@ set-option -g status-utf8 on
 set -g status-interval 5
 
 set -g status-justify centre
-
-# Split settings
-bind | split-window -h
-bind \ split-window -h # Because shift is hard
-bind - split-window -v
-
-# Use 256color screen. This makes vim look pretty
-set -g default-terminal "screen-256color"
 
 # Enable reattach-to-user-namespace on init
 # Requires reattach-to-user-namespace, install with brew:
@@ -90,6 +84,11 @@ set-option -g default-command "reattach-to-user-namespace -l fish"
 
 # Reload settings
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Split settings
+bind | split-window -h
+bind \ split-window -h
+bind - split-window -v
 
 # Make C-j display a selectable list of sessions
 bind C-j choose-tree
