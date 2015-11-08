@@ -3,7 +3,7 @@ if has('nvim')
   nmap <BS> <C-W>h
 endif
 
-" Basic s as as  mapping
+" Space as leader key
 let mapleader="\<Space>"
 
 " Move more senibly when line wrapping enabled
@@ -19,6 +19,9 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 nnoremap <Up>   :echoe "Use k"<CR>
 nnoremap <Right>:echoe "Use l"<CR>
+
+" New blank tab
+nnoremap <S-t> :tabe<CR>
 
 " Resize windows with the arrow keys
 nnoremap <up>    <C-W>+
@@ -76,8 +79,7 @@ nmap <silent> <leader>q :call BufferDelete()<CR>
 map <leader>n :call RenameFile()<CR>
 
 " Plugins mapping
-nnoremap <F3> :NERDTreeTabsToggle<CR>
-nnoremap <leader>r :NERDTreeFind<CR>
+nnoremap <F3> :Explore<CR>
 nnoremap <leader>p :CtrlPFunky <CR>  " CtrlP funky model (symbols)
 nnoremap <leader>o :CtrlPTag<cr>
 nnoremap <leader>h :Dash<CR>

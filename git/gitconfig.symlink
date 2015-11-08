@@ -3,7 +3,7 @@
   email = mendelowski@gmail.com
 [core]
   excludesfile = /Users/lucas/.gitignore
-  editor = /usr/local/bin/vim
+  editor = /usr/bin/vim
 [push]
   default = matching
 [color]

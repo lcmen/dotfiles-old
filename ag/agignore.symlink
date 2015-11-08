@@ -5,5 +5,8 @@ doc
 coverage
 node_modules
 bower_components
+
+build
 Resources
+
 /.git/

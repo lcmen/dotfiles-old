@@ -14,5 +14,18 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+
 " Clear the search buffer when hitting return
 nnoremap <CR> :nohlsearch<cr>
+
+" Mappings
+nmap <space>c :xccmd complete<CR>
+nmap <space>r :run<CR>
+nmap <S-t> :xccmd newTab<CR>
+nmap gt :xccmd selectNextTab<CR>
+nmap gT :xccmd selectPreviousTab<CR>
+nmap gcc :xccmd commentAndUncommentCurrentLines<CR>
+
+" Move more senibly when line wrapping enabled
+nmap k gk
+nmap j gj

@@ -33,6 +33,7 @@ set shiftwidth=2                  " Number of spaces per <tab> when indenting
 set tabstop=4                     " Number of spaces <tab> counts for
 
 " UI settings
+let g:netrw_liststyle=3
 set number                        " Show line numbers
 set relativenumber                " Use relative line numbers
 set listchars=tab:▸\              " Char representing a tab

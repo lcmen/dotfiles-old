@@ -18,8 +18,6 @@ brew install git
 brew install hg
 brew install imagemagick
 brew install mariadb
-brew install memcached
-brew install mongodb
 brew install nvm
 brew install openssl
 brew install postgresql

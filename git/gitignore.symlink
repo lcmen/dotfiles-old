@@ -18,7 +18,9 @@ Icon
 *.savedSearch
 
 # Ignore files created by text editors
+.projections.json
 *.sublime-project
 *.sublime-workspace
+config/projections.json
 gem.tags
 tags

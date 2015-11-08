@@ -18,6 +18,9 @@ set -g renumber-windows on
 # Make mouse useful
 set-option -g mouse
 
+# Make tmux play nicely with NeoVim
+set -g escape-time 10
+
 # Fix scroll on tmux 2.1
 bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
 bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
@@ -64,7 +67,7 @@ set -g status-left "#(whoami) @ #h #[fg=colour235, bg=blue] #S #[fg=colour234, b
 # Status line right side
 # battery % | DD MMM HH:MM
 set -g status-right-length 90
-set -g status-right "#[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) #[fg=colour234, bg=colour064] %d %b %R "
+set -g status-right "#[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) %#[fg=colour235, bg=blue] d %b %R "
 
 set-option -g status-utf8 on
 
