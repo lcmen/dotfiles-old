@@ -25,7 +25,3 @@ nmap <S-t> :xccmd newTab<CR>
 nmap gt :xccmd selectNextTab<CR>
 nmap gT :xccmd selectPreviousTab<CR>
 nmap gcc :xccmd commentAndUncommentCurrentLines<CR>
-
-" Move more senibly when line wrapping enabled
-nmap k gk
-nmap j gj

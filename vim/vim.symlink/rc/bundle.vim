@@ -15,8 +15,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'rking/ag.vim'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'tpope/vim-projectionist'
+Plugin 'tpope/vim-vinegar'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Utilities
@@ -38,6 +40,7 @@ Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
 Plugin 'thoughtbot/vim-rspec', { 'v': 'b0d30e2' }
 Plugin 'elzr/vim-json'
+Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
 filetype plugin indent on

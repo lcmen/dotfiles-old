@@ -79,7 +79,7 @@ nmap <silent> <leader>q :call BufferDelete()<CR>
 map <leader>n :call RenameFile()<CR>
 
 " Plugins mapping
-nnoremap <F3> :Explore<CR>
-nnoremap <leader>p :CtrlPFunky <CR>  " CtrlP funky model (symbols)
+nnoremap <F3> :vs.<CR>
+nnoremap <leader>p :CtrlPFunky <CR>
 nnoremap <leader>o :CtrlPTag<cr>
 nnoremap <leader>h :Dash<CR>
