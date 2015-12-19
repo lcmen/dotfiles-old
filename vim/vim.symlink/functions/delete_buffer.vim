@@ -1,4 +1,4 @@
-function! BufferDelete()
+function! DeleteBuffer()
   if &modified
     echohl ErrorMsg
     echomsg "No write since last change."

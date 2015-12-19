@@ -11,14 +11,14 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Navigation
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'rking/ag.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'pbrisbin/vim-mkdir'
 Plugin 'tpope/vim-projectionist'
-Plugin 'tpope/vim-vinegar'
+Plugin 'scrooloose/nerdtree'
 Plugin 'christoomey/vim-tmux-navigator'
 
 " Utilities
@@ -38,27 +38,69 @@ Plugin 'jgdavey/vim-blockle'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
-Plugin 'thoughtbot/vim-rspec', { 'v': 'b0d30e2' }
+Plugin 'skalnik/vim-vroom'
 Plugin 'elzr/vim-json'
 Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
 filetype plugin indent on
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme="tomorrow"
-
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -f -l -U --hidden --nocolor -g ""'
 let g:ctrlp_use_caching = 0
 
-let g:rspec_runner = "os_x_iterm"
+let g:ctrlp_working_path_mode = 0
 
-" Make sure vim rspec works in macvim, console and tmux
-if !has("gui") && InTmuxSession()
-  let g:rspec_command = "Dispatch bin/rspec {spec}"
-elseif has("gui")
-  let g:rspec_command = "bin/rspec {spec}"
-else
-  let g:rspec_command = "!bin/rspec {spec}"
+" Increase default CtrlP settings
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_height = 20
+let g:ctrlp_max_depth = 40
+
+" Airline
+let g:airline_powerline_fonts = 1
+let g:airline_theme="luna"
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Vim vroom
+let g:vroom_use_bundle_exec = 1
+
+" Use Vim dispatch in Tmux
+if InTmuxSession()
+  let g:vroom_use_dispatch = 1
 end
+
+" Vim projectionist:
+"   - tiapp.xml - Titanium project configuration
+let g:projectionist_heuristics = {
+  \   "tiapp.xml": {
+  \     "app/config.json": {
+  \       "alternate": "app/config.example.json",
+  \       "type": "config"
+  \     },
+  \     "app/config.example.json": {
+  \       "alternate": "app/config.json",
+  \       "type": "econfig"
+  \     },
+  \     "app/controllers/*.js": {
+  \       "alternate": "app/views/{}.xml",
+  \       "type": "controller"
+  \     },
+  \     "app/lib/*.js": {
+  \       "type": "lib"
+  \     },
+  \     "app/models/*.js": {
+  \       "type": "model"
+  \     },
+  \     "app/styles/*.tss": {
+  \       "alternate": "app/views/{}.xml",
+  \       "type": "style"
+  \     },
+  \     "app/views/*.xml": {
+  \       "alternate": "app/controllers/{}.js",
+  \       "type": "view"
+  \     }
+  \   }
+  \ }

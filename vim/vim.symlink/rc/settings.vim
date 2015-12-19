@@ -8,8 +8,10 @@ syntax enable
 set t_Co=256
 set guioptions=aAce
 set laststatus=2
+set noshowmode
 set showcmd
-colorscheme dracula
+set antialias
+colorscheme luna
 
 " Editor settings
 set backspace=indent,eol,start    " Allow backspacing over everything in inset mode
@@ -33,8 +35,6 @@ set shiftwidth=2                  " Number of spaces per <tab> when indenting
 set tabstop=4                     " Number of spaces <tab> counts for
 
 " UI settings
-let g:netrw_preview=1
-let g:netrw_winsize=20
 set number                        " Show line numbers
 set relativenumber                " Use relative line numbers
 set listchars=tab:▸\              " Char representing a tab
@@ -42,6 +42,7 @@ set listchars+=extends:❯          " Char representing an extending line
 set listchars+=nbsp:␣             " Non breaking space
 set listchars+=precedes:❮         " Char representing an extending line in the other direction
 set listchars+=trail:·            " Show trailing spaces as dots
+set statusline=%<%f\ %h%m%r%=\ %-14.(%l,%c%V%)\ %P
 
 " Search
 set hlsearch
@@ -49,11 +50,19 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Use The Silver Search if available
+if executable('ag')
+  set grepprg=ag\ -f\ -U\ --nogroup\ --nocolor
+endif
+
 " Ctags
-set tags=rtags,gem.tags
+set tags+=gem.tags
 
 " Leave paste mode on exit
 autocmd InsertLeave * set nopaste
 
 " Trim white spaces
 autocmd BufWritePre * call StripTrailingWhiteSpace()
+
+" Special extension settings
+au BufRead,BufNewFile *.tss set filetype=javascript " Titanium Alloy Style Files

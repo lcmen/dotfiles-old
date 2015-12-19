@@ -1,3 +1,4 @@
+# Setup encoding
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -45,8 +46,14 @@ status --is-interactive; and . (pyenv virtualenv-init -|psub)
 status --is-interactive; and . (rbenv init -|psub)
 
 # Add iOS devices
+# iPhones
 set ip4 E910C09C-32F6-452D-A571-2EA3B20B15A7
 set ip5 E06B3EDB-5BCA-454C-B437-8A7B20349C9C
 set ip5s 5D014CB5-EC01-4E1D-810A-FB17AA3FAA12
 set ip6 807FA9E8-D6B8-4A88-84C9-CD09DC7F4539
 set ip6p 21A2CB8F-E10E-472E-B2C4-EE3FD061605F
+# iPads
+set ipad2 7E3C41EA-C159-481B-A189-43DA35442A0F
+set ipadr D43120A0-7785-49B7-898F-5CDCEC4184F6
+set ipada 3C55C179-E0AC-4A02-9648-5353AF318681
+set ipada2 1F8CC452-9773-4FE4-9503-1C86E17F2981

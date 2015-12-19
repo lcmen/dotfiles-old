@@ -19,6 +19,10 @@ set smartcase
 nnoremap <CR> :nohlsearch<cr>
 
 " Mappings
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 nmap <space>c :xccmd complete<CR>
 nmap <space>r :run<CR>
 nmap <S-t> :xccmd newTab<CR>
