@@ -18,6 +18,12 @@ set -g renumber-windows on
 # Make mouse useful
 set-option -g mouse
 
+# Fix escape-time for NeoVim
+set -sg escape-time 0
+
+# Decreate repeat time to 0
+set-option repeat-time 0
+
 # Fix scroll on tmux 2.1
 bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
 bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
@@ -35,6 +41,14 @@ set -g status-keys vi
 bind-key -t vi-edit Up   history-up
 bind-key -t vi-edit Down history-down
 
+# Setup 'v' to begin selection as in Vim
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+
+# Update default binding of `Enter` to also use copy-pipe
+unbind -t vi-copy Enter
+bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
+
 # Use 256color screen. This makes vim look pretty
 set -g default-terminal "screen-256color"
 set -g terminal-overrides "xterm:colors=256"
@@ -44,27 +58,28 @@ set -g status-bg black
 set -g status-fg yellow
 set-option -g status-attr default
 
+source "/Users/lucas/Code/dotfiles/tmux/themes/solarized-dark.conf"
+
 # set the color of the window list
-setw -g window-status-fg brightblue
-setw -g window-status-bg default
+# setw -g window-status-fg brightblue
+# setw -g window-status-bg default
 
-# set colors for the active window
-setw -g window-status-current-bg default
-setw -g window-status-current-format "[ #I:#W#F ]"
+# # set colors for the active window
+# setw -g window-status-current-format "[ #I:#W#F ]"
 
-# pane colors
-set -g pane-border-fg black
-set -g pane-active-border-fg brightgreen
+# # pane colors
+# set -g pane-border-fg black
+# set -g pane-active-border-fg brightgreen
 
-# Status line left side
-# user | session | window.pane
-set -g status-left-length 40
-set -g status-left "#(whoami) @ #h #[fg=colour235, bg=blue] #S #[fg=colour234, bg=colour230] #I.#P #[fg=colour166, bg=colour235]"
+# # Status line left side
+# # user | session | window.pane
+# set -g status-left-length 40
+# set -g status-left "#(whoami) @ #h #[fg=colour235, bg=blue] #S #[fg=colour234, bg=colour230] #I.#P #[fg=colour166, bg=colour235]"
 
-# Status line right side
-# battery % | DD MMM HH:MM
-set -g status-right-length 90
-set -g status-right "#[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) %#[fg=colour235, bg=blue] d %b %R "
+# # Status line right side
+# # battery % | DD MMM HH:MM
+# set -g status-right-length 90
+# set -g status-right "#[fg=colour234, bg=colour230] #(~/Code/dotfiles/scripts/battery_mac.sh) %#[fg=colour235, bg=blue] d %b %R "
 
 set-option -g status-utf8 on
 
@@ -99,6 +114,8 @@ bind t swap-window -t 1
 # Swap current windows prev / next
 bind C-k swap-window -t -1
 bind C-j swap-window -t +1
+bind C-h resize-pane -L 10
+bind C-l resize-pane -R 10
 
 # smart pane switching with awareness of vim splits
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"

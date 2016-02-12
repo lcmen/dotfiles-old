@@ -15,17 +15,15 @@ set incsearch
 set ignorecase
 set smartcase
 
-" Clear the search buffer when hitting return
-nnoremap <CR> :nohlsearch<cr>
+" Clear the search buffer
+nmap <silent> <S-h> :nohlsearch<CR>
 
 " Mappings
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
-nmap <space>c :xccmd complete<CR>
+nmap <C-p> :xccmd openQuickly<CR>
+nmap <space>c :xccmd complete<CR> <bar> a
 nmap <space>r :run<CR>
-nmap <S-t> :xccmd newTab<CR>
-nmap gt :xccmd selectNextTab<CR>
-nmap gT :xccmd selectPreviousTab<CR>
 nmap gcc :xccmd commentAndUncommentCurrentLines<CR>

@@ -1,4 +1,5 @@
-# Ignore chruby ruby version
+# Ignore language specific versions
+.node-version
 .ruby-version
 
 # Ignore bundler vendors
