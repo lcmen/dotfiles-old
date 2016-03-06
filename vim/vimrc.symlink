@@ -243,13 +243,12 @@ map <Leader>l :VroomRunLastTest<CR>
 
 " Files
 map <leader>m :call RenameFile()<CR>
-nnoremap <F5> :call PreviewMarkdownFile()<CR>
 
 " Plugins mapping
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 nnoremap <silent> <F4> :NERDTreeFind<CR>
-nnoremap <c-n> :CtrlPFunky<CR>
-nnoremap N :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <leader>n :CtrlPFunky<CR>
+nnoremap <leader>N :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 nnoremap <c-_> gcc<CR>
 nnoremap <leader><tab> :SuperTabHelp<CR>
 
@@ -315,7 +314,14 @@ call extend(g:rails_gem_projections, {
     \   "test/factories.rb": {
     \      "command": "factory"
     \   }
-    \ }
+    \ },
+    \ "request_specs": {
+    \   "spec/requests/*_spec.rb": {
+    \     "command": "request",
+    \     "alternate": "app/controllers/{}.rb",
+    \     "affinity": "controller"
+    \   }
+    \ },
   \ }, 'keep')
 
 " Vim projectionist:

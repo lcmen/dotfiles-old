@@ -22,7 +22,7 @@ set-option -g mouse
 set -sg escape-time 0
 
 # Decreate repeat time to 0
-set-option repeat-time 0
+set -g repeat-time 0
 
 # Fix scroll on tmux 2.1
 bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
