@@ -1,31 +1,28 @@
-################################################
-# Screens
-################################################
+# Screens {{{
 
 alias laptop        1280x800
 alias monitor       1920x1080
 
-################################################
-# Properties
-################################################
+# }}}
+
+# Layouts {{{
 
 # Helper variables
-alias center-ratio  0.8
-alias center-x      (screenSizeX-screenSizeX*${center-ratio})/2
+alias center-x      screenSizeX/4
 alias center-y      screenOriginY
-alias center-width  screenSizeX*${center-ratio}
+alias center-width  screenSizeX/2
 alias center-height screenSizeY
 
-################################################
-# Moves
-################################################
-
-# Generic
+# Layouts
 alias full-screen   move screenOriginX;screenOriginY screenSizeX;screenSizeY
 alias center        move ${center-x};${center-y} ${center-width};${center-height}
 alias center-1of3   move screenOriginX+screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
 alias top-half      move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
 alias bottom-half   move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias top-1of3      move screenOriginX;screenOriginY screenSizeX;screenSizeY/3
+alias top-2of3      move screenOriginX;screenOriginY screenSizeX;2*screenSizeY/3
+alias bottom-1of3   move screenOriginX;screenOriginY+2*screenSizeY/3 screenSizeX;screenSizeY/3
+alias bottom-2of3   move screenOriginX;screenOriginY+screenSizeY/3 screenSizeX;2*screenSizeY/3
 alias left-half     move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
 alias right-half    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
 alias left-1of3     move screenOriginX;screenOriginY screenSizeX/3;screenSizeY
@@ -33,61 +30,30 @@ alias left-2of3     move screenOriginX;screenOriginY screenSizeX*2/3;screenSizeY
 alias right-1of3    move screenOriginX+screenSizeX*2/3;screenOriginY screenSizeX/3;screenSizeY
 alias right-2of3    move screenOriginX+screenSizeX/3;screenOriginY screenSizeX*2/3;screenSizeY
 
-# App specific
-alias browser-monitor  move screenOriginX;screenOriginY 1085;screenSizeY
-alias chat-monitor     move screenOriginX+1085;screenOriginY 835;screenSizeY
-alias mail-laptop      move screenOriginX;screenOriginY 980;screenSizeY
-alias mail-monitor     move screenOriginX;screenOriginY 1060;screenSizeY
-alias skype-monitor    move screenOriginX+1060;screenOriginY 560;screenSizeY
-alias twitterrific-laptop   move screenOriginX+980;screenOriginY 300;screenSizeY
-alias twitterrific-monitor  move screenOriginX+1620;screenOriginY 300;screenSizeY
+# }}}
 
-################################################
-# Layouts
-################################################
-
-# Laptop layout
-layout laptoplayout 'Evernote':IGNORE_FAIL ${mail-laptop} ${laptop}
-layout laptoplayout 'Mail':IGNORE_FAIL ${mail-laptop} ${laptop}
-layout laptoplayout 'Twitterrific':IGNORE_FAIL ${twitterrific-laptop} ${laptop}
-layout laptoplayout 'Firefox':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
-layout laptoplayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
-layout laptoplayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
-layout laptoplayout 'HipChat':IGNORE_FAIL,REPEAT_LAST ${full-screen} ${laptop}
-
-# Monitor layout
-layout monitorlayout 'Evernote':IGNORE_FAIL ${mail-monitor} ${monitor}
-layout monitorlayout 'Mail':IGNORE_FAIL ${mail-monitor} ${monitor}
-layout monitorlayout 'Skype':IGNORE_FAIL ${skype-monitor} ${monitor}
-layout monitorlayout 'Twitterrific':IGNORE_FAIL ${twitterrific-monitor} ${monitor}
-layout monitorlayout 'Firefox':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
-layout monitorlayout 'Google Chrome':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
-layout monitorlayout 'Safari':IGNORE_FAIL,REPEAT_LAST ${browser-monitor} ${monitor}
-layout monitorlayout 'HipChat':IGNORE_FAIL,REPEAT_LAST ${chat-monitor} ${monitor}
-layout monitorlayout 'Transmission':IGNORE_FAIL ${right-1of3} ${monitor}
-
-# Default
-default laptoplayout count:1
-
-################################################
-# Bindings
-################################################
+# Bindings {{{
 
 # Halfies
-bind left:alt;ctrl        ${left-half}
-bind right:alt;ctrl       ${right-half}
+bind left:alt,cmd,s         ${left-half}
+bind right:alt,cmd,s        ${right-half}
+bind up:alt,cmd,s           ${top-half}
+bind down:alt,cmd,s         ${bottom-half}
 
 # Triples
-# bind q:alt;ctrl           ${left-1of3}
-# bind a:alt;ctrl           ${left-2of3}
-# bind w:alt;ctrl           ${center-1of3}
-# bind e:alt;ctrl           ${right-1of3}
-# bind d:alt;ctrl           ${right-2of3}
-
-# Layouts
-bind space:alt;cmd;ctrl   layout monitorlayout
-bind return:alt;cmd;ctrl  layout laptoplayout
+bind h:alt,cmd,s            ${left-1of3}
+bind 6:alt,cmd,s            ${left-2of3}
+bind k:alt,cmd,s            ${top-1of3}
+bind u:alt,cmd,s            ${top-2of3}
+bind l:alt,cmd,s            ${right-1of3}
+bind 4:alt,cmd,s            ${right-2of3}
+bind j:alt,cmd,s            ${bottom-1of3}
+bind d:alt,cmd,s            ${bottom-2of3}
 
 # Misc
-bind space:alt;ctrl       ${center}
-bind f:alt;ctrl           ${full-screen}
+bind c:alt,cmd,s            ${center}
+bind f:alt,cmd,s            ${full-screen}
+
+# }}}
+
+# vim:foldmethod=marker:foldlevel=0

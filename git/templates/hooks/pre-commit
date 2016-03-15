@@ -3,9 +3,9 @@
 spec_hits = []
 
 checks = {
-            '_spec.rb$' => [':focus', 'focus:[:space:]*true', ':wip', 'wip:[:space:]*true'],
-            '.rb$' => ['binding.pry', 'debugger', 'REMOVE', 'TODO!', 'save_and_open_page', 'screenshot_and_open_image']
-         }
+  '_spec.rb$' => [':focus', 'focus:[:space:]*true', ':wip', 'wip:[:space:]*true'],
+  '.rb$' => ['binding.pry', 'debugger', 'REMOVE', 'TODO!', 'save_and_open_page', 'screenshot_and_open_image']
+}
 
 # Find the names of all the filenames that have been (A)dded (C)opied or (M)odified
 filenames = `git diff --cached --name-only --diff-filter=ACM`.split("\n")
@@ -18,9 +18,9 @@ filenames.each do |filename|
         results = `git diff --cached #{filename} | grep "^+[^+]" | grep "#{contents_pattern}"`.split("\n")#.map { |r| r.sub(/^+[st]*/, '') }
         if $? == 0
           # Add the relevant change with line number to the spec_hits array
-          results.each{ |r|
-            spec_hits.push "#{filename}:" + `grep -n '#{r}' #{filename}`.sub(/:s+/, ' ').chomp
-          }
+          results.each do |r|
+            spec_hits.push("#{filename}:" + `grep -n '#{r}' #{filename}`.sub(/:s+/, ' ').chomp)
+          end
         end
       end
     end
@@ -28,7 +28,7 @@ filenames.each do |filename|
 end
 
 if spec_hits.any?
-  puts "e[33m>>> Please remove the following problems from these files before committinge[0m"
+  puts "Remove the following problems from these files before committing"
   puts spec_hits.join("n")
 end
 

@@ -1,20 +1,13 @@
-" ===============================================
-" == Small fixes ================================
-" ===============================================
+" Small fixes {{{
 
 " Change shell if it's fish
 if $SHELL =~ 'bin/fish'
   set shell=/bin/sh
 endif
 
-" Fix C-h mapping on neovim
-if has('nvim')
-  nmap <BS> <C-W>h
-endif
+" }}}
 
-" ===============================================
-" == Plugins ====================================
-" ===============================================
+" Plugins {{{
 set nocompatible
 filetype on
 filetype off
@@ -42,18 +35,19 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-dispatch'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ervandew/supertab'
+Plugin 'terryma/vim-expand-region'
 
 " UI
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ryanoasis/vim-devicons'
 
 " Language & syntax specific
 Plugin 'jgdavey/vim-blockle'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-bundler'
 Plugin 'skalnik/vim-vroom'
 Plugin 'elzr/vim-json'
 Plugin 'mustache/vim-mustache-handlebars'
@@ -63,6 +57,8 @@ filetype plugin indent on
 
 " Load all functions from functions directory
 runtime! functions/*.vim
+
+" }}}
 
 " ===============================================
 " == Settings ===================================
@@ -80,9 +76,8 @@ set guioptions=aAce
 set laststatus=2
 set noshowmode
 set showcmd
-let base16colorspace=256
-set background=dark
-colorscheme base16-railscasts
+set background=light
+colorscheme pencil
 
 " Editor
 set backspace=indent,eol,start    " Allow backspacing over everything in inset mode
@@ -90,6 +85,10 @@ set scrolloff=5                   " Start scrolling 5 lines away from margin
 set sidescrolloff=15              " Start scrolling 15 lines away from side margin
 set sidescroll=1
 set clipboard=unnamed             " Yield to system clipboard
+set foldmethod=syntax             " Fold sections by markers, rather than indentation
+set foldlevel=10                  " Open 10 folds by default
+set modeline                      " Enable modeline
+set modelines=1                   " Check just the final line of the file for a modeline
 
 " Whitespace
 set nowrap                        " Wrap visually
@@ -115,6 +114,14 @@ set listchars+=precedes:❮         " Char representing an extending line in the
 set listchars+=trail:·            " Show trailing spaces as dots
 set statusline=%<%f\ %h%m%r%=\ %-14.(%l,%c%V%)\ %P
 
+if InTmuxSession()
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
 " Search
 set hlsearch
 set incsearch
@@ -125,7 +132,7 @@ set smartcase
 set splitright                    " Split on the right side
 set splitbelow                    " Split below
 
-" Use The Silver Search if available
+" Use The Silver Search if available for search
 if executable('ag')
   set grepprg=ag\ -f\ -U\ --nogroup\ --nocolor
 endif
@@ -139,13 +146,13 @@ autocmd InsertLeave * set nopaste
 " Trim white spaces on save
 autocmd BufWritePre * call StripTrailingWhiteSpace()
 
-" Filetypes
+" Filetype settings
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd FileType php setl softtabstop=4 shiftwidth=4
 autocmd FileType python setl softtabstop=4 shiftwidth=4
 autocmd FileType xml setl softtabstop=2 shiftwidth=2
 
-" Syntax
+" Syntax settings
 autocmd BufNewFile,BufReadPost *.jst set syntax=html
 autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
 autocmd BufNewFile,BufReadPost *.tss set filetype=javascript " Titanium Alloy Style Files
@@ -220,6 +227,15 @@ nnoremap <leader>[ <C-t>
 nnoremap <leader>cq :Copen<CR>:q<CR>
 nnoremap <leader>co :Copen<CR>
 
+
+" Files
+map <leader>m :call RenameFile()<CR>
+
+" Plugins mapping {{{
+map <Leader>t :VroomRunTestFile<CR>
+map <Leader>s :VroomRunNearestTest<CR>
+map <Leader>l :VroomRunLastTest<CR>
+
 " Project navigation (vim-rails + vim-projectionist)
 nnoremap <leader>ec :Econtroller<Space>
 nnoremap <leader>ee :Eenvironment<Space>
@@ -236,47 +252,50 @@ nnoremap <leader>evo :Vmailer<Space>
 nnoremap <leader>evs :Vstyle<Space>
 nnoremap <leader>evv :Vview<Space>
 
-" Ruby tests
-map <Leader>t :VroomRunTestFile<CR>
-map <Leader>s :VroomRunNearestTest<CR>
-map <Leader>l :VroomRunLastTest<CR>
-
-" Files
-map <leader>m :call RenameFile()<CR>
-
-" Plugins mapping
+" NERDTree
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 nnoremap <silent> <F4> :NERDTreeFind<CR>
-nnoremap <leader>n :CtrlPFunky<CR>
-nnoremap <leader>N :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+" CtrlP + Funcy
+nnoremap <leader>p :CtrlPFunky<CR>
+nnoremap <leader>P :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
+" Commentery
 nnoremap <c-_> gcc<CR>
+
+" SuperTab
 nnoremap <leader><tab> :SuperTabHelp<CR>
 
-" ===============================================
-" == Plugin config ==============================
-" ===============================================
+" }}}
 
-" Make CtrlP use ag for listing the files
+" CtrlP {{{
+
+" Use ag for listing the files
 let g:ctrlp_user_command = 'ag %s -f -l -U --hidden --nocolor -g ""'
-
 " No need for caching when ag is used
 let g:ctrlp_use_caching = 0
-
+" Always open files in new buffers
+let g:ctrlp_switch_buffer = 0
+" Respect changing working directory during Vim session
 let g:ctrlp_working_path_mode = 0
 
-" Increase default CtrlP settings
+" Increase search results
 let g:ctrlp_max_files = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_max_depth = 40
 
-" Airline
+" }}}
+
+" Airline {{{
 let g:airline_powerline_fonts = 1
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Vim vroom
+" }}}
+
+" Vroom {{{
 let g:vroom_use_bundle_exec = 1
 
 " Use Vim dispatch in Tmux
@@ -284,6 +303,9 @@ if InTmuxSession()
   let g:vroom_use_dispatch = 1
 end
 
+" }}}
+
+" Rails {{{
 if !exists('g:rails_gem_projections')
   let g:rails_gem_projections = {}
 endif
@@ -324,8 +346,11 @@ call extend(g:rails_gem_projections, {
     \ },
   \ }, 'keep')
 
-" Vim projectionist:
-"   - tiapp.xml - Titanium project configuration
+" }}}
+
+" Vim projectionist {{{
+
+" tiapp.xml - Titanium project configuration
 let g:projectionist_heuristics = {
   \   "tiapp.xml": {
   \     "app/config.json": {
@@ -356,3 +381,7 @@ let g:projectionist_heuristics = {
   \     }
   \   }
   \ }
+
+" }}}
+
+" vim:foldmethod=marker:foldlevel=0

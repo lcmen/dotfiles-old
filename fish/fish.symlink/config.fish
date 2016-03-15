@@ -5,9 +5,6 @@ export LANG=en_US.UTF-8
 # Default text editor
 set EDITOR vim
 
-# Base16 Shell
-eval sh $HOME/.config/fish/themes/base16-railscasts.dark.sh
-
 # Set default ruby version for scripts (ripper-tags, etc.)
 # by looking at .ruby-version file
 cat ~/.ruby-version | read ruby
@@ -34,11 +31,6 @@ set -gx PATH $PATH /opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app/Conten
 
 # Sets necessary PATH defaults
 set -gx PATH $PATH /usr/bin /bin /usr/sbin /sbin
-
-# Add NVM
-# set -x NVM_DIR ~/.nvm
-# source ~/.config/fish/nvm-wrapper/nvm.fish
-# bass source ~/.nvm/nvm.sh
 
 # Add Ndenv
 bass 'export PATH="$HOME/.ndenv/bin:$PATH" && eval "$(ndenv init -)"'
