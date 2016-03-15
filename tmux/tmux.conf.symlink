@@ -55,22 +55,6 @@ bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
 set -g default-terminal "screen-256color"
 set -g terminal-overrides "xterm:colors=256"
 
-# set the status line's colors
-# set -g status-bg black
-# set -g status-fg yellow
-# set-option -g status-attr default
-
-# set the color of the window list
-# setw -g window-status-fg brightblue
-# setw -g window-status-bg default
-
-# set colors for the active window
-# setw -g window-status-current-format "[ #I:#W#F ]"
-
-# pane colors
-# set -g pane-border-fg black
-# set -g pane-active-border-fg brightgreen
-
 # Status line left side
 # user | session | window.pane
 # set -g status-left-length 40
@@ -101,10 +85,6 @@ setw -g window-status-bell-bg red
 setw -g window-status-bell-fg white
 setw -g window-status-bell-attr bright
 
-# content alerted color
-# setw -g window-status-content-bg blue
-# setw -g window-status-content-fg white
-# setw -g window-status-content-attr bright
 setw -g window-status-activity-bg blue
 setw -g window-status-activity-fg white
 setw -g window-status-activity-attr bright
@@ -132,7 +112,7 @@ set -g status-justify centre
 # Enable reattach-to-user-namespace on init
 # Requires reattach-to-user-namespace, install with brew:
 # brew install reattach-to-user-namespace
-set-option -g default-command "reattach-to-user-namespace -l fish"
+set-option -g default-command "reattach-to-user-namespace -l bash"
 
 # Shortcuts {{{
 

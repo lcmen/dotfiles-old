@@ -1,0 +1,11 @@
+export CLICOLOR=1
+
+# Functions
+docker-machine-eval() {
+  name=$1
+  eval "$(docker-machine env ${name})"
+}
+
+# Aliases
+alias deval=docker-machine-eval
+alias vim-update="vim +PluginInstall +qall"
