@@ -3,11 +3,11 @@
   email = mendelowski@gmail.com
 [core]
   excludesfile = /Users/lucas/.gitignore
-  editor = /usr/bin/vim
+  editor = vim
 [push]
   default = matching
 [color]
-  ui = true
+	ui = true
 [init]
   templatedir = /Users/lucas/Code/dotfiles/git/templates
 [alias]
@@ -20,3 +20,5 @@
   cmp = log --left-right --graph --cherry-pick --oneline
   ft = fetch --prune
   st = status
+[fetch]
+	prune = true

@@ -1,17 +1,8 @@
-# Screens {{{
-
-alias laptop        1280x800
-alias monitor       1920x1080
-
-# }}}
-
-# Layouts {{{
-
 # Helper variables
-alias center-x      screenSizeX/4
-alias center-y      screenOriginY
-alias center-width  screenSizeX/2
-alias center-height screenSizeY
+alias center-x      (screenSizeX-(4*screenSizeX/5))/2
+alias center-y      (screenSizeY-(4*screenSizeY/5))/2
+alias center-width  4*screenSizeX/5
+alias center-height (4*screenSizeY/5)+30
 
 # Layouts
 alias full-screen   move screenOriginX;screenOriginY screenSizeX;screenSizeY
@@ -30,9 +21,8 @@ alias left-2of3     move screenOriginX;screenOriginY screenSizeX*2/3;screenSizeY
 alias right-1of3    move screenOriginX+screenSizeX*2/3;screenOriginY screenSizeX/3;screenSizeY
 alias right-2of3    move screenOriginX+screenSizeX/3;screenOriginY screenSizeX*2/3;screenSizeY
 
-# }}}
-
-# Bindings {{{
+# Bindings
+bind space:alt,cmd,s        ${center}
 
 # Halfies
 bind left:alt,cmd,s         ${left-half}
@@ -41,19 +31,13 @@ bind up:alt,cmd,s           ${top-half}
 bind down:alt,cmd,s         ${bottom-half}
 
 # Triples
-bind h:alt,cmd,s            ${left-1of3}
-bind 6:alt,cmd,s            ${left-2of3}
-bind k:alt,cmd,s            ${top-1of3}
-bind u:alt,cmd,s            ${top-2of3}
-bind l:alt,cmd,s            ${right-1of3}
-bind 4:alt,cmd,s            ${right-2of3}
-bind j:alt,cmd,s            ${bottom-1of3}
-bind d:alt,cmd,s            ${bottom-2of3}
+bind m:alt,cmd,s            ${left-1of3}
+bind ,:alt,cmd,s            ${left-2of3}
+bind /:alt,cmd,s            ${right-1of3}
+bind .:alt,cmd,s            ${right-2of3}
+bind w:alt,cmd,s            ${top-2of3}
+bind x:alt,cmd,s            ${bottom-1of3}
 
-# Misc
+# Common
 bind c:alt,cmd,s            ${center}
 bind f:alt,cmd,s            ${full-screen}
-
-# }}}
-
-# vim:foldmethod=marker:foldlevel=0

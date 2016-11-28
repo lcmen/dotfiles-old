@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+# Simple command to get available port in the system
+#
+# usage: get-port
+
+require 'socket'
+
+Addrinfo.tcp("", 0).bind do |socket|
+  puts socket.local_address.ip_port
+end

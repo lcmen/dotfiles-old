@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# It's a wrapper around foreman which uses `dotenv` gem for setting up the env variables.
+# It has advantage over default foreman that you can reference envs in the .env file i.e.
+#
+#   ```
+#   foo=2
+#   bar=$foo
+#   ```
+#
+# It provides `/dev/null` as a file with environmental variables to forman
+# so it won't try to parse default .env file.
+#
+# requires:
+#   - foreman
+#   - dotenv
+#
+# usage: fman
+
+dotenv -f ./.env.local 'foreman start -f Procfile.local -e /dev/null'

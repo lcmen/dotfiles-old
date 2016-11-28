@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+redis-down() {
+  ps aux | grep redis | grep -v grep | awk '{print $2}' | xargs kill -9
+}
+
+redis-down

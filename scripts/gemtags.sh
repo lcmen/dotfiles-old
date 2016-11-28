@@ -14,6 +14,5 @@ gems=$(bundle show --paths | grep "$start" | sed "s|$start/||g" | sed '/bundler/
 
 # Generate ctags for every gem
 for gem in $gems; do
-  # ctags -n -a -f gem.tags ./$gem
-  RBENV_VERSION=$ruby rbenv exec ripper-tags -R --extra=q -f gem.tags ./$gem
+  ctags -n -a -f gem.tags ./$gem
 done

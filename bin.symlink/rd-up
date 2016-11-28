@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+redis_pid=""
+
+redis-up() {
+  socket_file=$1
+  redis_pid=setsid redis-server /usr/local/etc/redis.conf --port 0 --unixsocket $socket_file > /dev/null
+  redis_pid=$(echo $$)
+}
+
+redis-up $1
+
+trap "sleep 1 && kill -9 ${redis_pid}" SIGINT SIGTERM
+
+tail -f /dev/null

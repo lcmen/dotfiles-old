@@ -4,7 +4,8 @@ spec_hits = []
 
 checks = {
   '_spec.rb$' => [':focus', 'focus:[:space:]*true', ':wip', 'wip:[:space:]*true'],
-  '.rb$' => ['binding.pry', 'debugger', 'REMOVE', 'TODO!', 'save_and_open_page', 'screenshot_and_open_image']
+  '.rb$' => ['binding.pry', 'debugger', 'REMOVE', 'TODO!', 'save_and_open_page', 'screenshot_and_open_image'],
+  '.js$' => ['debugger']
 }
 
 # Find the names of all the filenames that have been (A)dded (C)opied or (M)odified
