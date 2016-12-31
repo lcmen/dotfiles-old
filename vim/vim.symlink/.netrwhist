@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/lucas/Code/dotfiles/neovim/nvim.symlink'
 let g:netrw_dirhist_2='/Users/lucas/Code/dotfiles/neovim'
 let g:netrw_dirhist_3='/Users/lucas/Code/dotfiles'
+let g:netrw_dirhist_4='/Users/lucas/Code/dotfiles/.git/modules'

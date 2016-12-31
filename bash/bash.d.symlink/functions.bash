@@ -6,6 +6,8 @@ bundle-remove() {
   bundle exec gem remove $@
 }
 
+# Build docker image
+# docker-build $image-name $ssh-key
 docker-build() {
   project_name=$1
 
@@ -19,6 +21,12 @@ docker-build() {
   if [ -n "$2" ]; then
     rm id_rsa
   fi
+}
+
+# Cleanup stopped container and unused images
+docker-cleanup() {
+  docker ps -a | grep "Exit\|Created" | awk '{print $1}' | xargs docker rm
+  docker images | grep "none" | awk '{print $3}' | xargs docker rmi
 }
 
 docker-eval() {

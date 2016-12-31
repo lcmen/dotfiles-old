@@ -1,7 +1,7 @@
 " vim: foldlevel=0 foldmethod=marker
 
 " Plugins {{{
-  call plug#begin('~/.nvim/plugged')
+  call plug#begin('~/.local/share/nvim/plugged')
 
   " Git {{{
     Plug 'airblade/vim-gitgutter'             " Display git marks on the side

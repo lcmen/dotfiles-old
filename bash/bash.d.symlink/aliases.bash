@@ -17,7 +17,7 @@ alias dev=docker-eval
 alias drun=docker-compose-run
 alias dup="docker-compose -f docker-compose.dev.yml up --remove-orphans"
 alias dssh=docker-ssh
-alias dcl=~/Code/dotfiles/scripts/docker_cleanup.sh
+alias dcl=docker-cleanup
 
 # Misc
 alias flush-dns="dscacheutil -flushcache"
