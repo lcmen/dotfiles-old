@@ -30,6 +30,7 @@ set nocompatible
     Plug 'tpope/vim-surround'
 
     Plug 'jgdavey/vim-blockle', { 'for': 'ruby' }
+    Plug 'jgdavey/vim-weefactor', { 'for': 'ruby' }
     Plug 'keith/rspec.vim', { 'for': 'ruby' }
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -159,7 +160,7 @@ set nocompatible
   " Search
   nnoremap <leader>a :Ag<space>
 
-  nmap <C-6> <C-^>
+  map <C-6> <C-^>
   nnoremap Y y$
 
   " If you forgot about sudo before opening the file
@@ -175,11 +176,6 @@ set nocompatible
     " Switch between errors with space-k / space-j
     nnoremap <silent> <leader>k <Plug>(ale_previous_wrap)
     nnoremap <silent> <leader>j <Plug>(ale_next_wrap)
-  " }}}
-
-  " Blockle {{{
-    let g:blockle_mapping = '<leader>['
-    nmap <leader>] <leader>[
   " }}}
 
   " Buffers {{{
@@ -204,6 +200,18 @@ set nocompatible
     nnoremap <leader>gl :call GitLog()<CR>
     nnoremap <leader>gp :call PushToCurrentBranch()<CR>
     nnoremap <leader>gs :Gstatus<CR>
+  " }}}
+
+  " Refactoring {{{
+    " Ruby Blocks
+    let g:blockle_mapping = '<leader>rb'
+
+    map <leader>r: :NotRocket<CR>
+
+    " Rspec let
+    map <leader>rl <Plug>ExtractRspecLet
+    " Ruby struct to class
+    map <leader>rs <Plug>ConvertStructToClass
   " }}}
 
   " Toggles {{{
