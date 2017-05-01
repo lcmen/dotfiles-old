@@ -10,12 +10,17 @@ alias center        move ${center-x};${center-y} ${center-width};${center-height
 alias center-1of3   move screenOriginX+screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
 alias top-half      move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
 alias bottom-half   move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias left-half     move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias right-half    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias top-left-2of3 move screenOriginX;screenOriginY screenSizeX/2;2*screenSizeY/3
+alias top-right-2of3 move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;2*screenSizeY/3
+alias bottom-left-1of3 move screenOriginX;screenOriginY+2*screenSizeY/3 screenSizeX/2;screenSizeY/3
+alias bottom-right-1of3 move screenOriginX+screenSizeX/2;screenOriginY+2*screenSizeY/3 screenSizeX/2;2*screenSizeY/3
+
 alias top-1of3      move screenOriginX;screenOriginY screenSizeX;screenSizeY/3
 alias top-2of3      move screenOriginX;screenOriginY screenSizeX;2*screenSizeY/3
 alias bottom-1of3   move screenOriginX;screenOriginY+2*screenSizeY/3 screenSizeX;screenSizeY/3
 alias bottom-2of3   move screenOriginX;screenOriginY+screenSizeY/3 screenSizeX;2*screenSizeY/3
-alias left-half     move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
-alias right-half    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
 alias left-1of3     move screenOriginX;screenOriginY screenSizeX/3;screenSizeY
 alias left-2of3     move screenOriginX;screenOriginY screenSizeX*2/3;screenSizeY
 alias right-1of3    move screenOriginX+screenSizeX*2/3;screenOriginY screenSizeX/3;screenSizeY
@@ -29,14 +34,18 @@ bind left:alt,cmd,s         ${left-half}
 bind right:alt,cmd,s        ${right-half}
 bind up:alt,cmd,s           ${top-half}
 bind down:alt,cmd,s         ${bottom-half}
+bind -:alt,cmd,s            ${top-left-2of3}
+bind =:alt,cmd,s            ${top-right-2of3}
+bind [:alt,cmd,s            ${bottom-left-1of3}
+bind ]:alt,cmd,s            ${bottom-right-1of3}
 
 # Triples
 bind m:alt,cmd,s            ${left-1of3}
 bind ,:alt,cmd,s            ${left-2of3}
 bind /:alt,cmd,s            ${right-1of3}
 bind .:alt,cmd,s            ${right-2of3}
-bind w:alt,cmd,s            ${top-2of3}
-bind x:alt,cmd,s            ${bottom-1of3}
+bind 0:alt,cmd,s            ${top-2of3}
+bind p:alt,cmd,s            ${bottom-1of3}
 
 # Common
 bind c:alt,cmd,s            ${center}

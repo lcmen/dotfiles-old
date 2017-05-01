@@ -1,11 +1,3 @@
-bundle-update() {
-  bundle update $1
-}
-
-bundle-remove() {
-  bundle exec gem remove $@
-}
-
 # Build docker image
 # docker-build $image-name $ssh-key
 docker-build() {

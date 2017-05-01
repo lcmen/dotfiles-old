@@ -7,8 +7,7 @@ node_modules
 bower_components
 
 build
-rbenv.symlink/shims
-rbenv.symlink/versions
+asdf.symlink
 Resources
 
 .git

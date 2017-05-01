@@ -1,19 +1,14 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export CLICOLOR=1
-export EDITOR=vim
-
-export PATH="$HOME/.ndenv/bin:$PATH"
-export PATH="$HOME/.bin:$PATH"
-export PATH="./node_modules/.bin:$PATH"
-export PATH="./bin:$PATH"
+export EDITOR="mvim -v"
 
 . ~/.bash.d/functions.bash
 . ~/.bash.d/aliases.bash
 . ~/.bash.d/prompt.bash
 . ~/.bash.d/git-completion.bash
 
-eval "$(ndenv init -)"
-
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+export PATH="./bin:./node_modules/.bin:$HOME/.bin:$PATH"

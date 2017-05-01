@@ -24,4 +24,5 @@ gem.tags
 tags
 
 # Ignore Project dev environment specific
+.tool-versions
 Procfile.local

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# It's a wrapper around docker exec so that
+# it automatically finds container id
+# based on the image name taken from current directory.
+
+image=$(basename `pwd`)
+container_id=$(docker ps | grep $image | awk '{print $1}' | head -n 1)
+
+if [ -z "${container_id}" ]; then
+  echo "${image} container is not running"
+  exit 1
+else
+  echo "Running command in ${container_id} (${image})"
+fi
+
+docker exec -it ${container_id} "$@"
