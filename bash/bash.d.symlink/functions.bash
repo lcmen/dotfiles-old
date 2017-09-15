@@ -21,20 +21,13 @@ docker-cleanup() {
   docker images | grep "none" | awk '{print $3}' | xargs docker rmi
 }
 
-docker-eval() {
-  eval $(docker-machine env $1)
-}
-
-docker-ssh() {
-  docker-machine ssh $1
-}
 
 # Run command against docker web container defined in
 # docker-compose.dev.yml file.
 #
 # Pass -u argument to run as user with current user id
 # Pass -e arguments for env variables, ie:
-# docker-compose-run -e RAILS_ENV test bundle exec rake db:migrate
+# docker-compose-run -e RAILS_ENV=test bundle exec rake db:migrate
 docker-compose-run() {
   cmd=""
   var=""
@@ -68,10 +61,24 @@ docker-compose-run() {
   eval $cmd
 }
 
+# Open man page for command in preview
+manp() {
+  cmd=$1
+  man -t ${cmd} | open -f -a /Applications/Preview.app
+}
+
 tmux-join() {
   tmux attach-session -t $1
 }
 
 tmux-kill() {
   tmux kill-session -t $1
+}
+
+# Convert movie to gif (it requires `ffmpeg` and `gifsicle` to be installed)
+# to-gif $input $output
+to-gif() {
+  input=$1
+  output=$2
+  ffmpeg -i ${input} -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > ${output}
 }

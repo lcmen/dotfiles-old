@@ -1,0 +1,8 @@
+# Documentation:
+#   Enabled: false
+
+# Layout/DotPosition:
+#   EnforcedStyle: trailing
+
+# Layout/MultilineMethodCallIndentation:
+#   Enabled: false

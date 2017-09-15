@@ -33,7 +33,7 @@ alias https="Python -m SimpleHTTPServer $argv"
 alias pg-close=~/Code/dotfiles/scripts/pg_close.sh
 alias sequel-open=~/Code/dotfiles/scripts/sequel_open.sh
 alias tags="ctags --extra=+q -n -R ."
-alias vim='mvim -v'
+alias gif=to-gif
 
 # Tmux
 alias txj=tmux-join

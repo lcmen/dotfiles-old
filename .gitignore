@@ -1,1 +1,4 @@
+secrets.bash
 bundler/bundle.symlink/cache
+vim/vim.symlink/plugged
+vim/vim.symlink/tmp

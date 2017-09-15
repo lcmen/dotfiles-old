@@ -3,7 +3,7 @@
   email = mendelowski@gmail.com
 [core]
   excludesfile = /Users/lucas/.gitignore
-  editor = mvim -v
+  editor = nvim
 [init]
   templatedir = /Users/lucas/Code/dotfiles/git/templates
 [fetch]

@@ -6,7 +6,7 @@ task :install do
 
   symlinks = Dir.glob('*/*.symlink')
   targets = {
-    nvim: File.join(ENV['HOME'], '.config', 'nvim')
+    :'init.vim' => File.join(ENV['HOME'], '.config', 'nvim', 'init.vim')
   }
 
   symlinks.each do |s|

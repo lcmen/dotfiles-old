@@ -1,14 +1,24 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export CLICOLOR=1
-export EDITOR="mvim -v"
+export EDITOR=nvim
 
+export GOPATH=~/Code/go
+
+. ~/.bash.d/secrets.bash
 . ~/.bash.d/functions.bash
 . ~/.bash.d/aliases.bash
 . ~/.bash.d/prompt.bash
+
 . ~/.bash.d/git-completion.bash
+. ~/.bash.d/exercism-completion.bash
 
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-export PATH="./bin:./node_modules/.bin:$HOME/.bin:$PATH"
+export PATH="./bin:./node_modules/.bin:$HOME/Developer/go/bin:$HOME/.bin:/usr/local/sbin:$PATH"
+
+# ASDF addons
+export GOPATH=$HOME/Developer/go
+export GOROOT=$(go env GOROOT)
+export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-uuid=e2fs

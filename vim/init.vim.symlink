@@ -1,0 +1,56 @@
+" vim:foldmethod=marker
+
+set nocompatible
+
+" Plugins {{{
+  " Managed by vim-plug (https://github.com/junegunn/vim-plug)
+  " Commands:
+  "   - PlugInstall - install plugins
+  "   - PlugUpdate - update plugins
+  "   - PlugClean - Remove unused directories
+  "   - PlugUpgrade - upgrade manager
+  call plug#begin('~/.vim/plugged')
+    source ~/.vim/layers/core.vim
+    source ~/.vim/layers/plugins/buffers.vim
+    source ~/.vim/layers/plugins/completion.vim
+    source ~/.vim/layers/plugins/git.vim
+    source ~/.vim/layers/plugins/linting.vim
+    source ~/.vim/layers/plugins/project.vim
+    source ~/.vim/layers/plugins/search.vim
+    source ~/.vim/layers/plugins/specs.vim
+    source ~/.vim/layers/plugins/toggles.vim
+    source ~/.vim/layers/plugins/ui.vim
+
+    source ~/.vim/layers/langs/go.vim
+    source ~/.vim/layers/langs/markdown.vim
+    source ~/.vim/layers/langs/ruby.vim
+  call plug#end()
+
+  call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+" }}}
+
+colorscheme nord
+
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+  \ 'name': 'buffer',
+  \ 'whitelist': ['*'],
+  \ 'blacklist': ['go'],
+  \ 'priority': 0,
+  \ 'completor': function('asyncomplete#sources#buffer#completor'),
+  \ }))
+call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
+  \ 'name': 'gocode',
+  \ 'whitelist': ['go'],
+  \ 'completor': function('asyncomplete#sources#gocode#completor'),
+  \ }))
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+  \ 'name': 'omni',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#omni#completor')
+  \  }))
+
+" Autogroups {{{
+  augroup syntax
+    autocmd BufNewFile,BufReadPost *.jst set syntax=html
+  augroup END
+" }}}
