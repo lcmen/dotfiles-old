@@ -1,56 +1,189 @@
-" vim:foldmethod=marker
-
 set nocompatible
 
-" Plugins {{{
-  " Managed by vim-plug (https://github.com/junegunn/vim-plug)
-  " Commands:
-  "   - PlugInstall - install plugins
-  "   - PlugUpdate - update plugins
-  "   - PlugClean - Remove unused directories
-  "   - PlugUpgrade - upgrade manager
-  call plug#begin('~/.vim/plugged')
-    source ~/.vim/layers/core.vim
-    source ~/.vim/layers/plugins/buffers.vim
-    source ~/.vim/layers/plugins/completion.vim
-    source ~/.vim/layers/plugins/git.vim
-    source ~/.vim/layers/plugins/linting.vim
-    source ~/.vim/layers/plugins/project.vim
-    source ~/.vim/layers/plugins/search.vim
-    source ~/.vim/layers/plugins/specs.vim
-    source ~/.vim/layers/plugins/toggles.vim
-    source ~/.vim/layers/plugins/ui.vim
+call plug#begin('~/.vim/plugged')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'breuckelen/vim-resize'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'itchyny/lightline.vim'
+  Plug 'jbranchaud/vim-bdubs'
+  Plug 'joshdick/onedark.vim'
+  Plug 'jszakmeister/vim-togglecursor'
+  Plug 'junegunn/gv.vim'
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'scrooloose/nerdtree'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'tpope/vim-bundler'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'troydm/zoomwintab.vim'
+  Plug 'w0rp/ale'
+call plug#end()
 
-    source ~/.vim/layers/langs/go.vim
-    source ~/.vim/layers/langs/markdown.vim
-    source ~/.vim/layers/langs/ruby.vim
-  call plug#end()
+let mapleader=" "
 
-  call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+" Misc {{{
+  set clipboard=unnamed               " Use system clipboard
+  set noswapfile                      " Disable swap
+  set scrolloff=5                     " Start scrolling 5 lines away from margin
+  set sidescrolloff=15                " Start scrolling 15 lines away from side margin
+  set nospell                         " Spell checking off
+  set splitbelow                      " Split below
+  set splitright                      " Split on the right side
 " }}}
 
-colorscheme nord
+" Whitespace, tabs & spaces {{{
+  set nowrap
+  set linebreak
+  set textwidth=120
+  set wrapmargin=0
+  set expandtab                     " Indent with spaces
+  set softtabstop=2                 " Number of spaces per <tab> when inserting
+  set shiftwidth=2                  " Number of spaces per <tab> when indenting
+  set tabstop=4                     " Number of spaces <tab> counts for
+" }}}
 
-call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-  \ 'name': 'buffer',
-  \ 'whitelist': ['*'],
-  \ 'blacklist': ['go'],
-  \ 'priority': 0,
-  \ 'completor': function('asyncomplete#sources#buffer#completor'),
-  \ }))
-call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
-  \ 'name': 'gocode',
-  \ 'whitelist': ['go'],
-  \ 'completor': function('asyncomplete#sources#gocode#completor'),
-  \ }))
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-  \ 'name': 'omni',
-  \ 'whitelist': ['*'],
-  \ 'completor': function('asyncomplete#sources#omni#completor')
-  \  }))
+" Search {{{
+  set ignorecase                    " Ignore case when searching
+  set smartcase                     " unless there is a capital letter in the query
+" }}}
 
-" Autogroups {{{
-  augroup syntax
-    autocmd BufNewFile,BufReadPost *.jst set syntax=html
+" Backups {{{
+  set nobackup
+  set nowritebackup
+  set undofile
+  set undolevels=1000               " Maximum number of changes that can be undone
+  set undoreload=10000              " Maximum number lines to save for undo on a buffer reload
+  set undodir=$HOME/.vim/tmp/undo   " Set persistent undo directory
+" }}}
+
+" UI {{{
+  colorscheme onedark
+  set background=dark
+  set termguicolors
+  set list                          " Show invisible characters
+  set listchars=tab:▸\ ,eol:¬,trail:·
+  set number                        " Show line numbers
+  set relativenumber                " Use relative line numbers
+" }}}
+
+" Plugins {{{
+  let g:NERDTreeShowHidden = 1
+
+  let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \ 'component_function': {
+    \   'filetype': 'StatusLineFiletype',
+    \   'fileformat': 'StatusLineFileformat',
+    \ }
+    \ }
+
+  " fzf {{{
+    " CTRL-A CTRL-Q to select all and build quickfix list
+    function! s:build_quickfix_list(lines)
+      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+      copen
+      cc
+    endfunction
+
+    let g:fzf_action = {
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+  " }}}
+" }}}
+
+" Mappings {{{
+  nnoremap , :
+
+  " Yank to the end of line
+  nnoremap Y y$
+
+  " If you forgot about sudo before opening the file
+  cmap w!! w !sudo tee % >/dev/null
+
+  " Move more senibly when line wrapping enabled
+  nmap <silent> k gk
+  nmap <silent> j gj
+
+  " Exit terminal-mode with ESC
+  tnoremap <Esc> <C-\><C-n>
+
+  " Close terminal with C-c
+  nnoremap <silent> <C-c> :call ExitFromTerminal()<CR>
+
+  " Moving block of codes
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Tabs
+  nnoremap [g gT
+  nnoremap ]g gt
+
+  nnoremap <C-e> :NERDTreeToggle<CR>
+  nnoremap <leader>e :NERDTreeFind<CR>
+
+  " Window resizes
+  let g:vim_resize_disable_auto_mappings = 1
+  nnoremap <silent> <left> :CmdResizeLeft<cr>
+  nnoremap <silent> <down> :CmdResizeDown<cr>
+  nnoremap <silent> <up> :CmdResizeUp<cr>
+  nnoremap <silent> <right> :CmdResizeRight<cr>
+
+  " FZF FTW!
+  nnoremap <C-p> :Files<CR>
+  nnoremap <leader>b :Buffers<CR>
+  nnoremap <leader>g :GFiles?<CR>
+  nnoremap <leader>l :BLines<CR>
+  nnoremap <leader>t :Tags<CR>
+
+  " Enable hlserch on start
+  nnoremap / :set hlsearch<cr>/
+" }}}
+
+" Functions {{{
+  function! ExitFromTerminal()
+    if &buftype ==# 'terminal'
+      quit!
+    end
+  endfunction
+
+  function! PushToCurrentBranch()
+    execute ":Gwrite"
+    let branch = system('git rev-parse --abbrev-ref HEAD')
+    execute ":Git push origin" . branch
+  endfunction
+
+  function! StripTrailingWhiteSpace()
+    " Ignore for markdown and slim
+    if &filetype =~ 'markdown' || &filetype =~ 'slim'
+      return
+    endif
+    %s/\s\+$//e
+  endfunction
+" }}}
+
+" Commands {{{
+  command! Gpush call PushToCurrentBranch()
+
+  augroup hooks
+    " Trim white spaces on save
+    autocmd BufWritePre * call StripTrailingWhiteSpace()
+    " Leave paste mode on exit
+    autocmd InsertLeave * set nopaste
+  augroup END
+
+  augroup modes
+    autocmd Filetype gitcommit setl spell textwidth=72
+    autocmd Filetype markdown setl spell colorcolumn=0 wrap linebreak
+    autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
+    autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
   augroup END
 " }}}

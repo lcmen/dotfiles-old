@@ -1,9 +1,9 @@
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 export CLICOLOR=1
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
-
-export GOPATH=~/Code/go
+export FZF_DEFAULT_COMMAND='ag -f -U --hidden -g ""'
+export FZF_DEFAULT_OPTS="--bind ctrl-a:select-all,ctrl-d:deselect-all"
 
 . ~/.bash.d/secrets.bash
 . ~/.bash.d/functions.bash
@@ -15,6 +15,8 @@ export GOPATH=~/Code/go
 
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+eval "$(nodenv init -)"
 
 export PATH="./bin:./node_modules/.bin:$HOME/Developer/go/bin:$HOME/.bin:/usr/local/sbin:$PATH"
 

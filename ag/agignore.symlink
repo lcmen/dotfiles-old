@@ -1,16 +1,15 @@
-log
-tmp
-vendor
+.asset-cache
+.git
 
 coverage
 doc
+log
+tmp
 
-node_modules
 bower_components
+deps
+node_modules
+vendor
 
+_build
 build
-asdf.symlink
-Resources
-
-.asset-cache
-.git

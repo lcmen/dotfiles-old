@@ -1,8 +1,11 @@
-# Documentation:
-#   Enabled: false
+Documentation:
+  Enabled: false
 
-# Layout/DotPosition:
-#   EnforcedStyle: trailing
+Layout/DotPosition:
+  EnforcedStyle: trailing
 
-# Layout/MultilineMethodCallIndentation:
-#   Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

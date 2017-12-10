@@ -1,0 +1,17 @@
+-R
+--exclude=.gem
+--exclude=.git
+--exclude=build
+--exclude=dist
+--exclude=bower_components
+--exclude=node_modules
+--exclude=log
+--exclude=db
+--exclude=vendor/bundle
+--exclude=tmp
+--exclude=*.css
+--exclude=*.js
+--exclude=*.jsx
+--exclude=*.vue
+--exclude=package.json
+--exclude=package-lock.json
