@@ -16,7 +16,7 @@ brew update
 #======================================
 
 # Required by asdf
-brwe install automake
+brew install automake
 brew install autoconf
 brew install libyaml
 brew install libxslt
@@ -36,6 +36,7 @@ brew install tig
 brew install tmux
 brew install tree
 brew install wget
+brew install universal-ctags --HEAD
 
 #======================================
 # Install Apps
@@ -45,20 +46,15 @@ brew cask install --appdir="/Applications" --force android-file-transfer
 brew cask install --appdir="/Applications" --force appcleaner
 brew cask install --appdir="/Applications" --force cyberduck
 brew cask install --appdir="/Applications" --force dropbox
-brew cask install --appdir="/Applications" --force filezilla
 brew cask install --appdir="/Applications" --force firefox
 brew cask install --appdir="/Applications" --force google-chrome
 brew cask install --appdir="/Applications" --force gpgtools
-brew cask install --appdir="/Applications" --force hipchat
-brew cask install --appdir="/Applications" --force macvim
-brew cask install --appdir="/Applications" --force opera
 brew cask install --appdir="/Applications" --force sequel-pro
 brew cask install --appdir="/Applications" --force skitch
 brew cask install --appdir="/Applications" --force skype
-brew cask install --appdir="/Applications" --force slate
 brew cask install --appdir="/Applications" --force spotify
 brew cask install --appdir="/Applications" --force textmate
-brew cask install --appdir="/Applications" --force toggldesktop
+brew cask install --appdir="/Applications" --force tidal
 brew cask install --appdir="/Applications" --force utorrent
 brew cask install --appdir="/Applications" --force virtualbox
 brew cask install --appdir="/Applications" --force vlc

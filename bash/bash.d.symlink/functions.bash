@@ -67,6 +67,7 @@ manp() {
   man -t ${cmd} | open -f -a /Applications/Preview.app
 }
 
+# Tmux
 tmux-join() {
   tmux attach-session -t $1
 }

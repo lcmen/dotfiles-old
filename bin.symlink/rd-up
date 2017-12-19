@@ -1,15 +1,25 @@
 #!/usr/bin/env bash
 
-redis_pid=""
-
 redis-up() {
-  socket_file=$1
-  redis_pid=setsid redis-server /usr/local/etc/redis.conf --port 0 --unixsocket $socket_file > /dev/null
-  redis_pid=$(echo $$)
+  app_name=$1
+  socket_file="/tmp/redis/${app_name}.socket"
+  log_file="/tmp/redis/${app_name}.log"
+
+  mkdir -p /tmp/redis
+
+  echo "Redis: ${app_name} starting up"
+
+  setsid nohup redis-server \
+    /usr/local/etc/redis.conf \
+    --port 0 \
+    --unixsocket $socket_file \
+    > $log_file 2>&1 &
 }
 
 redis-up $1
 
-trap "sleep 1 && kill -9 ${redis_pid}" SIGINT SIGTERM
+# Some slepp before exist so process manager like foreman
+# can kill depending services first.
+trap "sleep 1 && rd-down ${1}" SIGINT SIGTERM
 
-tail -f /dev/null
+tail -f ${log_file}

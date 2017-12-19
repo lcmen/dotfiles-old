@@ -1,0 +1,8 @@
+#!/bin/bash
+
+command=$1
+
+while :; do
+  clear
+  eval $command
+done

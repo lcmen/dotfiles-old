@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
 redis-down() {
-  ps aux | grep redis | grep -v grep | awk '{print $2}' | xargs kill -9
+  app_name=$1
+  socket_file="/tmp/redis/${app_name}.socket"
+  log_file="/tmp/redis/${app_name}.log"
+  if [ ! -e $socket_file ]; then
+    echo "Redis: ${app_name} is already shut downed"
+    exit 0
+  fi
+  redis-cli -s ${socket_file} shutdown
+  rm -rf ${socket_file} ${log_file}
+  echo "Redis: ${app_name} shut downed"
 }
 
-redis-down
+redis-down $1

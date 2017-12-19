@@ -5,12 +5,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'breuckelen/vim-resize'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'docunext/closetag.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'jbranchaud/vim-bdubs'
   Plug 'joshdick/onedark.vim'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'junegunn/gv.vim'
-  Plug 'ludovicchabant/vim-gutentags'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
@@ -74,15 +74,23 @@ let mapleader=" "
 " }}}
 
 " Plugins {{{
+  " Ale {{{
+    let g:ale_fixers = {}
+    let g:ale_fixers['javascript'] = ['prettier']
+    let g:ale_fix_on_save = 1
+    let g:ale_javascript_prettier_use_local_config = 1
+  " }}}
   let g:NERDTreeShowHidden = 1
 
-  let g:lightline = {
-    \ 'colorscheme': 'onedark',
-    \ 'component_function': {
-    \   'filetype': 'StatusLineFiletype',
-    \   'fileformat': 'StatusLineFileformat',
-    \ }
-    \ }
+  " Lightline {{{
+    let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'component_function': {
+      \   'filetype': 'StatusLineFiletype',
+      \   'fileformat': 'StatusLineFileformat',
+      \ }
+      \ }
+  " }}}
 
   " fzf {{{
     " CTRL-A CTRL-Q to select all and build quickfix list
@@ -155,6 +163,10 @@ let mapleader=" "
     end
   endfunction
 
+  function! Prettierify
+    execute ":prettier --stdin --trailing-comma all --single-quote"
+  endfunction
+
   function! PushToCurrentBranch()
     execute ":Gwrite"
     let branch = system('git rev-parse --abbrev-ref HEAD')
@@ -172,6 +184,7 @@ let mapleader=" "
 
 " Commands {{{
   command! Gpush call PushToCurrentBranch()
+  command! Prettier call Prettierify()
 
   augroup hooks
     " Trim white spaces on save
