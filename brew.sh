@@ -15,15 +15,6 @@ brew update
 # Install Tools
 #======================================
 
-# Required by asdf
-brew install automake
-brew install autoconf
-brew install libyaml
-brew install libxslt
-brew install libtool
-brew install readline
-brew install unixodbc
-
 # Othr stuff
 brew install caskroom/cask/brew-cask
 brew install awscli
@@ -31,6 +22,7 @@ brew install git
 brew install heroku
 brew install openssl
 brew install reattach-to-user-namespace --with-wrap-pbcopy-and-pbpaste
+brew install redis
 brew install the_silver_searcher
 brew install tig
 brew install tmux

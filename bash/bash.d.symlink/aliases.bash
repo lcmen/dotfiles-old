@@ -33,6 +33,19 @@ alias https="Python -m SimpleHTTPServer $argv"
 alias tags="ctags --extras=+q -n -R ."
 alias gif=to-gif
 
+# Nginx
+alias proxy-up="~/Code/dotfiles/scripts/proxy.sh up"
+alias proxy-down="~/Code/dotfiles/scripts/proxy.sh down"
+
+# Postgres
+alias pg-up="~/Code/dotfiles/scripts/postgres.sh up"
+alias pg-down="~/Code/dotfiles/scripts/postgres.sh down"
+alias pg-cl="~/Code/dotfiles/scripts/postgres.sh cl"
+
+# Redis
+alias rd-up="~/Code/dotfiles/scripts/redis.sh up"
+alias rd-down="~/Code/dotfiles/scripts/redis.sh down"
+
 # Tmux
 alias txj=tmux-join
 alias txl="tmux ls"

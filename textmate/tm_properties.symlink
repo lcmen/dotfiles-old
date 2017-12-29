@@ -1,11 +1,13 @@
+PATH = "$TM_PROJECT_DIRECTORY/bin:$HOME/.anyenv/envs/rbenv/shims:/usr/local/bin:$PATH"
+
 LINTER_LINT_ON_SAVE = true
 LINTER_STRIP_WHITESPACE_ON_SAVE = true
 LINTER_ENSURE_NEWLINE_ON_SAVE = true
 LINTER_FIX_ON_SAVE = true
 
 encoding       = UTF-8
-fontName       = "Monaco"
-fontSize       = 14
+fontName       = "SFMono Nerd Font"
+fontSize       = 15
 lineEndings    = '\n'
 showInvisibles = true
 softWrap       = false

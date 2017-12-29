@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-# Disable fsync for development
-pg_ctl -o "-F -p 5432" start

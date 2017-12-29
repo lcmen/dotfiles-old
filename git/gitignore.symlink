@@ -25,4 +25,5 @@ tags
 
 # Ignore Project dev environment specific
 .tool-versions
+Procfile.dev
 Procfile.local

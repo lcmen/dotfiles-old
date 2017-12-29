@@ -16,11 +16,9 @@ export FZF_DEFAULT_OPTS="--bind ctrl-a:select-all,ctrl-d:deselect-all"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-eval "$(nodenv init -)"
+export PATH="./node_modules/.bin:$HOME/.anyenv/bin:/usr/local/sbin:$PATH"
 
-export PATH="./bin:./node_modules/.bin:$HOME/Developer/go/bin:$HOME/.bin:/usr/local/sbin:$PATH"
+eval "$(anyenv init -)"
 
 # ASDF addons
-export GOPATH=$HOME/Developer/go
-export GOROOT=$(go env GOROOT)
 export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-uuid=e2fs
