@@ -1,7 +1,0 @@
-ruby 2.4.0
-postgres 9.5.5
-nodejs 8.1.2
-elixir 1.4.2
-erlang 19.3
-redis 3.2.6
-golang 1.8.3

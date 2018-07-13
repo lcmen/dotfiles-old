@@ -3,17 +3,22 @@
 # Script for controlling redis.
 # Usage: `redis.sh {up|down} app_name`
 
+set -e
+
 redis-up() {
   mkdir -p /tmp/redis
 
-  echo "Redis: starting ${app_name}"
+  app_name=$1
+  config_file=${2:-/usr/local/etc/redis.conf}
 
-  setsid nohup redis-server /usr/local/etc/redis.conf \
+  echo "Redis: starting ${app_name} with ${config_file}"
+
+  setsid nohup redis-server ${config_file} \
     --port 0 --unixsocket $socket_file > $log_file 2>&1 &
 
   # Some slepp before exist so process manager like foreman
   # can kill depending services (i.e. sidekiq) first.
-  trap "sleep 2 && redis-down ${1} && exit 0" SIGINT SIGTERM
+  trap "sleep 2 && redis-down ${app_name} && exit 0" SIGINT SIGTERM
 
   tail -f ${log_file}
 }

@@ -19,11 +19,11 @@ alias dup="docker-compose -f docker-compose.dev.yml up --remove-orphans"
 alias ddown="docker-compose -f docker-compose.dev.yml stop"
 alias dssh=docker-ssh
 alias dcl=docker-cleanup
+alias dp=docker-port
 
 # Docker & bundler
 alias dbi="drun bundle install"
 alias dbe="drun bundle exec"
-alias dbet="drun -e RAILS_ENV=test bundle exec"
 alias dbr="drun bundle exec gem remove"
 alias dbu="drun bundle update"
 
@@ -32,6 +32,7 @@ alias flush-dns="dscacheutil -flushcache"
 alias https="Python -m SimpleHTTPServer $argv"
 alias tags="ctags --extras=+q -n -R ."
 alias gif=to-gif
+alias vim="mvim -v"
 
 # Nginx
 alias proxy-up="~/Code/dotfiles/scripts/proxy.sh up"

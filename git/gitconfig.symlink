@@ -9,9 +9,10 @@
 [fetch]
   prune = true
 [push]
-  default = matching
+	default = upstream
 [alias]
   am = commit --amend
+  amr = commit --amend --reset-author
   br = branch
   brc = "!f() { git br --merged | grep -v "master" | xargs git br -D; }; f"
   cm = !git add -A && git commit
@@ -20,11 +21,5 @@
   cmp = log --left-right --graph --cherry-pick --oneline
   ft = fetch --prune
   st = status
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = /Users/lucas/.stCommitMsg
+[credential]
+	helper = osxkeychain

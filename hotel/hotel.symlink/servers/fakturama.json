@@ -1,0 +1,7 @@
+{
+  "cwd": "/Users/lucas/Code/personal/fakturama",
+  "cmd": "yarn serve --port $PORT",
+  "env": {
+    "PATH": "/Users/lucas/.anyenv/envs/nodenv/versions/8.11.3/bin:/Users/lucas/.anyenv/envs/nodenv/libexec:/Users/lucas/.anyenv/envs/nodenv/plugins/nodenv-vars/bin:/Users/lucas/.anyenv/envs/nodenv/plugins/nodenv-default-packages/bin:/Users/lucas/.anyenv/envs/nodenv/plugins/node-build/bin:/Users/lucas/.anyenv/envs/rbenv/shims:/Users/lucas/.anyenv/envs/rbenv/bin:/Users/lucas/.anyenv/envs/nodenv/shims:/Users/lucas/.anyenv/envs/nodenv/bin:/Users/lucas/.anyenv/envs/exenv/shims:/Users/lucas/.anyenv/envs/exenv/bin:./node_modules/.bin:/Users/lucas/.anyenv/bin:/usr/local/sbin:/Users/lucas/.asdf/shims:/Users/lucas/.asdf/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin"
+  }
+}

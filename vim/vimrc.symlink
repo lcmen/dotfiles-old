@@ -1,24 +1,21 @@
 set nocompatible
 
 call plug#begin('~/.vim/plugged')
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'arcticicestudio/nord-vim'
   Plug 'breuckelen/vim-resize'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'docunext/closetag.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'jbranchaud/vim-bdubs'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'joshdick/onedark.vim'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'junegunn/gv.vim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
-  Plug 'tpope/vim-bundler'
+  Plug 'tacahiroy/ctrlp-funky'
   Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-endwise'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-repeat'
@@ -26,6 +23,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired'
   Plug 'troydm/zoomwintab.vim'
   Plug 'w0rp/ale'
+
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-buffer.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+  Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 let mapleader=" "
@@ -54,6 +57,9 @@ let mapleader=" "
 " Search {{{
   set ignorecase                    " Ignore case when searching
   set smartcase                     " unless there is a capital letter in the query
+
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
 " }}}
 
 " Backups {{{
@@ -68,7 +74,6 @@ let mapleader=" "
 " UI {{{
   colorscheme nord
   set background=dark
-  set termguicolors
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
   set number                        " Show line numbers
@@ -82,6 +87,30 @@ let mapleader=" "
     let g:ale_fix_on_save = 1
     let g:ale_javascript_prettier_use_local_config = 1
   " }}}
+
+  " Completion {{{
+    let g:asyncomplete_remove_duplicates = 1
+    let g:asyncomplete_enable_default_mappings = 1
+    set completeopt+=preview
+
+    call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'whitelist': ['*'],
+      \ 'blacklist': ['go'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+  " }}}
+
+  " CtrlP {{{
+    " Use ag for listing the files
+    let g:ctrlp_user_command = 'ag %s -f -l --hidden --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+    " Always open files in new buffers
+    let g:ctrlp_switch_buffer = 0
+    " Respect current working directory during Vim session
+    let g:ctrlp_working_path_mode = 0
+  " }}}
+
   let g:NERDTreeShowHidden = 1
 
   " Lightline {{{
@@ -94,23 +123,9 @@ let mapleader=" "
       \ }
   " }}}
 
-  " fzf {{{
-    " CTRL-A CTRL-Q to select all and build quickfix list
-    function! s:build_quickfix_list(lines)
-      call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-      copen
-      cc
-    endfunction
-
-    let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
-  " }}}
-" }}}
-
 " Mappings {{{
+  set backspace=indent,eol,start
+
   nnoremap , :
 
   " Yank to the end of line
@@ -135,12 +150,6 @@ let mapleader=" "
   " Disable hl
   nnoremap <silent> <leader><cr> :noh<cr>
 
-  " Exit terminal-mode with ESC
-  tnoremap <Esc> <C-\><C-n>
-
-  " Close terminal with C-c
-  nnoremap <silent> <C-c> :call ExitFromTerminal()<CR>
-
   " Moving block of codes
   vnoremap < <gv
   vnoremap > >gv
@@ -159,28 +168,24 @@ let mapleader=" "
   nnoremap <silent> <up> :CmdResizeUp<cr>
   nnoremap <silent> <right> :CmdResizeRight<cr>
 
-  " FZF FTW!
-  nnoremap <C-p> :Files<CR>
-  nnoremap <leader>b :Buffers<CR>
-  nnoremap <leader>g :GFiles?<CR>
-  nnoremap <leader>l :BLines<CR>
-  nnoremap <leader>t :Tags<CR>
-
   " Enable hlserch on start
   nnoremap / :set hlsearch<cr>/
+
+  " CtrlP {{{
+    nnoremap <leader>p :CtrlPFunky<CR>
+    nnoremap <leader>P :execute 'CtrlPFunky ' . expand('<cword>')<CR>
+  " }}}
+
+  " Completion {{{
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
+    nnoremap <leader>h :LspHover
+  " }}}
 " }}}
 
 " Functions {{{
-  function! ExitFromTerminal()
-    if &buftype ==# 'terminal'
-      quit!
-    end
-  endfunction
-
-  function! Prettierify()
-    execute ":prettier --stdin --trailing-comma all --single-quote"
-  endfunction
-
   function! PushToCurrentBranch()
     execute ":Gwrite"
     let branch = system('git rev-parse --abbrev-ref HEAD')
@@ -197,8 +202,9 @@ let mapleader=" "
 " }}}
 
 " Commands {{{
+  " Ag for search
+  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
   command! Gpush call PushToCurrentBranch()
-  command! Prettier call Prettierify()
 
   augroup hooks
     " Trim white spaces on save
@@ -216,4 +222,15 @@ let mapleader=" "
     autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
     autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
   augroup END
+
+  " Completion {{{
+    if executable('typescript-language-server')
+      au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+        \ })
+    endif
+  " }}}
 " }}}

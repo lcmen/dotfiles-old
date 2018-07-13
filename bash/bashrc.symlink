@@ -1,3 +1,5 @@
+PS1='\[\e]1;\s\$ \W\a\e]2;\u@\h\a\]'"$PS1"
+
 export CLICOLOR=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8

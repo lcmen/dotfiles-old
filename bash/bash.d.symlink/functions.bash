@@ -61,6 +61,13 @@ docker-compose-run() {
   eval $cmd
 }
 
+docker-port() {
+  name=$1
+  port=$2
+
+  docker port "${name}" "${port}" | awk -F: '{print $2}'
+}
+
 # Open man page for command in preview
 manp() {
   cmd=$1

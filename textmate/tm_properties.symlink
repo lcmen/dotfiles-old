@@ -3,7 +3,7 @@ PATH = "$TM_PROJECT_DIRECTORY/bin:$HOME/.anyenv/envs/rbenv/shims:/usr/local/bin:
 LINTER_LINT_ON_SAVE = true
 LINTER_STRIP_WHITESPACE_ON_SAVE = true
 LINTER_ENSURE_NEWLINE_ON_SAVE = true
-LINTER_FIX_ON_SAVE = true
+LINTER_FIX_ON_SAVE = false
 
 encoding       = UTF-8
 fontName       = "SFMono Nerd Font"
