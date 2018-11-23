@@ -6,7 +6,7 @@
 brew tap 'caskroom/cask'
 brew tap 'caskroom/versions'
 brew tap 'homebrew/versions'
-brew tap 'universal-ctags/universal-ctags'
+brew tap 'petere/postgresql'
 
 brew doctor
 brew update
@@ -15,12 +15,15 @@ brew update
 # Install Tools
 #======================================
 
-# Othr stuff
 brew install caskroom/cask/brew-cask
-brew install awscli
+brew install coreutils
 brew install git
-brew install heroku
+brew install neovim
 brew install openssl
+brew install petere/postgresql/postgresql@9.2
+brew install petere/postgresql/postgresql@9.6
+brew install petere/postgresql/postgresql@10
+brew install postrgresql-common
 brew install reattach-to-user-namespace --with-wrap-pbcopy-and-pbpaste
 brew install redis
 brew install the_silver_searcher
@@ -28,7 +31,7 @@ brew install tig
 brew install tmux
 brew install tree
 brew install wget
-brew install universal-ctags --HEAD
+brew install youtube-dl
 
 #======================================
 # Install Apps
@@ -44,9 +47,7 @@ brew cask install --appdir="/Applications" --force gpgtools
 brew cask install --appdir="/Applications" --force sequel-pro
 brew cask install --appdir="/Applications" --force skitch
 brew cask install --appdir="/Applications" --force skype
-brew cask install --appdir="/Applications" --force spotify
-brew cask install --appdir="/Applications" --force textmate
 brew cask install --appdir="/Applications" --force tidal
-brew cask install --appdir="/Applications" --force utorrent
+brew cask install --appdir="/Applications" --force transmission
 brew cask install --appdir="/Applications" --force virtualbox
 brew cask install --appdir="/Applications" --force vlc

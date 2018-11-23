@@ -68,7 +68,7 @@
             "manipulators": [
               {
                 "from": {
-                  "key_code": "q",
+                  "key_code": "p",
                   "modifiers": {
                     "mandatory": [
                       "left_shift",
@@ -153,30 +153,6 @@
                 "to": [
                   {
                     "shell_command": "osascript -e 'tell app \"Sublime Text\"' -e activate -e end"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
-            "description": "Hyper P - Preview",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_shift",
-                      "left_command",
-                      "left_control",
-                      "left_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript -e 'tell app \"Preview\"' -e activate -e end"
                   }
                 ],
                 "type": "basic"

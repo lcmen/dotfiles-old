@@ -7,10 +7,6 @@ alias bu="bundle update"
 alias be="bundle exec"
 alias br="bundle exec gem remove"
 
-# Grunt & nodejs
-alias gsu="grunt submod-update"
-alias gsum="grunt submod-update --branch=master"
-
 # Docker
 alias dbd=docker-build
 alias dev=docker-eval
@@ -30,9 +26,7 @@ alias dbu="drun bundle update"
 # Misc
 alias flush-dns="dscacheutil -flushcache"
 alias https="Python -m SimpleHTTPServer $argv"
-alias tags="ctags --extras=+q -n -R ."
 alias gif=to-gif
-alias vim="mvim -v"
 
 # Nginx
 alias proxy-up="~/Code/dotfiles/scripts/proxy.sh up"
@@ -41,7 +35,8 @@ alias proxy-down="~/Code/dotfiles/scripts/proxy.sh down"
 # Postgres
 alias pg-up="~/Code/dotfiles/scripts/postgres.sh up"
 alias pg-down="~/Code/dotfiles/scripts/postgres.sh down"
-alias pg-cl="~/Code/dotfiles/scripts/postgres.sh cl"
+alias pg-cl="~/Code/dotfiles/scripts/postgres.sh clean"
+alias pg-st="~/Code/dotfiles/scripts/postgres.sh status"
 
 # Redis
 alias rd-up="~/Code/dotfiles/scripts/redis.sh up"

@@ -1,15 +1,14 @@
-[user]
-	name = Lucas Mendelowski
-	email = mendelowski@gmail.com
 [core]
-	excludesfile = /Users/lucas/.gitignore
+  excludesfile = /Users/lucas/.gitignore
   editor = nvim
 [init]
   templatedir = /Users/lucas/Code/dotfiles/git/templates
 [fetch]
   prune = true
 [push]
-	default = upstream
+  default = upstream
+[credential]
+  helper = osxkeychain
 [alias]
   am = commit --amend
   amr = commit --amend --reset-author
@@ -21,5 +20,9 @@
   cmp = log --left-right --graph --cherry-pick --oneline
   ft = fetch --prune
   st = status
-[credential]
-	helper = osxkeychain
+[includeIf "gitdir:~/Code/mine/"]
+  path = ~/Code/mine/.gitconfig
+[includeIf "gitdir:~/Code/personal/"]
+  path = ~/Code/personal/.gitconfig
+[includeIf "gitdir:~/Code/ironin/"]
+  path = ~/Code/ironin/.gitconfig

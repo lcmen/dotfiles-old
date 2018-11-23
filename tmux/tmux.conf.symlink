@@ -16,27 +16,6 @@
 
   # Nice colors
   set-option -ga terminal-overrides ",xterm-256color:Tc"
-
-  # Colors (taken from nord-tmux) {{{
-    # Statuses
-    # set -g status-bg black
-    # set -g status-fg white
-    # set -g status-attr none
-
-    # Panes
-    # set -g pane-border-bg black
-    # set -g pane-border-fg black
-    # set -g pane-active-border-bg black
-    # set -g pane-active-border-fg brightblack
-    # set -g display-panes-colour black
-    # set -g display-panes-active-colour brightblack
-
-    # Messages
-    # set -g message-fg cyan
-    # set -g message-bg brightblack
-    # set -g message-command-fg cyan
-    # set -g message-command-bg brightblack
-  # }}}
 # }}}
 
 # Bindings {{{

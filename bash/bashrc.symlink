@@ -1,26 +1,17 @@
-PS1='\[\e]1;\s\$ \W\a\e]2;\u@\h\a\]'"$PS1"
-
 export CLICOLOR=1
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR=nvim
-export FZF_DEFAULT_COMMAND='ag -f -U --hidden -g ""'
-export FZF_DEFAULT_OPTS="--bind ctrl-a:select-all,ctrl-d:deselect-all"
+export EDITOR="nvim"
 
 . ~/.bash.d/secrets.bash
 . ~/.bash.d/functions.bash
 . ~/.bash.d/aliases.bash
 . ~/.bash.d/prompt.bash
-
 . ~/.bash.d/git-completion.bash
 . ~/.bash.d/exercism-completion.bash
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
-export PATH="./node_modules/.bin:$HOME/.anyenv/bin:/usr/local/sbin:$PATH"
-
+# Init anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
-# ASDF addons
-export POSTGRES_EXTRA_CONFIGURE_OPTIONS=--with-uuid=e2fs
+export PATH="./node_modules/.bin:$HOME/.bin:$PATH"

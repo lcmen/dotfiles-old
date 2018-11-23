@@ -1,16 +1,21 @@
 #!/usr/bin/env bash
 
 # Script for controlling postgres.
-# Usage: `redis.sh {up|down}`
+# Usage: `postgres.sh {up|down}`
 
 postgres-up() {
-  echo "Postgres: starting"
-  pg_ctl -o "-F -p 5432" start
+  echo "Postgres ${1}: starting"
+  pg_ctlcluster $1 main start
 }
 
 postgres-down() {
-  echo "Postgres: shuting down"
-  pg_ctl stop
+  echo "Postgres ${1}: shuting down"
+  pg_ctlcluster $1 main stop
+}
+
+postgres-status() {
+  echo "Postgres ${1}: status"
+  pg_ctlcluster $1 main status
 }
 
 postgres-clean() {
@@ -29,7 +34,8 @@ EOF
 }
 
 case $1 in
-  "up") postgres-up;;
-  "down") postgres-down;;
-  "cl") postgres-clean $2;;
+  "up") postgres-up $2 ;;
+  "down") postgres-down $2 ;;
+  "status") postgres-status $2 ;;
+  "clean") postgres-clean $2 ;;
 esac

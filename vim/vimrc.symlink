@@ -1,5 +1,20 @@
 set nocompatible
 
+let g:ale_completion_enabled=1
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+
+if !filereadable(vimplug_exists)
+  if !executable("curl")
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  autocmd VimEnter * PlugInstall
+endif
+
 call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'arcticicestudio/nord-vim'
@@ -9,12 +24,14 @@ call plug#begin('~/.vim/plugged')
   Plug 'docunext/closetag.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'jbranchaud/vim-bdubs'
+  Plug 'jiangmiao/auto-pairs'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'junegunn/gv.vim'
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'lokikl/vim-ctrlp-ag'
+  Plug 'mtth/scratch.vim'
+  Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
-  Plug 'tacahiroy/ctrlp-funky'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rails'
@@ -23,12 +40,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired'
   Plug 'troydm/zoomwintab.vim'
   Plug 'w0rp/ale'
-
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-buffer.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
-  Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 let mapleader=" "
@@ -41,6 +52,7 @@ let mapleader=" "
   set nospell                         " Spell checking off
   set splitbelow                      " Split below
   set splitright                      " Split on the right side
+  set mouse=a                         " Enable GUI mouse behavior
 " }}}
 
 " Whitespace, tabs & spaces {{{
@@ -55,11 +67,10 @@ let mapleader=" "
 " }}}
 
 " Search {{{
+  set completeopt=menu,menuone,preview,noselect,noinsert
   set ignorecase                    " Ignore case when searching
   set smartcase                     " unless there is a capital letter in the query
-
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set incsearch                     " Enable incremental search
 " }}}
 
 " Backups {{{
@@ -83,35 +94,18 @@ let mapleader=" "
 " Plugins {{{
   " Ale {{{
     let g:ale_fixers = {}
-    let g:ale_fixers['javascript'] = ['prettier']
+    " let g:ale_fixers['javascript'] = ['prettier']
+    " let g:ale_fixers['vue'] = ['prettier']
     let g:ale_fix_on_save = 1
     let g:ale_javascript_prettier_use_local_config = 1
+    let g:ale_vue_prettier_use_local_config = 1
   " }}}
-
-  " Completion {{{
-    let g:asyncomplete_remove_duplicates = 1
-    let g:asyncomplete_enable_default_mappings = 1
-    set completeopt+=preview
-
-    call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'whitelist': ['*'],
-      \ 'blacklist': ['go'],
-      \ 'completor': function('asyncomplete#sources#buffer#completor'),
-      \ }))
-  " }}}
-
-  " CtrlP {{{
-    " Use ag for listing the files
-    let g:ctrlp_user_command = 'ag %s -f -l --hidden --nocolor -g ""'
-    let g:ctrlp_use_caching = 0
-    " Always open files in new buffers
-    let g:ctrlp_switch_buffer = 0
-    " Respect current working directory during Vim session
-    let g:ctrlp_working_path_mode = 0
-  " }}}
-
   let g:NERDTreeShowHidden = 1
+
+  " Dev Icons {{{
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
+    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = '﵂'
+  " }}}
 
   " Lightline {{{
     let g:lightline = {
@@ -123,9 +117,29 @@ let mapleader=" "
       \ }
   " }}}
 
-" Mappings {{{
-  set backspace=indent,eol,start
+  " CtrlP {{{
+     let g:ctrlp_use_caching = 0
+     " Always open files in new buffers
+     let g:ctrlp_switch_buffer = 0
+     " Respect current working directory during Vim session
+     let g:ctrlp_working_path_mode = 0
+     " Ignore those directories
+     let g:ctrlp_ag_ignores = '--ignore .git
+          \ --ignore "_build/*"
+          \ --ignore "deps/*"
+          \ --ignore "node_modules/*"
+          \ --ignore "vendor/bundle"'
+   " }}}
 
+   " Scratch {{{
+    " Don't switch window on leaving insert mode
+    let g:scratch_insert_autohide = 0
+    " Persist scratch file
+    let g:scratch_persistence_file="$HOME/.vim/tmp/scratch"
+   " }}}
+" }}}
+
+" Mappings {{{
   nnoremap , :
 
   " Yank to the end of line
@@ -141,9 +155,6 @@ let mapleader=" "
   nmap <silent> k gk
   nmap <silent> j gj
 
-  " Move to the end line (next to 0 which goes to the beginning)
-  nmap <silent> - $
-
   " Select all text
   nnoremap <silent> va ggVG
 
@@ -158,8 +169,9 @@ let mapleader=" "
   nnoremap [g gT
   nnoremap ]g gt
 
-  nnoremap <C-e> :NERDTreeToggle<CR>
-  nnoremap <leader>e :NERDTreeFind<CR>
+  " NERDTree
+  nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+  nnoremap <silent> <leader>e :NERDTreeFind<CR>
 
   " Window resizes
   let g:vim_resize_disable_auto_mappings = 1
@@ -170,22 +182,15 @@ let mapleader=" "
 
   " Enable hlserch on start
   nnoremap / :set hlsearch<cr>/
-
-  " CtrlP {{{
-    nnoremap <leader>p :CtrlPFunky<CR>
-    nnoremap <leader>P :execute 'CtrlPFunky ' . expand('<cword>')<CR>
-  " }}}
-
-  " Completion {{{
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-
-    nnoremap <leader>h :LspHover
-  " }}}
 " }}}
 
 " Functions {{{
+  function! Ag(args) abort
+    execute "silent! grep!" shellescape(a:args)
+    copen
+    redraw!
+  endfunction
+
   function! PushToCurrentBranch()
     execute ":Gwrite"
     let branch = system('git rev-parse --abbrev-ref HEAD')
@@ -202,8 +207,7 @@ let mapleader=" "
 " }}}
 
 " Commands {{{
-  " Ag for search
-  command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+  command! -nargs=+ -complete=file Ag call Ag(<q-args>)
   command! Gpush call PushToCurrentBranch()
 
   augroup hooks
@@ -222,15 +226,4 @@ let mapleader=" "
     autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
     autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
   augroup END
-
-  " Completion {{{
-    if executable('typescript-language-server')
-      au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-        \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-        \ })
-    endif
-  " }}}
 " }}}

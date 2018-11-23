@@ -13,14 +13,7 @@ redis-up() {
 
   echo "Redis: starting ${app_name} with ${config_file}"
 
-  setsid nohup redis-server ${config_file} \
-    --port 0 --unixsocket $socket_file > $log_file 2>&1 &
-
-  # Some slepp before exist so process manager like foreman
-  # can kill depending services (i.e. sidekiq) first.
-  trap "sleep 2 && redis-down ${app_name} && exit 0" SIGINT SIGTERM
-
-  tail -f ${log_file}
+  redis-server ${config_file} --port 0 --unixsocket $socket_file --daemonize yes
 }
 
 redis-down() {
@@ -30,7 +23,7 @@ redis-down() {
   fi
   echo "Redis: shuting down ${app_name}"
   redis-cli -s ${socket_file} shutdown
-  rm -rf ${socket_file} ${log_file}
+  rm -rf ${socket_file}
 }
 
 if (( $# != 2 )); then

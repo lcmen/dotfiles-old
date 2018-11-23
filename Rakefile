@@ -1,23 +1,23 @@
-require 'rake'
+require "rake"
 
-desc 'Install all dotfiles in the system'
+desc "Install all dotfiles in the system"
 task :install do
   ARGV.clear
 
-  symlinks = Dir.glob('*/*.symlink')
+  symlinks = Dir.glob("*/*.symlink")
   targets = {
-    'init.vim': File.join(ENV['HOME'], '.config', 'nvim', 'init.vim'),
-    'karabiner.json': File.join(ENV['HOME'], '.config', 'karabiner', 'karabiner.json')
+    "init.vim": File.join(ENV["HOME"], ".config", "nvim", "init.vim"),
+    "karabiner.json": File.join(ENV["HOME"], ".config", "karabiner", "karabiner.json")
   }
 
   symlinks.each do |s|
-    symlink = ".#{s.split('/').last.split('.symlink').first}"
-    target = targets.fetch(symlink, File.join(ENV['HOME'], symlink))
+    symlink = ".#{s.split("/").last.split(".symlink").first}"
+    target = targets.fetch(symlink, File.join(ENV["HOME"], symlink))
     source = File.join(File.dirname(__FILE__), s)
 
     if File.exist?(target)
       puts "File #{symlink} already exists (#{target})."
-      puts 'Do you want to overwrite? y/n'
+      puts "Do you want to overwrite? y/n"
       next unless gets.chomp =~ /^y/i
 
       `mv #{target} #{target}.bak`
