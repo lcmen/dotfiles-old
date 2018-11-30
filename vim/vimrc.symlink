@@ -1,6 +1,5 @@
 set nocompatible
 
-let g:ale_completion_enabled=1
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
@@ -15,6 +14,7 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
+
 call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'arcticicestudio/nord-vim'
@@ -24,6 +24,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'docunext/closetag.vim'
   Plug 'itchyny/lightline.vim'
   Plug 'jbranchaud/vim-bdubs'
+  Plug 'jeffkreeftmeijer/vim-dim'
   Plug 'jiangmiao/auto-pairs'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'junegunn/gv.vim'
@@ -83,16 +84,27 @@ let mapleader=" "
 " }}}
 
 " UI {{{
-  colorscheme nord
+  colorscheme dim
   set background=dark
+  set cursorline                    " Show cursor line
+  set fillchars+=vert:\             " Disable "|" from split borders
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
   set number                        " Show line numbers
   set relativenumber                " Use relative line numbers
+
+  " Colors {{{
+    hi CursorLine cterm=bold ctermfg=NONE ctermbg=NONE
+    hi Search cterm=bold ctermfg=8 ctermbg=6
+    hi clear SpellBad
+    hi SpellBad cterm=underline
+    hi VertSplit ctermfg=10 ctermbg=10
+  " }}}
 " }}}
 
 " Plugins {{{
   " Ale {{{
+    let g:ale_completion_enabled=1
     let g:ale_fixers = {}
     " let g:ale_fixers['javascript'] = ['prettier']
     " let g:ale_fixers['vue'] = ['prettier']
@@ -109,7 +121,7 @@ let mapleader=" "
 
   " Lightline {{{
     let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'solarized',
       \ 'component_function': {
       \   'filetype': 'StatusLineFiletype',
       \   'fileformat': 'StatusLineFileformat',
@@ -141,6 +153,9 @@ let mapleader=" "
 
 " Mappings {{{
   nnoremap , :
+
+  " Quickly switch between buffers
+  nnoremap <silent> <leader><leader> :b#<CR>
 
   " Yank to the end of line
   nnoremap Y y$

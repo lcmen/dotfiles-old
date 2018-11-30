@@ -27,6 +27,7 @@ alias dbu="drun bundle update"
 alias flush-dns="dscacheutil -flushcache"
 alias https="Python -m SimpleHTTPServer $argv"
 alias gif=to-gif
+alias vim=nvim
 
 # Nginx
 alias proxy-up="~/Code/dotfiles/scripts/proxy.sh up"
