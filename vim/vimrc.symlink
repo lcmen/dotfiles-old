@@ -1,8 +1,6 @@
 set nocompatible
 
-let vimplug_exists=expand('~/.vim/autoload/plug.vim')
-
-if !filereadable(vimplug_exists)
+if !filereadable(expand('~/.vim/autoload/plug.vim'))
   if !executable("curl")
     echoerr "You have to install curl or first install vim-plug yourself!"
     execute "q!"
@@ -14,33 +12,43 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
-
 call plug#begin('~/.vim/plugged')
+  Plug 'sonph/onehalf', {'rtp': 'vim/'}
+  Plug 'AndrewRadev/ember_tools.vim'
+  Plug 'AndrewRadev/sideways.vim'
+  Plug 'AndrewRadev/splitjoin.vim'
   Plug 'airblade/vim-gitgutter'
   Plug 'arcticicestudio/nord-vim'
   Plug 'breuckelen/vim-resize'
+  Plug 'Chiel92/vim-autoformat'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'docunext/closetag.vim'
+  Plug 'ervandew/supertab'
   Plug 'itchyny/lightline.vim'
+  Plug 'janko-m/vim-test'
   Plug 'jbranchaud/vim-bdubs'
-  Plug 'jeffkreeftmeijer/vim-dim'
-  Plug 'jiangmiao/auto-pairs'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'junegunn/gv.vim'
   Plug 'lokikl/vim-ctrlp-ag'
-  Plug 'mtth/scratch.vim'
+  Plug 'prabirshrestha/async.vim'
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'rking/ag.vim'
   Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
   Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-projectionist'
   Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-rake'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'troydm/zoomwintab.vim'
   Plug 'w0rp/ale'
+  Plug 'wincent/terminus'
 call plug#end()
 
 let mapleader=" "
@@ -53,7 +61,6 @@ let mapleader=" "
   set nospell                         " Spell checking off
   set splitbelow                      " Split below
   set splitright                      " Split on the right side
-  set mouse=a                         " Enable GUI mouse behavior
 " }}}
 
 " Whitespace, tabs & spaces {{{
@@ -84,49 +91,27 @@ let mapleader=" "
 " }}}
 
 " UI {{{
-  colorscheme dim
-  set background=dark
+  colorscheme onehalflight
   set cursorline                    " Show cursor line
   set fillchars+=vert:\             " Disable "|" from split borders
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
   set number                        " Show line numbers
+  set noshowmode                    " Don't display mode
   set relativenumber                " Use relative line numbers
-
-  " Colors {{{
-    hi CursorLine cterm=bold ctermfg=NONE ctermbg=NONE
-    hi Search cterm=bold ctermfg=8 ctermbg=6
-    hi clear SpellBad
-    hi SpellBad cterm=underline
-    hi VertSplit ctermfg=10 ctermbg=10
-  " }}}
 " }}}
 
 " Plugins {{{
   " Ale {{{
-    let g:ale_completion_enabled=1
-    let g:ale_fixers = {}
-    " let g:ale_fixers['javascript'] = ['prettier']
-    " let g:ale_fixers['vue'] = ['prettier']
+    let g:ale_linters = {'go': ['gofmt', 'golint', 'govet']}
+    let g:ale_fixers = {'go': ['gofmt']}
     let g:ale_fix_on_save = 1
-    let g:ale_javascript_prettier_use_local_config = 1
-    let g:ale_vue_prettier_use_local_config = 1
   " }}}
   let g:NERDTreeShowHidden = 1
 
-  " Dev Icons {{{
+  " Extra file icons {{{
     let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
     let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = '﵂'
-  " }}}
-
-  " Lightline {{{
-    let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'component_function': {
-      \   'filetype': 'StatusLineFiletype',
-      \   'fileformat': 'StatusLineFileformat',
-      \ }
-      \ }
   " }}}
 
   " CtrlP {{{
@@ -141,14 +126,99 @@ let mapleader=" "
           \ --ignore "deps/*"
           \ --ignore "node_modules/*"
           \ --ignore "vendor/bundle"'
-   " }}}
+  " }}}
 
-   " Scratch {{{
-    " Don't switch window on leaving insert mode
-    let g:scratch_insert_autohide = 0
-    " Persist scratch file
-    let g:scratch_persistence_file="$HOME/.vim/tmp/scratch"
-   " }}}
+  " Lighline {{{
+    let g:lightline = {
+         \ 'colorscheme': 'one',
+         \ }
+  " }}}
+
+  " LSP {{{
+  let g:lsp_diagnostics_enabled = 0
+
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'bingo',
+        \ 'cmd': {server_info->['bingo', '-mode', 'stdio', '-format-style', 'fmt']},
+        \ 'whitelist': ['go'],
+        \ })
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'javascript support using typescript-language-server',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+        \ 'whitelist': ['javascript', 'javascript.jsx']
+        \ })
+  " }}}
+
+  " Projections {{{
+   let g:projectionist_heuristics = {
+        \ "Rakefile": {
+        \   "apps/*.rb": {
+        \     "alternate": "spec/{}_spec.rb",
+        \     "type": "source"
+        \   }
+        \ },
+        \ "ember-cli-build.js": {
+        \   "app/components/*.js": {
+        \     "alternate": [
+        \       "app/templates/components/{}.hbs",
+        \       "app/templates/components/{}.emblem",
+        \     ],
+        \     "type": "source"
+        \   },
+        \   "app/controllers/*.js": {
+        \     "alternate": [
+        \       "app/templates/components/{}.hbs",
+        \       "app/templates/components/{}.emblem",
+        \     ],
+        \     "type": "source"
+        \   },
+        \   "app/templates/components/*.hbs": {
+        \     "alternate": "app/components/{}.js",
+        \     "type": "template"
+        \   },
+        \   "app/templates/components/*.emblem": {
+        \     "alternate": "app/components/{}.js",
+        \     "type": "template"
+        \   },
+        \   "app/router.js": { "command": "router" },
+        \   "config/environment.js": { "command": "environment" },
+        \   "app/models/*.js": {
+        \     "command": "model",
+        \     "alternate": "tests/unit/models/{}-test.js"
+        \   },
+        \   "app/services/*.js": {
+        \     "command": "service",
+        \     "alternate": "tests/unit/services/{}-test.js"
+        \   },
+        \   "tests/unit/*-test.js": {
+        \     "alternate": "app/{}.js",
+        \     "command": "test"
+        \   },
+        \   "tests/acceptance/*-test.js": { "command": "acceptance"},
+        \   "tests/integration/*-test.js": { "command": "integration"},
+        \ }}
+  " }}}
+
+  " Splitjoin {{{
+    " disable default keybindings
+    let g:splitjoin_split_mapping = ''
+    let g:splitjoin_join_mapping = ''
+  " }}}
+
+  " Supertab {{{
+    let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabClosePreviewOnPopupClose = 1
+  " }}}
+
+  " VimTest {{{
+    let test#strategy = {
+          \ "nearest": "dispatch",
+          \ "file": "dispatch",
+          \ "suite": "dispatch_background",
+          \ }
+  " }}}
 " }}}
 
 " Mappings {{{
@@ -185,27 +255,54 @@ let mapleader=" "
   nnoremap ]g gt
 
   " NERDTree
-  nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+  nnoremap <silent> <C-e>     :NERDTreeToggle<CR>
   nnoremap <silent> <leader>e :NERDTreeFind<CR>
 
   " Window resizes
   let g:vim_resize_disable_auto_mappings = 1
-  nnoremap <silent> <left> :CmdResizeLeft<cr>
-  nnoremap <silent> <down> :CmdResizeDown<cr>
-  nnoremap <silent> <up> :CmdResizeUp<cr>
+  nnoremap <silent> <left>  :CmdResizeLeft<cr>
+  nnoremap <silent> <down>  :CmdResizeDown<cr>
+  nnoremap <silent> <up>    :CmdResizeUp<cr>
   nnoremap <silent> <right> :CmdResizeRight<cr>
+
+  " Autoformat
+  noremap <F3> :Autoformat<CR>
+
+  let g:formatdef_fixjson = '"fixjson --indent 2"'
 
   " Enable hlserch on start
   nnoremap / :set hlsearch<cr>/
+
+  " Close quickfix list
+  nnoremap <silent> q :cclose<CR> :pclose<CR>
+  nnoremap <silent> Q :cclose<CR> :pclose<CR>
+
+  " LSP
+  nmap <silent> <leader>lf :LspDocumentFormat<CR>
+  vmap <silent> <leader>lf :LspDocumentRangeFormat<CR>
+  nmap <silent> <leader>lg :LspDefinition<CR>
+  nmap <silent> <leader>lh :LspHover<CR>
+  nmap <silent> <leader>lr :LspReferences<CR>
+  nmap <silent> <leader>lR :LspRename<CR>
+
+  " Tests
+  nmap <silent> <leader>tt :TestNearest<CR>
+  nmap <silent> <leader>t. :TestLast<CR>
+  nmap <silent> <leader>tf :TestFile<CR>
+  nmap <silent> <leader>ta :TestSuite<CR>
+  nmap <silent> <leader>tv :TestVisit<CR>
+
+  " Refactoring
+  nmap <silent> <leader>rh :SidewaysLeft<cr>
+  nmap <silent> <leader>rl :SidewaysRight<cr>
+  nmap <silent> <leader>rj :SplitjoinJoin<cr>
+  nmap <silent> <leader>rk :SplitjoinSplit<cr>
+
+  " Reload config file
+  nmap <silent> <leader>R :source ~/.vimrc<CR>
 " }}}
 
 " Functions {{{
-  function! Ag(args) abort
-    execute "silent! grep!" shellescape(a:args)
-    copen
-    redraw!
-  endfunction
-
   function! PushToCurrentBranch()
     execute ":Gwrite"
     let branch = system('git rev-parse --abbrev-ref HEAD')
@@ -222,7 +319,6 @@ let mapleader=" "
 " }}}
 
 " Commands {{{
-  command! -nargs=+ -complete=file Ag call Ag(<q-args>)
   command! Gpush call PushToCurrentBranch()
 
   augroup hooks
@@ -237,8 +333,12 @@ let mapleader=" "
 
   augroup modes
     autocmd Filetype gitcommit setl spell textwidth=72
+    autocmd Filetype go setl softtabstop=4 shiftwidth=4 noexpandtab omnifunc=lsp#complete
     autocmd Filetype markdown setl spell colorcolumn=0 wrap linebreak
     autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
     autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
   augroup END
 " }}}
+
+" Enable project's vimrc
+set exrc

@@ -10,16 +10,17 @@
 [credential]
   helper = osxkeychain
 [alias]
-  am = commit --amend
-  amr = commit --amend --reset-author
+  am = !git add && git commit --amend
+  amr = !git add && git commit --amend --reset-author
   br = branch
-  brc = "!f() { git br --merged | grep -v "master" | xargs git br -D; }; f"
+  brc = "!f() { git br --merged | grep -v "master" | grep -v "staging" | xargs git br -D; }; f"
   cm = !git add -A && git commit
   co = checkout
   cob = checkout -b
   cmp = log --left-right --graph --cherry-pick --oneline
   ft = fetch --prune
   st = status
+  wip = !git add -A && git commit -m "WIP"
 [includeIf "gitdir:~/Code/mine/"]
   path = ~/Code/mine/.gitconfig
 [includeIf "gitdir:~/Code/personal/"]

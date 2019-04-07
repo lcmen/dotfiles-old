@@ -14,4 +14,7 @@ export EDITOR="nvim"
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 
+# Init direnv
+eval "$(direnv hook bash)"
+
 export PATH="./node_modules/.bin:$HOME/.bin:$PATH"

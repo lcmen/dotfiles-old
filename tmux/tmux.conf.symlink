@@ -16,6 +16,19 @@
 
   # Nice colors
   set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+  # Status bar
+  set -g @batt_remain_short true
+  set -g @prefix_highlight_show_copy_mode 'on'
+  set -g @prefix_highlight_bg 'colour233'
+  set -g @prefix_highlight_copy_mode_attr 'bg=colour233'
+  set -g @prefix_highlight_copy_prompt 'Copy'
+  set -g @prefix_highlight_empty_prompt 'Tmux'
+  set -g @prefix_highlight_prefix_prompt 'Wait'
+  set -g @prefix_highlight_empty_has_affixes 'on'
+  set -g @prefix_highlight_output_prefix '['
+  set -g @prefix_highlight_output_suffix ']'
+  set -g status-right '%a %h-%d %H:%M #{prefix_highlight}'
 # }}}
 
 # Bindings {{{
@@ -46,17 +59,25 @@
     bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
   # }}}
 
+  # Kill current session and switch to the next one
+  bind K run-shell 'tmux switch-client -n \; kill-session -t "$(tmux display-message -p "#S")" || tmux kill-session'
+
   # Swap current windows prev / next
   bind ( swap-window -t -1
   bind ) swap-window -t +1
+
+  # Run in split
+  bind r command-prompt -p "Run: " "split-window -h '%%'"
 # }}}
 
 # Plugins {{{
+  set -g @plugin 'tmux-plugins/tpm'
   set -g @plugin 'christoomey/vim-tmux-navigator'
   set -g @plugin 'nhdaly/tmux-better-mouse-mode'
-  set -g @plugin 'tmux-plugins/tpm'
+  set -g @plugin 'tmux-plugins/tmux-open'
+  set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
   set -g @plugin 'tmux-plugins/tmux-sensible'
-
+  set -g @plugin 'tmux-plugins/tmux-urlview'
 
   run '~/.tmux/plugins/tpm/tpm'
 # }}}

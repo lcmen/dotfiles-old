@@ -7,12 +7,15 @@ task :install do
   symlinks = Dir.glob("*/*.symlink")
   targets = {
     "init.vim": File.join(ENV["HOME"], ".config", "nvim", "init.vim"),
-    "karabiner.json": File.join(ENV["HOME"], ".config", "karabiner", "karabiner.json")
+    "karabiner.json": File.join(ENV["HOME"], ".config", "karabiner", "karabiner.json"),
+    "default-gems": `rbenv root`,
+    "default-packages": `nodenv root`,
   }
 
   symlinks.each do |s|
-    symlink = ".#{s.split("/").last.split(".symlink").first}"
-    target = targets.fetch(symlink, File.join(ENV["HOME"], symlink))
+    name = s.split("/").last.gsub(/\.symlink/, "")
+    symlink = ".#{name}"
+    target = targets.fetch(name, File.join(ENV["HOME"], symlink))
     source = File.join(File.dirname(__FILE__), s)
 
     if File.exist?(target)

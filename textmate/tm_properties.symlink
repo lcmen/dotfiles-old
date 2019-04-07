@@ -1,0 +1,24 @@
+PATH = "$TM_PROJECT_DIRECTORY/bin:$HOME/.anyenv/envs/rbenv/shims:/usr/local/bin:$PATH"
+
+scopeAttributes = "bundle.linter.strip-whitespace-on-save bundle.linter.ensure-newline-on-save"
+
+encoding       = UTF-8
+fontName       = "SFMono Nerd Font"
+fontSize       = 15
+lineEndings    = '\n'
+showInvisibles = true
+softWrap       = false
+tabSize        = 2
+softTabs       = true
+
+excludeDirectories    = "{$excludeDirectories,log,tmp,node_modules,dist,bower_components,_build,fastboot-dist,cookbooks,coverage,_site}"
+excludeInFolderSearch = "{$excludeInFolderSearch,_build,_site,bower_components,coverage,dist,node_modules,log,tmp,vendor}"
+includeDirectories    = "{$includesDirectories,.circleci,.tmuxinator,.bash,.zsh}"
+includeFiles          = "{$includeFiles,.ruby-version,.node-version,.rspec,.gitignore,.travis.yml,.env,.jshintrc,.eslintrc.js,bowerrc,.rubocop.yml,.gitlab-ci.yml,.jscsrc,.ember-cli,.npmignore,.zshrc,.ackrc,.bashrc,.gemrc,.gitconfig,.gitignore-global,.gitshrc,.irbrc,.profile,.sbtconfig,.tmux}"
+
+[ text ]
+spellChecking = true
+wrapColumn = "Use Window Frame"
+
+[ "{Capfile,Gemfile,Gemfile.lock,Guardfile}" ]
+fileType = source.ruby

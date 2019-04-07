@@ -1,11 +1,21 @@
+AllCops:
+  Exclude:
+    - tmp/**/*
+    - vendor/**/*
+    - bin/**/*
+    - spec/dummy/bin/**/*
+
 Documentation:
   Enabled: false
 
-Layout/DotPosition:
-  EnforcedStyle: trailing
+Metrics/BlockLength:
+  ExcludedMethods: ['describe', 'context', 'feature']
 
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
+Metrics/LineLength:
+  Max: 110
 
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes

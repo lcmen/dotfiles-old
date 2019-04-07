@@ -26,8 +26,13 @@ redis-down() {
   rm -rf ${socket_file}
 }
 
-if (( $# != 2 )); then
-  echo "Usage: redis.sh {up|down} app_name"
+redis-list() {
+  echo "Redis:"
+  ls /tmp/redis | grep ".socket" | sed -e 's/\.socket//'
+}
+
+if (( $1 != "list" && $# != 2 )); then
+  echo "Usage: redis.sh {up|down|list} [app_name]"
   exit 1
 fi
 
@@ -38,4 +43,5 @@ log_file="/tmp/redis/${app_name}.log"
 case "$1" in
   "up") redis-up $2 ;;
   "down") redis-down $2 ;;
+  "list") redis-list ;;
 esac
