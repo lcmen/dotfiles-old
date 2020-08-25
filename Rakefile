@@ -8,8 +8,6 @@ task :install do
   targets = {
     "init.vim": File.join(ENV["HOME"], ".config", "nvim", "init.vim"),
     "karabiner.json": File.join(ENV["HOME"], ".config", "karabiner", "karabiner.json"),
-    "default-gems": `rbenv root`,
-    "default-packages": `nodenv root`,
   }
 
   symlinks.each do |s|

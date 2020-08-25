@@ -43,7 +43,7 @@ class Proxy
   def config_template
     <<-EOT
 server {
-  listen 8080;
+  listen 80;
   server_name <%= hostname %>;
   access_log /usr/local/var/log/nginx/<%= hostname %>.access.log;
 

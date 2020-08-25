@@ -10,10 +10,11 @@ redis-up() {
 
   app_name=$1
   config_file=${2:-/usr/local/etc/redis.conf}
+  db_file="${app_name}.rdb"
 
   echo "Redis: starting ${app_name} with ${config_file}"
 
-  redis-server ${config_file} --port 0 --unixsocket $socket_file --daemonize yes
+  redis-server ${config_file} --dbfilename ${db_file} --port 0 --unixsocket ${socket_file} --daemonize yes
 }
 
 redis-down() {

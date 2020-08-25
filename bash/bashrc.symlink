@@ -3,7 +3,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 
-. ~/.bash.d/secrets.bash
 . ~/.bash.d/functions.bash
 . ~/.bash.d/aliases.bash
 . ~/.bash.d/prompt.bash

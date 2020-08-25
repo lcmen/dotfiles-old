@@ -1,8 +1,6 @@
 [core]
   excludesfile = /Users/lucas/.gitignore
   editor = nvim
-[init]
-  templatedir = /Users/lucas/Code/dotfiles/git/templates
 [fetch]
   prune = true
 [push]
@@ -10,20 +8,15 @@
 [credential]
   helper = osxkeychain
 [alias]
-  am = !git add && git commit --amend
-  amr = !git add && git commit --amend --reset-author
-  br = branch
+  br = branch --sort=committerdate
   brc = "!f() { git br --merged | grep -v "master" | grep -v "staging" | xargs git br -D; }; f"
   cm = !git add -A && git commit
+  cma = !git add -A && git commit --amend --no-edit
+  cmar = !git add -A && git commit --amend --no-edit --reset-author
   co = checkout
   cob = checkout -b
-  cmp = log --left-right --graph --cherry-pick --oneline
-  ft = fetch --prune
+  df = difftool
   st = status
   wip = !git add -A && git commit -m "WIP"
-[includeIf "gitdir:~/Code/mine/"]
-  path = ~/Code/mine/.gitconfig
-[includeIf "gitdir:~/Code/personal/"]
-  path = ~/Code/personal/.gitconfig
-[includeIf "gitdir:~/Code/ironin/"]
-  path = ~/Code/ironin/.gitconfig
+[pull]
+	ff = only

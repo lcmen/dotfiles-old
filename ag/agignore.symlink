@@ -7,7 +7,6 @@ log
 tmp
 
 bower_components
-deps
 node_modules
 vendor
 

@@ -16,68 +16,50 @@
 
   # Nice colors
   set-option -ga terminal-overrides ",xterm-256color:Tc"
+  # set -g status-bg default
 
   # Status bar
-  set -g @batt_remain_short true
-  set -g @prefix_highlight_show_copy_mode 'on'
-  set -g @prefix_highlight_bg 'colour233'
-  set -g @prefix_highlight_copy_mode_attr 'bg=colour233'
-  set -g @prefix_highlight_copy_prompt 'Copy'
-  set -g @prefix_highlight_empty_prompt 'Tmux'
-  set -g @prefix_highlight_prefix_prompt 'Wait'
-  set -g @prefix_highlight_empty_has_affixes 'on'
-  set -g @prefix_highlight_output_prefix '['
-  set -g @prefix_highlight_output_suffix ']'
   set -g status-right '%a %h-%d %H:%M #{prefix_highlight}'
 # }}}
 
 # Bindings {{{
-  # Splits {{{
-    # Use current path when splitting / tabbing
-    bind '"' split-window -c "#{pane_current_path}"
-    bind % split-window -h -c "#{pane_current_path}"
-    bind c new-window -c "#{pane_current_path}"
-
-    # Supporting panes (30% of the terminal width)
-    bind - split-window -v -p 30 -c "#{pane_current_path}"
-    bind \ split-window -h -p 30 -c "#{pane_current_path}"
-  # }}}
+  # Use current path when splitting / tabbing
+  bind '"' split-window -c "#{pane_current_path}"
+  bind % split-window -h -c "#{pane_current_path}"
+  bind c new-window -c "#{pane_current_path}"
 
   # Remap ctrl+b to ctrl+s
   unbind C-b
   set -g prefix C-s
   bind -r C-s send-prefix
 
-  # Enable vim key binding {{{
-    setw -g mode-keys vi
-    set -g status-keys vi
+  # Enable vim key binding
+  setw -g mode-keys vi
+  set -g status-keys vi
 
-    # Setup 'v' to begin selection as in Vim
-    bind-key -T copy-mode-vi v send -X begin-selection
-
-    # Yank
-    bind-key -T copy-mode-vi 'y' send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'
-  # }}}
+  # Setup 'v' to begin selection as in Vim
+  bind-key -T copy-mode-vi v send -X begin-selection
 
   # Kill current session and switch to the next one
   bind K run-shell 'tmux switch-client -n \; kill-session -t "$(tmux display-message -p "#S")" || tmux kill-session'
 
   # Swap current windows prev / next
-  bind ( swap-window -t -1
-  bind ) swap-window -t +1
+  bind ( swap-window -t -1\; select-window -t -1
+  bind ) swap-window -t +1\; select-window -t +1
 
   # Run in split
   bind r command-prompt -p "Run: " "split-window -h '%%'"
 # }}}
 
 # Plugins {{{
-  set -g @plugin 'tmux-plugins/tpm'
   set -g @plugin 'christoomey/vim-tmux-navigator'
-  set -g @plugin 'nhdaly/tmux-better-mouse-mode'
-  set -g @plugin 'tmux-plugins/tmux-open'
-  set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
   set -g @plugin 'tmux-plugins/tmux-sensible'
-  set -g @plugin 'tmux-plugins/tmux-urlview'
+  set -g @plugin 'tmux-plugins/tmux-yank'
+  set -g @plugin 'tmux-plugins/tpm'
 
   run '~/.tmux/plugins/tpm/tpm'
+
+  # Default clipboards for text and mouse modes
+  set -g @yank_selection 'clipboard'
+  set -g @yank_selection_mouse 'clipboard'
 # }}}

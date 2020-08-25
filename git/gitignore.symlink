@@ -1,6 +1,7 @@
 # Ignore bundler vendors
 .bin
 .bundle
+.direnv
 vendor/bundle
 
 # Temp files
