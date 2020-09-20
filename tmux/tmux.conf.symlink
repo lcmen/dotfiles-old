@@ -1,6 +1,9 @@
 # vim:foldmethod=marker
 
 # Basic settings {{{
+  # Set bash as default shell to source .bashrc
+  set -g default-command "/bin/bash"
+
   # Start numbering at 1
   set -g base-index 1
   set -g pane-base-index 1

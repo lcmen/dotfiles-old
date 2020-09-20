@@ -24,7 +24,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'docunext/closetag.vim'
   Plug 'janko-m/vim-test'
   Plug 'jbranchaud/vim-bdubs'
-  Plug 'jeffkreeftmeijer/vim-dim'
+  Plug 'joshdick/onedark.vim'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'lokikl/vim-ctrlp-ag'
   Plug 'rking/ag.vim'
@@ -83,8 +83,8 @@ let mapleader=" "
 " }}}
 
 " UI {{{
-  colorscheme PaperColor
-  set background=light
+  set termguicolors
+  colorscheme onedark
   set cursorline                    " Show cursor line
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
@@ -95,7 +95,7 @@ let mapleader=" "
 " Plugins {{{
   " Ale {{{
     let g:ale_fix_on_save = 1
-    let g:ale_linters = {'vue': ['eslint', 'vls']}
+    let g:ale_linters = {'vue': ['eslint']}
   " }}}
 
   " File browser {{{

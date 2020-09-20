@@ -3,5 +3,7 @@
 
 secrets.bash
 bundler/bundle.symlink/cache
+vim/vim.symlink/autoload/plug.vim
 vim/vim.symlink/plugged
+vim/vim.symlink/spell
 vim/vim.symlink/tmp
