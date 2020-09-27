@@ -1,0 +1,18 @@
+devices: (
+{
+    name: "Wireless Mouse MX Master 2S";
+    smartshift:
+    {
+        on: true;
+        threshold: 255;
+    };
+    hiresscroll:
+    {
+        hires: true;
+        invert: false;
+        target: false;
+    };
+    dpi: 1200;
+    buttons: ();
+}
+);
