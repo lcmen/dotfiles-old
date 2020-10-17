@@ -1,7 +1,6 @@
-# Ignore bundler vendors
-.bin
+# Ignore vendors
 .bundle
-.direnv
+node_modules
 vendor/bundle
 
 # Temp files
@@ -21,10 +20,10 @@ Icon
 .projections.json
 *.sublime-project
 *.sublime-workspace
-gem.tags
-tags
 
 # Ignore Project dev environment specific
+.direnv
 .envrc
+.vscode
 Procfile.dev
 Procfile.local

@@ -7,7 +7,6 @@ export EDITOR="nvim"
 . ~/.bash.d/aliases.bash
 . ~/.bash.d/prompt.bash
 . ~/.bash.d/git-completion.bash
-. ~/.bash.d/exercism-completion.bash
 
 # Init anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"

@@ -12,7 +12,7 @@ redis-up() {
   config_file=${2:-/usr/local/etc/redis.conf}
   db_file="${app_name}.rdb"
 
-  echo "Redis: starting ${app_name} with ${config_file}"
+  echo "Redis: starting ${app_name} with ${config_file} on ${socket_file}"
 
   redis-server ${config_file} --dbfilename ${db_file} --port 0 --unixsocket ${socket_file} --daemonize yes
 }
@@ -28,8 +28,8 @@ redis-down() {
 }
 
 redis-list() {
-  echo "Redis:"
-  ls /tmp/redis | grep ".socket" | sed -e 's/\.socket//'
+  printf "Redis apps:\n\n"
+  ls /tmp/redis | grep ".socket" | sed -e 's/\.socket//' | sed -e 's/^/- /'
 }
 
 if (( $1 != "list" && $# != 2 )); then

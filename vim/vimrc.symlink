@@ -41,7 +41,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'troydm/zoomwintab.vim'
   Plug 'wincent/terminus'
   Plug 'zivyangll/git-blame.vim'
-  Plug 'rhysd/git-messenger.vim'
+  Plug 'yssl/QFEnter'
 call plug#end()
 
 let mapleader=" "
@@ -105,6 +105,7 @@ let mapleader=" "
   " }}}
 
   " CtrlP {{{
+     " Disable caching
      let g:ctrlp_use_caching = 0
      " Always open files in new buffers
      let g:ctrlp_switch_buffer = 0
@@ -119,8 +120,12 @@ let mapleader=" "
           \ --ignore "vendor/bundle"'
   " }}}
 
-  " Git {{{
-    let g:git_messenger_always_into_popup = v:true
+  " QFEnter {{{
+    let g:qfenter_keymap = {}
+    let g:qfenter_keymap.open = ['<CR>']
+    let g:qfenter_keymap.vopen = ['<C-v>']
+    let g:qfenter_keymap.hopen = ['<C-x>']
+    let g:qfenter_keymap.topen = ['<C-t>']
   " }}}
 
   " Splitjoin {{{
@@ -146,6 +151,11 @@ let mapleader=" "
   " Copy buffer path (relative / absolute) to system clipboard
   nnoremap <silent> <leader>p :let @+=expand('%')<CR>
   nnoremap <silent> <leader>P :let @+=expand('%:p')<CR>
+
+  " CtrlP
+  nnoremap <c-f> :CtrlPag<cr>
+  nnoremap <leader>f :CtrlPagLocate<space>
+  vnoremap <leader>f :CtrlPagVisual<cr>
 
   " Move more senibly when line wrapping enabled
   nmap <silent> k gk

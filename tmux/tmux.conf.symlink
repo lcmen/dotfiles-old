@@ -46,12 +46,15 @@
   # Kill current session and switch to the next one
   bind K run-shell 'tmux switch-client -n \; kill-session -t "$(tmux display-message -p "#S")" || tmux kill-session'
 
+  # Resize panes
+  bind k resize-pane -U 5
+  bind j resize-pane -D 5
+  bind h resize-pane -L 5
+  bind l resize-pane -R 5
+
   # Swap current windows prev / next
   bind ( swap-window -t -1\; select-window -t -1
   bind ) swap-window -t +1\; select-window -t +1
-
-  # Run in split
-  bind r command-prompt -p "Run: " "split-window -h '%%'"
 # }}}
 
 # Plugins {{{
