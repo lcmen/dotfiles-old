@@ -24,13 +24,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'docunext/closetag.vim'
   Plug 'janko-m/vim-test'
   Plug 'jbranchaud/vim-bdubs'
-  Plug 'joshdick/onedark.vim'
   Plug 'jszakmeister/vim-togglecursor'
   Plug 'lokikl/vim-ctrlp-ag'
   Plug 'rking/ag.vim'
   Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
+  Plug 'sonph/onehalf', {'rtp': 'vim/'}
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-rails'
@@ -83,8 +83,7 @@ let mapleader=" "
 " }}}
 
 " UI {{{
-  set termguicolors
-  colorscheme onedark
+  colorscheme onehalflight
   set cursorline                    " Show cursor line
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
