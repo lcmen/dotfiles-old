@@ -64,30 +64,6 @@
             ]
           },
           {
-            "description": "Hyber Tab - Editor / Terminal toggle",
-            "manipulators": [
-              {
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "mandatory": [
-                      "left_shift",
-                      "left_command",
-                      "left_control",
-                      "left_option"
-                    ]
-                  }
-                },
-                "to": [
-                  {
-                    "shell_command": "osascript ~/Code/dotfiles/scripts/editor_terminal_toggle.scpt"
-                  }
-                ],
-                "type": "basic"
-              }
-            ]
-          },
-          {
             "description": "Hyper T - Terminal",
             "manipulators": [
               {

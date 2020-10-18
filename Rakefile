@@ -5,15 +5,17 @@ task :install do
   ARGV.clear
 
   symlinks = Dir.glob("*/*.symlink")
-  targets = {
-    "init.vim": File.join(ENV["HOME"], ".config", "nvim", "init.vim"),
-    "karabiner.json": File.join(ENV["HOME"], ".config", "karabiner", "karabiner.json"),
-  }
+  targets = { "init.vim": "~/.config/nvim/init.vim" }
+
+  case RUBY_PLATFORM
+  when /darwin/
+    targets["karabiner.json"] = "~/.config/karabiner/karabiner.json"
+  end
 
   symlinks.each do |s|
-    name = s.split("/").last.gsub(/\.symlink/, "")
+    name = s.split("/").last.gsub(/\.symlink$/, "")
     symlink = ".#{name}"
-    target = targets.fetch(name, File.join(ENV["HOME"], symlink))
+    target = targets.fetch(name) { File.join(ENV["HOME"], symlink) }
     source = File.join(File.dirname(__FILE__), s)
 
     if File.exist?(target)
@@ -29,3 +31,5 @@ task :install do
     puts "File #{symlink} was installed.\n\n"
   end
 end
+
+task default: :install

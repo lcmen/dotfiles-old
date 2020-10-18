@@ -3,10 +3,11 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR="nvim"
 
-. ~/.bash.d/functions.bash
-. ~/.bash.d/aliases.bash
-. ~/.bash.d/prompt.bash
-. ~/.bash.d/git-completion.bash
+dir=$(dirname "$(readlink $(pwd))")
+source "${dir}/bash/functions.bash"
+source "${dir}/bash/git-completion.bash"
+source "${dir}/bash/aliases.bash"
+source "${dir}/bash/prompt.bash"
 
 # Init anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
@@ -15,4 +16,5 @@ eval "$(anyenv init -)"
 # Init direnv
 eval "$(direnv hook bash)"
 
+# Include .bin directory from node_modules
 export PATH="./node_modules/.bin:$HOME/.bin:$PATH"
