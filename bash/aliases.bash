@@ -23,23 +23,23 @@ alias dbu="drun bundle update"
 
 # Misc
 alias c="clear"
-alias https="${dir}/scripts/server.sh 8000"
+alias https="${DOTFILES_DIR}/scripts/server.sh 8000"
 alias vim=nvim
 
 # Nginx
-alias proxy-up="${dir}/scripts/proxy.sh up"
-alias proxy-down="${dir}/scripts/proxy.sh down"
+alias proxy-up="${DOTFILES_DIR}/scripts/proxy.sh up"
+alias proxy-down="${DOTFILES_DIR}/scripts/proxy.sh down"
 
 # Postgres
-alias pg-up="${dir}/scripts/postgres.sh up"
-alias pg-down="${dir}/scripts/postgres.sh down"
-alias pg-cl="${dir}/scripts/postgres.sh clean"
-alias pg-st="${dir}/scripts/postgres.sh status"
+alias pg-up="${DOTFILES_DIR}/scripts/postgres.sh up"
+alias pg-down="${DOTFILES_DIR}/scripts/postgres.sh down"
+alias pg-cl="${DOTFILES_DIR}/scripts/postgres.sh clean"
+alias pg-st="${DOTFILES_DIR}/scripts/postgres.sh status"
 
 # Redis
-alias rd-up="${dir}/scripts/redis.sh up"
-alias rd-down="${dir}/scripts/redis.sh down"
-alias rd-list="${dir}/scripts/redis.sh list"
+alias rd-up="${DOTFILES_DIR}/scripts/redis.sh up"
+alias rd-down="${DOTFILES_DIR}/scripts/redis.sh down"
+alias rd-list="${DOTFILES_DIR}/scripts/redis.sh list"
 
 # Tmux
 alias txj=tmux-join

@@ -1,13 +1,13 @@
 export CLICOLOR=1
+export EDITOR="nvim"
+export DOTFILES_DIR=$(dirname $(dirname $(realpath "${BASH_SOURCE[0]}")))
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR="nvim"
 
-dir=$(dirname "$(readlink $(pwd))")
-source "${dir}/bash/functions.bash"
-source "${dir}/bash/git-completion.bash"
-source "${dir}/bash/aliases.bash"
-source "${dir}/bash/prompt.bash"
+source ${DOTFILES_DIR}/bash/functions.bash
+source ${DOTFILES_DIR}/bash/git-completion.bash
+source ${DOTFILES_DIR}/bash/aliases.bash
+source ${DOTFILES_DIR}/bash/prompt.bash
 
 # Init anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
