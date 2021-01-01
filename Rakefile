@@ -5,7 +5,7 @@ task :install do
   ARGV.clear
 
   symlinks = Dir.glob("*/*.symlink")
-  targets = { "init.vim": "~/.config/nvim/init.vim" }
+  targets = { "init.vim" => "~/.config/nvim/init.vim" }
 
   symlinks.each do |s|
     name = s.split("/").last.gsub(/\.symlink$/, "")

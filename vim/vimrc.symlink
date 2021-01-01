@@ -15,7 +15,6 @@ endif
 call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/sideways.vim'
   Plug 'AndrewRadev/splitjoin.vim'
-  Plug 'NLKNguyen/papercolor-theme'
   Plug 'airblade/vim-gitgutter'
   Plug 'breuckelen/vim-resize'
   Plug 'christoomey/vim-tmux-navigator'
