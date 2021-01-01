@@ -1,12 +1,10 @@
 [core]
-  excludesfile = /Users/lucas/.gitignore
+  excludesfile = ~/.gitignore
   editor = nvim
 [fetch]
   prune = true
 [push]
   default = upstream
-[credential]
-  helper = osxkeychain
 [alias]
   br = branch --sort=committerdate
   brc = "!f() { git br --merged | grep -v "master" | grep -v "staging" | xargs git br -D; }; f"
@@ -19,4 +17,4 @@
   st = status
   wip = !git add -A && git commit -m "WIP"
 [pull]
-	ff = only
+  ff = only

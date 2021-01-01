@@ -7,11 +7,6 @@ task :install do
   symlinks = Dir.glob("*/*.symlink")
   targets = { "init.vim": "~/.config/nvim/init.vim" }
 
-  case RUBY_PLATFORM
-  when /darwin/
-    targets["karabiner.json"] = "~/.config/karabiner/karabiner.json"
-  end
-
   symlinks.each do |s|
     name = s.split("/").last.gsub(/\.symlink$/, "")
     symlink = ".#{name}"

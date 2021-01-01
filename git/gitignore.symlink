@@ -1,7 +1,7 @@
 # Ignore vendors
 .bundle
 node_modules
-vendor/bundle
+vendor/bundle/
 
 # Temp files
 .sass-cache
