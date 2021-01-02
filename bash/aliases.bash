@@ -22,6 +22,8 @@ alias dbr="drun bundle exec gem remove"
 alias dbu="drun bundle update"
 
 # Misc
+alias bt-call="${DOTFILES_DIR}/scripts/bt.sh call"
+alias bt-music="${DOTFILES_DIR}/scripts/bt.sh music"
 alias c="clear"
 alias https="${DOTFILES_DIR}/scripts/server.sh 8000"
 alias vim=nvim
