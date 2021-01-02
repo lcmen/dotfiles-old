@@ -6,20 +6,24 @@
 set -e
 
 redis-up() {
-  app_name=$1
-
   mkdir -p /tmp/redis
-  echo "Redis: starting ${app_name} with ${config_file} on ${socket_file}"
+  chmod 777 /tmp/redis
+  echo "Redis: starting ${app_name} on ${socket_file}"
 
   docker run \
-    -name "redis-${app_name}" \
-    -v "/tmp/redis/${app_name}.socket:/tmp/redis.socket" \
-    -d redis redis-server --port 0 --unixsocket /tmp/redis.socket
+    --name "${cont_name}" \
+    -v "/tmp/redis:/tmp/redis" \
+    -d redis \
+    redis-server --port 0 --unixsocket "/tmp/redis/${app_name}.sock" --unixsocketperm 777
+}
+
+redis-down() {
+  docker stop $cont_name
+  docker rm $cont_name
 }
 
 app_name=$2
-socket_file="/tmp/redis/${app_name}.socket"
-log_file="/tmp/redis/${app_name}.log"
+cont_name="redis-${app_name}"
 
 case "$1" in
   "up") redis-up $2 ;;

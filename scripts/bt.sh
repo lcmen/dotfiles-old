@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script for managing bt profiles for headphones (music / phone call)
+# Script for managing bt profiles (music / phone call) for headphones
 # Usage: `bt {call|music}
 #
 # Credits: https://forums.linuxmint.com/viewtopic.php?t=295859
