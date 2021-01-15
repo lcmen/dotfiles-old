@@ -24,6 +24,7 @@ alias dbu="drun bundle update"
 # Misc
 alias bt-call="${DOTFILES_DIR}/scripts/bt.sh call"
 alias bt-music="${DOTFILES_DIR}/scripts/bt.sh music"
+alias bt-restart="${DOTFILES_DIR}/scripts/bt.sh restart"
 alias c="clear"
 alias https="${DOTFILES_DIR}/scripts/server.sh 8000"
 alias vim=nvim

@@ -7,9 +7,15 @@
 
 set -e
 
+function restart() {
+  rfkill block bluetooth
+  rfkill unblock bluetooth
+}
+
 case "$1" in
   call) profilename="headset_head_unit" ;;
   music) profilename="a2dp_sink_aptx" ;;
+  restart) restart; exit 0;;
 esac
 
 # Get Card and Device
