@@ -18,3 +18,6 @@ eval "$(direnv hook bash)"
 
 # Include .bin directory from node_modules
 export PATH="./node_modules/.bin:$HOME/.bin:$PATH"
+
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon

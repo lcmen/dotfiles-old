@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/sideways.vim'
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'airblade/vim-gitgutter'
+  Plug 'arcticicestudio/nord-vim'
   Plug 'breuckelen/vim-resize'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'ctrlpvim/ctrlp.vim'
@@ -29,7 +30,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
   Plug 'scrooloose/nerdtree'
   Plug 'sheerun/vim-polyglot'
-  Plug 'sonph/onehalf', {'rtp': 'vim/'}
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-rails'
@@ -82,7 +82,7 @@ let mapleader=" "
 " }}}
 
 " UI {{{
-  colorscheme onehalflight
+  colorscheme nord
   set cursorline                    " Show cursor line
   set list                          " Show invisible characters
   set listchars=tab:▸\ ,eol:¬,trail:·
@@ -116,6 +116,44 @@ let mapleader=" "
           \ --ignore "deps/*"
           \ --ignore "node_modules/*"
           \ --ignore "vendor/bundle"'
+
+     " Mapping
+     let g:ctrlp_prompt_mappings = {
+        \ 'PrtBS()':              ['<bs>', '<c-]>'],
+        \ 'PrtDelete()':          ['<del>'],
+        \ 'PrtDeleteWord()':      ['<c-w>'],
+        \ 'PrtClear()':           ['<c-u>'],
+        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+        \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
+        \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+        \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+        \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+        \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+        \ 'PrtHistory(-1)':       ['<c-n>'],
+        \ 'PrtHistory(1)':        ['<c-p>'],
+        \ 'AcceptSelection("e")': ['<cr>'],
+        \ 'AcceptSelection("h")': ['<c-i>', '<c-cr>'],
+        \ 'AcceptSelection("t")': ['<c-t>'],
+        \ 'AcceptSelection("v")': ['<c-s>'],
+        \ 'ToggleFocus()':        ['<s-tab>'],
+        \ 'ToggleRegex()':        ['<c-r>'],
+        \ 'ToggleByFname()':      ['<c-d>'],
+        \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+        \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+        \ 'PrtExpandDir()':       ['<tab>'],
+        \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+        \ 'PrtInsert()':          ['<c-\>'],
+        \ 'PrtCurStart()':        ['<c-a>'],
+        \ 'PrtCurEnd()':          ['<c-e>'],
+        \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+        \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+        \ 'PrtClearCache()':      ['<F5>'],
+        \ 'PrtDeleteEnt()':       ['<F7>'],
+        \ 'CreateNewFile()':      ['<c-y>'],
+        \ 'MarkToOpen()':         ['<c-z>'],
+        \ 'OpenMulti()':          ['<c-o>'],
+        \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+      \ }
   " }}}
 
   " QFEnter {{{
@@ -142,6 +180,10 @@ let mapleader=" "
 
 " Mappings {{{
   nnoremap , :
+
+  " Enable block move via x (to allow use C-c and C-v for natural copy paste)
+  nnoremap <C-x> <C-v>
+  nnoremap X V
 
   " Quickly switch between buffers
   nnoremap <silent> <leader><leader> :b#<CR>
