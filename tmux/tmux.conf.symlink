@@ -54,6 +54,9 @@
   # Swap current windows prev / next
   bind ( swap-window -t -1\; select-window -t -1
   bind ) swap-window -t +1\; select-window -t +1
+
+  # Unbind ctrl + \ to toggle between panes (used for SIGQUIT)
+  unbind C-\;
 # }}}
 
 # Plugins {{{

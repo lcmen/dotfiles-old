@@ -1,6 +1,7 @@
 export CLICOLOR=1
 export EDITOR="nvim"
 export DOTFILES_DIR=$(dirname $(dirname $(realpath "${BASH_SOURCE[0]}")))
+export FZF_DEFAULT_COMMAND="ag -g ''"
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 

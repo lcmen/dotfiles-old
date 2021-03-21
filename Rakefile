@@ -23,7 +23,7 @@ task :install do
     end
 
     `ln -s #{source} #{target}`
-    puts "File #{symlink} was installed.\n\n"
+    puts "File #{symlink} was installed at #{target}.\n\n"
   end
 end
 

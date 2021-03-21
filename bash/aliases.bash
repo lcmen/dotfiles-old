@@ -25,7 +25,7 @@ alias dbu="drun bundle update"
 alias bt-call="${DOTFILES_DIR}/scripts/bt.sh call"
 alias bt-music="${DOTFILES_DIR}/scripts/bt.sh music"
 alias bt-restart="${DOTFILES_DIR}/scripts/bt.sh restart"
-alias c="clear"
+alias dns-flush="sudo systemd-resolve --flush-caches"
 alias https="${DOTFILES_DIR}/scripts/server.sh 8000"
 alias vim=nvim
 
