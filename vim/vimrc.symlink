@@ -16,15 +16,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/sideways.vim'
   Plug 'AndrewRadev/splitjoin.vim'
   Plug 'airblade/vim-gitgutter'
-  Plug 'breuckelen/vim-resize'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'dense-analysis/ale'
   Plug 'docunext/closetag.vim'
+  Plug 'hrsh7th/nvim-compe'
   Plug 'janko-m/vim-test'
   Plug 'jbranchaud/vim-bdubs'
-  Plug 'jszakmeister/vim-togglecursor'
+  Plug 'kabouzeid/nvim-lspinstall'
   Plug 'lokikl/vim-ctrlp-ag'
+  Plug 'neovim/nvim-lspconfig'
   Plug 'rking/ag.vim'
   Plug 'ryanoasis/vim-devicons', { 'branch': 'master' }
   Plug 'scrooloose/nerdtree'
@@ -33,20 +33,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-rake'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
   Plug 'troydm/zoomwintab.vim'
   Plug 'wincent/terminus'
-  Plug 'zivyangll/git-blame.vim'
-  Plug 'yssl/QFEnter'
 call plug#end()
 
 let mapleader=" "
 
 " Misc {{{
   set clipboard=unnamedplus           " Use system clipboard
+  set completeopt=menuone,noselect
   set noswapfile                      " Disable swap
   set scrolloff=5                     " Start scrolling 5 lines away from margin
   set sidescrolloff=15                " Start scrolling 15 lines away from side margin
@@ -61,6 +59,8 @@ let mapleader=" "
   set textwidth=120
   set wrapmargin=0
   set expandtab                     " Indent with spaces
+  set list                          " Show invisible characters
+  set listchars=tab:▸\ ,eol:¬,trail:·
   set softtabstop=2                 " Number of spaces per <tab> when inserting
   set shiftwidth=2                  " Number of spaces per <tab> when indenting
   set tabstop=4                     " Number of spaces <tab> counts for
@@ -73,29 +73,38 @@ let mapleader=" "
 " }}}
 
 " Backups {{{
-  set nobackup
+  set nobackup                      " Disable backup
   set nowritebackup
+  set undodir=$HOME/.vim/tmp/undo   " Persistent undo directory
+  set undofile                      " Enable undo file
+  set undolevels=1000               " Maximum number of changes that can be undone
+  set undoreload=10000              " Maximum number lines to save for undo on a buffer reload
 " }}}
 
 " UI {{{
   colorscheme onehalflight
+  highlight link CompeDocumentation NormalFloat
   set cursorline                    " Show cursor line
-  set list                          " Show invisible characters
-  set listchars=tab:▸\ ,eol:¬,trail:·
   set number                        " Show line numbers
   set relativenumber                " Use relative line numbers
 " }}}
 
 " Plugins {{{
-  " Ale {{{
-    let g:ale_fix_on_save = 1
-    let g:ale_linters = {'vue': ['eslint']}
+  " Compe {{{
+    let g:compe = {}
+    let g:compe.autocomplete = v:true
+    let g:compe.documentation = v:true
+    let g:compe.enabled = v:true
+    let g:compe.source = {
+         \ "path": v:true,
+         \ "buffer": v:true,
+         \ "calc": v:true,
+         \ "nvim_lsp": v:true,
+         \ }
   " }}}
 
   " File browser {{{
     let g:NERDTreeShowHidden = 1
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-    let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vue'] = '﵂'
   " }}}
 
   " CtrlP {{{
@@ -112,55 +121,10 @@ let mapleader=" "
           \ --ignore "deps/*"
           \ --ignore "node_modules/*"
           \ --ignore "vendor/bundle"'
-
-     " Mapping
-     let g:ctrlp_prompt_mappings = {
-        \ 'PrtBS()':              ['<bs>', '<c-]>'],
-        \ 'PrtDelete()':          ['<del>'],
-        \ 'PrtDeleteWord()':      ['<c-w>'],
-        \ 'PrtClear()':           ['<c-u>'],
-        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-        \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
-        \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-        \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-        \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-        \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-        \ 'PrtHistory(-1)':       ['<c-n>'],
-        \ 'PrtHistory(1)':        ['<c-p>'],
-        \ 'AcceptSelection("e")': ['<cr>'],
-        \ 'AcceptSelection("h")': ['<c-i>', '<c-cr>'],
-        \ 'AcceptSelection("t")': ['<c-t>'],
-        \ 'AcceptSelection("v")': ['<c-s>'],
-        \ 'ToggleFocus()':        ['<s-tab>'],
-        \ 'ToggleRegex()':        ['<c-r>'],
-        \ 'ToggleByFname()':      ['<c-d>'],
-        \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-        \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
-        \ 'PrtExpandDir()':       ['<tab>'],
-        \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-        \ 'PrtInsert()':          ['<c-\>'],
-        \ 'PrtCurStart()':        ['<c-a>'],
-        \ 'PrtCurEnd()':          ['<c-e>'],
-        \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-        \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-        \ 'PrtClearCache()':      ['<F5>'],
-        \ 'PrtDeleteEnt()':       ['<F7>'],
-        \ 'CreateNewFile()':      ['<c-y>'],
-        \ 'MarkToOpen()':         ['<c-z>'],
-        \ 'OpenMulti()':          ['<c-o>'],
-        \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-      \ }
-  " }}}
-
-  " QFEnter {{{
-    let g:qfenter_keymap = {}
-    let g:qfenter_keymap.open = ['<CR>']
-    let g:qfenter_keymap.vopen = ['<C-v>']
-    let g:qfenter_keymap.hopen = ['<C-x>']
-    let g:qfenter_keymap.topen = ['<C-t>']
   " }}}
 
   " Splitjoin {{{
+    " Disable default mappings
     let g:splitjoin_split_mapping = ''
     let g:splitjoin_join_mapping = ''
   " }}}
@@ -222,13 +186,6 @@ let mapleader=" "
   nnoremap <silent> <C-e>     :NERDTreeToggle<CR>
   nnoremap <silent> <leader>e :NERDTreeFind<CR>
 
-  " Window resizes
-  let g:vim_resize_disable_auto_mappings = 1
-  nnoremap <silent> <left>  :CmdResizeLeft<cr>
-  nnoremap <silent> <down>  :CmdResizeDown<cr>
-  nnoremap <silent> <up>    :CmdResizeUp<cr>
-  nnoremap <silent> <right> :CmdResizeRight<cr>
-
   " Delete and yank to the end of line
   nnoremap D d$
   nnoremap Y y$
@@ -283,8 +240,6 @@ let mapleader=" "
   augroup hooks
     autocmd BufEnter,FocusGained * set relativenumber
     autocmd BufLeave,FocusLost * set norelativenumber
-    autocmd BufNewFile,BufReadPost *.md,*.mdown,*.mdwn,*.mmd set filetype=markdown
-    autocmd BufNewFile,BufReadPost Rakefile,Vagrantfile set filetype=ruby
     autocmd BufWritePre * call StripTrailingWhiteSpace()
 
     autocmd Filetype gitcommit setl spell textwidth=72
@@ -295,5 +250,59 @@ let mapleader=" "
   augroup END
 " }}}
 
-" Enable project's vimrc
-set exrc
+lua << EOF
+  require'lspinstall'.setup()
+
+  local on_attach = function(client, bufnr)
+    local opts = { noremap=true }
+
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gF', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'F',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  end
+
+  for _, server in pairs(require'lspinstall'.installed_servers()) do
+    require'lspconfig'[server].setup{ on_attach = on_attach }
+  end
+
+  require'lspconfig'.diagnosticls.setup {
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
+    init_options = {
+      filetypes = {
+        javascript = 'eslint',
+        javascripteact = 'eslint',
+        typescript = 'eslint',
+        typescriptreact = 'eslint'
+      },
+      linters = {
+        eslint = {
+          command = 'eslint',
+          rootPatterns = { 'package.json' },
+          debounce = 100,
+          args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+          sourceName = 'eslint',
+          parseJson = {
+            errorsRoot = '[0].messages',
+            line = 'line',
+            column = 'column',
+            endLine = 'endLine',
+            endColumn = 'endColumn',
+            message = '[eslint] ${message} [${ruleId}]',
+            security = 'severity'
+          },
+          securities = {
+            [2] = 'error',
+            [1] = 'warning'
+          }
+        }
+      }
+    }
+  }
+EOF

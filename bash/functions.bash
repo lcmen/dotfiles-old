@@ -62,7 +62,7 @@ docker-compose-run() {
 
 # Tmux
 tmux-join() {
-  tmux attach-session -t $1
+  tmux attach-session -d -t $1
 }
 
 tmux-kill() {

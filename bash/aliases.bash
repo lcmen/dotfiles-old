@@ -29,10 +29,6 @@ alias dns-flush="sudo systemd-resolve --flush-caches"
 alias https="${DOTFILES_DIR}/scripts/server.sh 8000"
 alias vim=nvim
 
-# Nginx
-alias proxy-up="${DOTFILES_DIR}/scripts/proxy.sh up"
-alias proxy-down="${DOTFILES_DIR}/scripts/proxy.sh down"
-
 # Postgres
 alias pg-up="${DOTFILES_DIR}/scripts/postgres.sh up"
 alias pg-down="${DOTFILES_DIR}/scripts/postgres.sh down"
