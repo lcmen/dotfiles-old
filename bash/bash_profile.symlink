@@ -1,9 +1,11 @@
+export BAT_THEME=OneHalfLight
 export CLICOLOR=1
-export EDITOR="nvim"
 export DOTFILES_DIR=$(dirname $(dirname $(realpath "${BASH_SOURCE[0]}")))
-export FZF_DEFAULT_COMMAND="ag -g ''"
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export EDITOR="nvim"
+
+# Default DB password for local development
+export DB_USERNAME="postgres"
+export DB_PASSWORD="postgres"
 
 source ${DOTFILES_DIR}/bash/functions.bash
 source ${DOTFILES_DIR}/bash/git-completion.bash

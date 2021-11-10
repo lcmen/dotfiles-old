@@ -18,8 +18,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'codeindulgence/vim-tig'
   Plug 'docunext/closetag.vim'
-  Plug 'hrsh7th/nvim-compe'
+  " Plug 'hrsh7th/nvim-compe'
   Plug 'janko-m/vim-test'
   Plug 'jbranchaud/vim-bdubs'
   Plug 'kabouzeid/nvim-lspinstall'
@@ -89,6 +90,11 @@ let mapleader=" "
   set relativenumber                " Use relative line numbers
 " }}}
 
+" Folding {{{
+  set foldmethod=syntax
+  set foldlevelstart=10
+" }}}
+
 " Plugins {{{
   " Compe {{{
     let g:compe = {}
@@ -129,6 +135,10 @@ let mapleader=" "
     let g:splitjoin_join_mapping = ''
   " }}}
 
+  " Tig {{{
+    let g:tig_open_command = 'enew'
+  " }}}
+
   " VimTest {{{
     let test#strategy = {
           \ "nearest": "dispatch",
@@ -140,10 +150,6 @@ let mapleader=" "
 
 " Mappings {{{
   nnoremap , :
-
-  " Enable block move via x (to allow use C-c and C-v for natural copy paste)
-  nnoremap <C-x> <C-v>
-  nnoremap X V
 
   " Quickly switch between buffers
   nnoremap <silent> <leader><leader> :b#<CR>
@@ -197,8 +203,9 @@ let mapleader=" "
   nnoremap <silent> x :cclose<CR> :lclose<CR> :pclose<CR>
 
   " Git
-  nnoremap <leader>gb :<C-u>call gitblame#echo()<CR>
-  nnoremap <leader>gm :GitMessenger<CR>
+  nnoremap <silent> <leader>gb :execute 'Tig blame' expand('%:p')<CR>
+  nnoremap <silent> <leader>gr :execute 'Tig refs' expand('%:p')<CR>
+  nnoremap <silent> <leader>g0 :Tig! status<CR>
 
   " Tests
   nmap <silent> <leader>t. :TestLast<CR>
@@ -214,7 +221,7 @@ let mapleader=" "
   nmap <silent> <leader>rk :SplitjoinSplit<cr>
 
   " Reload config file
-  nmap <silent> <leader>R :source ~/.vimrc<CR>
+  nmap <silent> <leader>R :source ~/.vimrc<CR>:echo "Reloaded!"<CR>
 " }}}
 
 " Functions {{{
@@ -240,7 +247,9 @@ let mapleader=" "
   augroup hooks
     autocmd BufEnter,FocusGained * set relativenumber
     autocmd BufLeave,FocusLost * set norelativenumber
+    autocmd BufLeave term://* stopinsert
     autocmd BufWritePre * call StripTrailingWhiteSpace()
+    autocmd TermOpen * startinsert
 
     autocmd Filetype gitcommit setl spell textwidth=72
     autocmd Filetype go setl softtabstop=4 shiftwidth=4 noexpandtab
@@ -260,9 +269,9 @@ lua << EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g0', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gf', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gF', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'F',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'g=',  '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
@@ -278,8 +287,6 @@ lua << EOF
       filetypes = {
         javascript = 'eslint',
         javascripteact = 'eslint',
-        typescript = 'eslint',
-        typescriptreact = 'eslint'
       },
       linters = {
         eslint = {
